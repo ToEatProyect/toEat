@@ -1,0 +1,26 @@
+{
+  "name": "toeat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^2.1.0",
+    "grunt-sass": "^2.0.0",
+    "load-grunt-tasks": "^3.5.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ToEatProyect/toEat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ToEatProyect/toEat/issues"
+  },
+  "homepage": "https://github.com/ToEatProyect/toEat#readme"
+}
