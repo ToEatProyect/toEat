@@ -31,9 +31,10 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('default', ['sass', 'cssmin'])
+
   //Create database comment
   grunt.registerTask('create-database', function(){
-    _exec('mysql -u root -e "DROP DATABASE IF EXISTS toeat_db"');
     _exec('mysql -u root < application/sql/structure.sql');
   });
 
