@@ -193,7 +193,7 @@ class Examples extends MY_Controller
 		// Customize this array for your user
 		$user_data = [
 			'username'   => 'skunkbot',
-			'passwd'     => 'PepeLePew7',
+			'passwd'     => '1234',
 			'email'      => 'skunkbot@example.com',
 			'auth_level' => '9', // 9 if you want to login @ examples/index.
 		];
@@ -225,10 +225,6 @@ class Examples extends MY_Controller
 				'rules' => [
 					'trim',
 					'required',
-					[ 
-						'_check_password_strength', 
-						[ $this->validation_callables, '_check_password_strength' ] 
-					]
 				],
 				'errors' => [
 					'required' => 'The password field is required.'
