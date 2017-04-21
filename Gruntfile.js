@@ -36,6 +36,7 @@ module.exports = function (grunt) {
   //Create database comment
   grunt.registerTask('create-database', function(){
     _exec('mysql -u root < application/sql/structure.sql');
+    _exec('php index.php cmd/create_admin_user');
   });
 
   //Executes a command
