@@ -2,6 +2,8 @@
 module.exports = function (grunt) {
   'use strict';
 
+  var sh = require('shelljs');
+
   require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
@@ -29,9 +31,19 @@ module.exports = function (grunt) {
   
   grunt.registerTask('default', ['sass', 'cssmin']);
 
-  grunt.registerTask('hola', function () {
-    grunt.log.writeln('adios');
+  //Create database comment
+  grunt.registerTask('create-database', function(){
+    _exec('mysql -u root -e "DROP DATABASE IF EXISTS toeat_db"');
+    _exec('mysql -u root < application/sql/structure.sql');
   });
 
-  grunt.registerTask('hola2', ['default', 'hola']);
+  //Executes a command
+  function _exec(command) {
+    var _result = sh.exec(command);
+
+    if(_result['code'] !== 0) {
+      grunt.fatal(_result['stderr']);
+      throw new Error(_result['stderr']);
+    }
+  }
 };
