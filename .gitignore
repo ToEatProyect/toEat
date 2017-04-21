@@ -31,5 +31,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 node_modules/
 node_modules/*
 
-assets/css/main.min.css
-assets/css/main.css
+assets/css/
+assets/css/*
+
+assets/bower/*
+assets/bower/
+
