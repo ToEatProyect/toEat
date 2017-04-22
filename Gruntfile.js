@@ -6,7 +6,8 @@ module.exports = function (grunt) {
 
   require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-
+  
+  // DOC: https://github.com/sindresorhus/grunt-sass
   grunt.initConfig({
     'sass': {
       'options': {'sourceMap': false, 'precision': 8},

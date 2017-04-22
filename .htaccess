@@ -2,7 +2,7 @@
 # BEGIN DENY LIST --
 # END DENY LIST --
 
-
+## DOC: http://stackoverflow.com/questions/19183311/codeigniter-removing-index-php-from-url
 RewriteEngine on
 RewriteCond $1 !^(index\.php|resources|robots\.txt)
 RewriteCond %{REQUEST_FILENAME} !-f

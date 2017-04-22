@@ -340,7 +340,7 @@ class MY_Controller extends CI_Controller {
 	 */
 	protected function is_logged_in()
 	{
-		$this->verify_min_level( 1 );
+		return $this->verify_min_level( 1 );
 	}
 
 	// --------------------------------------------------------------

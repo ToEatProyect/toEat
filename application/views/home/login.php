@@ -7,6 +7,7 @@
         <div class="form-group">
           <label for="login_string">Usename</label>
           <input type="text" class="form-control" name="login_string"
+                 <?php // If the user fails authentication, maintains name ?>
                  <?php if(isset($login_string)) : ?>value="<?php echo $login_string ?>" <?php endif; ?>
                  id="login_string" autocomplete="off" maxlength="255" />
         </div>

@@ -10,23 +10,34 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img src="/assets/img/toeat-icon.gif" alt="toeat-icon">
       </a>
     </div>
     <!-- /.navbar-header -->
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Services</a>
-        </li>
-        <li>
-          <a href="#">Contact</a>
-        </li>
-      </ul><!-- /.navbar-left -->
+    <div id="navbar" class="navbar-collapse collapse">
+
+      <ul class="nav navbar-nav navbar-right">
+        <?php if(isset($auth_data)): ?>
+          <li class="dropdown">
+
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+              <?php echo $auth_data->username ?>
+              <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a href="/logout">Desconectar</a></li>
+            </ul>
+
+          </li>
+        <?php else: ?>
+          <li><a href="/login">Entrar</a></li>
+          <li><a href="/home/create">Crear cuenta</a></li>
+        <?php endif; ?>
+      </ul>
+
+      <!-- Search form -->
       <ul class="nav navbar-nav navbar-right">
         <li>
           <form class="navbar-form navbar-right" action="/search/" method="get">
@@ -34,18 +45,19 @@
 
               <input type="text" class="form-control" name="q" placeholder="Search">
 
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
 
             </div>
           </form>
         </li>
-      </ul><!-- /.navbar-right -->
-    </div>
-    <!-- /.navbar-collapse -->
+      </ul>
+      <!-- /Search form -->
+
+    </div><!-- /.navbar-collapse -->
   </div>
   <!-- /.container -->
 </nav>
