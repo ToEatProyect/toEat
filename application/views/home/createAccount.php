@@ -11,7 +11,9 @@
             Nombre y apellidos
             <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
           </label>
-          <input type="text" class="form-control" id="userData" name="name_lastname" maxlength="60" required />
+          <input type="text" class="form-control"
+                 value="<?php echo set_value("name_lastname") ?>"
+                 id="userData" name="name_lastname" maxlength="60" required />
         </div><!-- /Name and lastname -->
 
         <!-- Username -->
@@ -20,7 +22,9 @@
             Usuario
             <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
           </label>
-          <input type="text" class="form-control" id="user" name="username" maxlength="50" required />
+          <input type="text" class="form-control"
+                 value="<?php echo set_value("username") ?>"
+                 id="user" name="username" maxlength="50" required />
         </div><!-- /Username -->
 
         <!-- Email -->
@@ -29,7 +33,9 @@
             Correo electrónico
             <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
           </label>
-          <input type="text" class="form-control" id="email" name="email" maxlength="50" required />
+          <input type="text" class="form-control"
+                 value="<?php echo set_value("email") ?>"
+                 id="email" name="email" maxlength="50" required />
         </div><!-- /Password -->
 
         <!-- Password -->
