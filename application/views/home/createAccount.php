@@ -17,14 +17,17 @@
         </div><!-- /Name and lastname -->
 
         <!-- Username -->
-        <div class="form-group">
-          <label for="user">
+        <div class="form-group <?php echo form_error('username') ? 'has-error' : NULL ?>">
+          <label for="username">
             Usuario
             <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
           </label>
           <input type="text" class="form-control"
                  value="<?php echo set_value("username") ?>"
-                 id="user" name="username" maxlength="50" required />
+                 id="username" name="username" maxlength="50" required />
+          <?php if(form_error('username')): ?>
+            <span class="text-danger"><?php echo form_error('username') ?></span>
+          <?php endif; ?>
         </div><!-- /Username -->
 
         <!-- Email -->
@@ -44,7 +47,7 @@
             Contraseña
             <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
           </label>
-          <input type="password" class="form-control" id="pass" name="password" maxlength="50" required />
+          <input type="password" class="form-control" id="pass" name="pass" maxlength="50" required />
         </div><!-- /Password -->
 
         <!-- Password confirmation -->
@@ -53,7 +56,7 @@
             Repetir contraseña
             <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
           </label>
-          <input type="password" class="form-control" id="passconf" name="password_conf" maxlength="50" required />
+          <input type="password" class="form-control" id="passconf" name="passconf" maxlength="50" required />
         </div><!-- /Password confirmation -->
 
         <input type="submit" class="btn btn-success" value="Crear cuenta">

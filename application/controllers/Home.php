@@ -8,15 +8,13 @@ class Home extends MY_Controller {
     parent::__construct();
     $this->load->helper(['form', 'url']);
     $this->load->library('form_validation');
-    $this->load->library('authentication');
+    $this->load->library('template');
   }
 
   // Home page
   public function index() {
 
-    $this->load->view('/template/header');
-    $this->load->view('/home/index');
-    $this->load->view('/template/footer');
+    $this->template->printView('home/index');
   }
 
   // Login page and process
@@ -38,9 +36,7 @@ class Home extends MY_Controller {
     }
 
     $this->setup_login_form();
-    $this->load->view('/template/header');
-    $this->load->view('/home/login', $viewData);
-    $this->load->view('/template/footer');
+    $this->template->printView('home/login', $viewData);
   }
 
   // Logout process
@@ -54,9 +50,20 @@ class Home extends MY_Controller {
   // Create a new account
   public function createAccount() {
 
-    $this->setup_login_form();
-    $this->load->view('/template/header');
-    $this->load->view('/home/createAccount');
-    $this->load->view('/template/footer');
+    if($this->is_logged_in()){
+
+      return redirect(site_url('/'));
+    }
+
+    $this->load->library("form_validation");
+    $this->config->load('form_validation/home');
+    $this->form_validation->set_rules(config_item('createAccount'));
+
+    if($this->form_validation->run()) {
+
+      return 'Todo correcto';
+    }
+
+    $this->template->printView('home/createAccount');
   }
 }

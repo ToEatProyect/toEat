@@ -30,6 +30,7 @@ class Auth_model extends MY_Model {
 		$selected_columns = [
 			'username',
 			'email',
+			'name',
 			'auth_level',
 			'passwd',
 			'user_id',
@@ -135,6 +136,7 @@ class Auth_model extends MY_Model {
 		$selected_columns = [
 			'u.username',
 			'u.email',
+			'u.name',
 			'u.auth_level',
 			'u.user_id',
 			'u.banned'

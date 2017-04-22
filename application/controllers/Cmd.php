@@ -17,6 +17,7 @@ class Cmd extends MY_Controller{
         'username' => 'admin',
         'passwd' => '1234',
         'email' => 'toEatProyect@gmail.com',
+        'name' => 'superAdmin',
         'auth_level' => '9', // 9 if you want to login @ examples/index.
     ];
 

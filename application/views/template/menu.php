@@ -18,11 +18,11 @@
     <div id="navbar" class="navbar-collapse collapse">
 
       <ul class="nav navbar-nav navbar-right">
-        <?php if(isset($auth_data)): ?>
+        <?php if(isset($userData)): ?>
           <li class="dropdown">
 
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
-              <?php echo $auth_data->username ?>
+              <?php echo $userData->username ?>
               <span class="caret"></span>
             </a>
 
@@ -33,7 +33,7 @@
           </li>
         <?php else: ?>
           <li><a href="/login">Entrar</a></li>
-          <li><a href="/home/createAccount">Crear cuenta</a></li>
+          <li><a href="/createAccount">Crear cuenta</a></li>
         <?php endif; ?>
       </ul>
 
