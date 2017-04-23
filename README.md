@@ -1,6 +1,6 @@
-# toEat
+# ToEat
 
-## installation commands
+## Installation commands
 - `npm install`
 - `bower install`
 - `grunt`

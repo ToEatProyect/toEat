@@ -55,13 +55,14 @@ class Home extends MY_Controller {
       return redirect(site_url('/'));
     }
 
+    // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
     $this->config->load('form_validation/home');
     $this->form_validation->set_rules(config_item('createAccount'));
 
     if($this->form_validation->run()) {
 
-      return 'Todo correcto';
+      
     }
 
     $this->template->printView('home/createAccount');
