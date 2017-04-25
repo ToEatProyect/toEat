@@ -9,4 +9,4 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route[LOGIN_PAGE] = 'home/login';
 $route['logout'] = 'home/logout';
-$route['createAccount'] = 'home/createAccount';
+$route['create-account'] = 'home/createAccount';

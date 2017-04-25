@@ -1,8 +1,38 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+$config['login_rules'] = [
+
+  // Username
+    [
+        'field' => 'login_string',
+        'label' => 'login_string',
+        'rules' => 'trim|required|max_length[255]'
+    ],
+
+  // Password
+    [
+      'field' => 'login_pass',
+      'label' => 'login_pass',
+      'rules' => 'trim|required'
+    ]
+];
+
 // Create a new account validation rules
 $config['createAccount'] = [
+
+  // Name
+    [
+      "field" => "name",
+      "label" => "name",
+      "rules" => "trim|required|max_length[60]|min_length[4]|alpha_numeric_spaces",
+      "errors" => [
+          "required" => "Este campo es obligatorio",
+          "max_length" => "La longitud máxima es de 60 caracteres",
+          "min_length" => "La longitud minima es de 4 carácteres",
+          "alpha_numeric_spaces" => "Formato no válido"
+      ]
+    ],
 
   //Username
     [
@@ -15,19 +45,6 @@ $config['createAccount'] = [
           "min_length" => "La longitud minima es de 4 carácteres",
           "alpha_numeric" => "Formato no válido",
           "is_unique" => "Ya existe un usuario registrado con ese nombre de usuario"
-      ]
-    ],
-
-  // Name
-    [
-      "field" => "name",
-      "label" => "name",
-      "rules" => "trim|required|max_length[60]|alpha_numeric_spaces",
-      "errors" => [
-          "required" => "Este campo es obligatorio",
-          "max_length" => "La longitud máxima es de 60 caracteres",
-          "min_length" => "La longitud minima es de 4 carácteres",
-          "alpha_numeric_spaces" => "Formato no válido"
       ]
     ],
 

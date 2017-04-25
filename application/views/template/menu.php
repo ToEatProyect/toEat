@@ -33,7 +33,7 @@
           </li>
         <?php else: ?>
           <li><a href="/login">Entrar</a></li>
-          <li><a href="/createAccount">Crear cuenta</a></li>
+          <li><a href="/create-account">Crear cuenta</a></li>
         <?php endif; ?>
       </ul>
 
