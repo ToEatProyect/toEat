@@ -18,8 +18,7 @@ $config['login_rules'] = [
     ]
 ];
 
-// Create a new account validation rules
-$config['createAccount'] = [
+$config['create_account_rules'] = [
 
   // Name
     [
@@ -67,11 +66,11 @@ $config['createAccount'] = [
     [
       "field" => "pass",
       "label" => "pass",
-      "rules" => "trim|required|max_length[255]|min_length[8]|matches[passconf]",
+      "rules" => "trim|required|max_length[255]|min_length[4]|matches[passconf]",
       "errors" => [
           "required" => "Este campo es obligatorio",
           "max_length" => "La longitud máxima es de 255 caracteres",
-          "min_length" => "La longitud minima es de 8 carácteres",
+          "min_length" => "La longitud minima es de 4 carácteres",
           "matches" => "Las contraseñas no coinciden"
       ]
     ],
@@ -85,3 +84,32 @@ $config['createAccount'] = [
 
 ];
 
+$config['create_recipe_rules'] = [
+
+  // Title
+    [
+      "field" => "title",
+      "label" => "title",
+      "rules" => "trim|required|max_length[80]|is_unique[recipes.title]|alpha_numeric|regex_match[/^([^0-9]*)$/]",
+      "errors" => [
+          "required" => "Este campo es obligatorio",
+          "alpha_numeric" => "Solo se admiten letras en este campo",
+          "regex_match" => "Solo se admiten letras en este campo",
+          "max_length" => "La longitud máxima es de 40 caracteres",
+          "is_unique" => "Ya existe otra receta con este título"
+      ]
+    ],
+
+  // Description
+    [
+      "field" => "description",
+      "label" => "description",
+      "rules" => "trim|required|max_length[800]|alpha_numeric",
+      "errors" => [
+          "required" => "Este campo es obligatorio",
+          "alpha_numeric" => "Solo se admiten letras y números en este campo",
+          "max_length" => "La longitud máxima es de 800 caracteres",
+      ]
+    ],
+
+];

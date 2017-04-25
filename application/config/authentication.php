@@ -43,7 +43,7 @@ $config['levels_and_roles'] = [
 */
 
 $config['groups'] = [
-	'employees' => 'manager,admin'
+	'recipe-creators' => 'collaborator,moderator'
 ];
 
 /*

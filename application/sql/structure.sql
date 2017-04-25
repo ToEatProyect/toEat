@@ -193,20 +193,21 @@ CREATE TABLE `acl` (
 
 -- --------------------------------------------------------
 
-# -- TABLE 2 - Recipes --
-# CREATE TABLE IF NOT EXISTS recipes(
-#   id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-#   id_owner INT(10) UNSIGNED NOT NULL,
+-- TABLE 2 - Recipes --
+CREATE TABLE IF NOT EXISTS recipes(
+  id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(40) NOT NULL UNIQUE,
+  id_owner INT(10) UNSIGNED NOT NULL,
 #   slug VARCHAR(90) NOT NULL UNIQUE,
-#   description VARCHAR(800) NOT NULL,
+  description VARCHAR(800) NOT NULL,
 #   cookingTime INT(3) NOT NULL,
-#   creationDate DATETIME NOT NULL,
+  created_at DATETIME NOT NULL,
 #   lastModDate DATETIME NULL,
 #   image LONGBLOB NOT NULL,
 #   published INT(1),
-#   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(id)
-# );
-#
+  CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
+);
+
 # -- TABLE 3 - Steps --
 # CREATE TABLE IF NOT EXISTS steps(
 #   id_recipe INT(10) UNSIGNED NOT NULL,

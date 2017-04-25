@@ -18,10 +18,10 @@ class Home extends MY_Controller {
 
   // Login page and process
   public function login(){
-
+    
+    // Redirect user if he is not logged
     if($this->is_logged_in()) {
 
-      // Are you connected? Go out!
       return redirect( site_url( '/' ) );
     }
 
@@ -48,9 +48,9 @@ class Home extends MY_Controller {
   // Create a new account
   public function createAccount() {
 
+    // Redirect user if he is not logged
     if($this->is_logged_in()){
 
-      // Are you logged in? Go out!
       return redirect(site_url('/'));
     }
 
@@ -58,7 +58,7 @@ class Home extends MY_Controller {
     $this->load->library("form_validation");
     $this->config->load('form_validation/home');
     $this->load->model("users_model");
-    $this->form_validation->set_rules(config_item('createAccount'));
+    $this->form_validation->set_rules(config_item('create_account_rules'));
 
     if($this->form_validation->run()) {
 

@@ -27,6 +27,7 @@
             </a>
 
             <ul class="dropdown-menu">
+              <li><a href="/recipes/new-recipe">Nueva receta</a></li>
               <li><a href="/logout">Desconectar</a></li>
             </ul>
 
