@@ -43,7 +43,7 @@ $config['levels_and_roles'] = [
 */
 
 $config['groups'] = [
-	'recipe-creators' => 'collaborator,moderator'
+	'recipe-creators' => 'collaborator'
 ];
 
 /*

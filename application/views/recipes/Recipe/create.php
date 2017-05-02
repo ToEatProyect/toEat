@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-      <?php echo form_open('') ?>
+      <?php echo form_open() ?>
       
         <!-- Title -->
         <div class="form-group <?php echo form_error('title') ? 'has-error' : NULL ?>">

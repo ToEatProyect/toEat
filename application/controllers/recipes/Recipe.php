@@ -20,21 +20,15 @@ class Recipe extends MY_Controller {
   // "Create a new recipe" process
   public function newRecipe() {
 
-    // Redirect user if he is not logged
-    if( ! $this->is_logged_in()) {
-
-      return redirect( site_url( '/' ) );
-    }
-
     // Redirect user if it doesn't belong to the selected group
-    if( ! $this->require_group('recipe-creators')) {
+    if( ! $this->verify_min_level(3)) {
 
       return redirect( site_url( '/' ) );
     }
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
-    $this->config->load('form_validation/home');
+    $this->config->load('form_validation/recipe/recipe');
     $this->form_validation->set_rules(config_item('create_recipe_rules'));
 
     if($this->form_validation->run()) {
@@ -43,7 +37,7 @@ class Recipe extends MY_Controller {
       $recipe_data['title'] = $this->input->post('title');
       $recipe_data['description'] = $this->input->post('recipe_description');
       $recipe_data['created_at'] = date("Y-m-d H:i:s");
-      $recipe_data['owner_id'] = $this->auth_data->user_id;
+      $recipe_data['id_owner'] = $this->auth_data->user_id;
 
       $this->db->set($recipe_data)->insert('recipes');
 

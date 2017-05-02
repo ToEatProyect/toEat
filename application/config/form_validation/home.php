@@ -83,33 +83,3 @@ $config['create_account_rules'] = [
     ],
 
 ];
-
-$config['create_recipe_rules'] = [
-
-  // Title
-    [
-      "field" => "title",
-      "label" => "title",
-      "rules" => "trim|required|max_length[80]|is_unique[recipes.title]|alpha_numeric|regex_match[/^([^0-9]*)$/]",
-      "errors" => [
-          "required" => "Este campo es obligatorio",
-          "alpha_numeric" => "Solo se admiten letras en este campo",
-          "regex_match" => "Solo se admiten letras en este campo",
-          "max_length" => "La longitud máxima es de 40 caracteres",
-          "is_unique" => "Ya existe otra receta con este título"
-      ]
-    ],
-
-  // Description
-    [
-      "field" => "description",
-      "label" => "description",
-      "rules" => "trim|required|max_length[800]|alpha_numeric",
-      "errors" => [
-          "required" => "Este campo es obligatorio",
-          "alpha_numeric" => "Solo se admiten letras y números en este campo",
-          "max_length" => "La longitud máxima es de 800 caracteres",
-      ]
-    ],
-
-];
