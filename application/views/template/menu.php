@@ -17,6 +17,12 @@
     <!-- /.navbar-header -->
     <div id="navbar" class="navbar-collapse collapse">
 
+      <ul class="nav navbar-nav navbar-left">
+        <?php if(isset($userData)): ?>
+          <li><a href="/recipes/my-recipes">Mis recetas</a></li>
+        <?php endif; ?>
+      </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <?php if(isset($userData)): ?>
           <li class="dropdown">
@@ -46,11 +52,11 @@
 
               <input type="text" class="form-control" name="q" placeholder="Search">
 
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-default">
-              <i class="fa fa-search"></i>
-            </button>
-          </span>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default">
+                  <i class="fa fa-search"></i>
+                </button>
+              </span>
 
             </div>
           </form>

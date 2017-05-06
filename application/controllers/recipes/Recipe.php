@@ -8,19 +8,35 @@ class Recipe extends MY_Controller {
     parent::__construct();
     $this->load->helper(['form', 'url', 'auth']);
     $this->load->library('template');
+    $this->load->model('recipes_model');
   }
 
-
+  // Get all recipes from logued user
   public function index() {
 
-    // TODO: add main search
-    redirect( site_url( '/' ) );
+    // Redirect user if it doesn't belong to the selected level
+    if( ! $this->verify_min_level(3)) {
+
+      return redirect( site_url( '/' ) );
+    }
+
+    // Get all recipes from logued user
+    $recipes = $this->recipes_model->getRecipes_fromUser($this->auth_data->user_id);
+
+    // View data
+    $viewData = [
+      'recipes' => $recipes
+    ];
+
+    // Print view
+    $this->template->printView('recipes/Recipe/user_recipes', $viewData);
+
   }
 
   // "Create a new recipe" process
   public function newRecipe() {
 
-    // Redirect user if it doesn't belong to the selected group
+    // Redirect user if it doesn't belong to the selected level
     if( ! $this->verify_min_level(3)) {
 
       return redirect( site_url( '/' ) );
