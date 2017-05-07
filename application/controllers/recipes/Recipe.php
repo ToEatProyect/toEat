@@ -61,7 +61,7 @@ class Recipe extends MY_Controller {
 
       if( $this->db->affected_rows() == 1 ) {
 
-        return redirect(site_url("/"));
+        return redirect(site_url("/recipes/my-recipes"));
       }
     }
 
