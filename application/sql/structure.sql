@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS recipes(
   id INT(10) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(40) NOT NULL UNIQUE,
   id_owner INT(10) UNSIGNED NOT NULL,
-#   slug VARCHAR(90) NOT NULL UNIQUE,
+  slug VARCHAR(90) NOT NULL UNIQUE,
   description VARCHAR(800) NOT NULL,
 #   cookingTime INT(3) NOT NULL,
   created_at DATETIME NOT NULL,
@@ -249,15 +249,14 @@ CREATE TABLE IF NOT EXISTS recipes(
 
 # -- TABLE 7 - Categorization --
 # CREATE TABLE IF NOT EXISTS categorization(
-#   idCategorization INT(3) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+#   id INT(3) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 #   category VARCHAR(40) NOT NULL,
-#   subcategory VARCHAR(40) NOT NULL,
-#   UNIQUE (category, subcategory)
+#   parent_category VARCHAR(40) NULL
 # );
 
 # -- TABLE 8 - Rec_cat --
 # CREATE TABLE IF NOT EXISTS rec_cat(
-#   categorization INT(3) UNSIGNED NOT NULL,
+#   category INT(3) UNSIGNED NOT NULL,
 #   recipe INT(10) UNSIGNED NOT NULL,
 #   PRIMARY KEY (categorization, recipe),
 #   CONSTRAINT fk_rec_cat_categorization FOREIGN KEY (categorization) REFERENCES categorization(idCategorization),

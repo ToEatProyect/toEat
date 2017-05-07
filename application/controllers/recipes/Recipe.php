@@ -7,7 +7,7 @@ class Recipe extends MY_Controller {
 
     parent::__construct();
     $this->load->helper(['form', 'url', 'auth']);
-    $this->load->library('template');
+    $this->load->library(['template', 'slug']);
     $this->load->model('recipes_model');
   }
 
@@ -49,8 +49,10 @@ class Recipe extends MY_Controller {
 
     if($this->form_validation->run()) {
 
+      // Load recipe data
       $recipe_data['id'] = 'DEFAULT';
       $recipe_data['title'] = $this->input->post('title');
+      $recipe_data['slug'] = $this->slug->parseSlug($this->input->post('title'));
       $recipe_data['description'] = $this->input->post('recipe_description');
       $recipe_data['created_at'] = date("Y-m-d H:i:s");
       $recipe_data['id_owner'] = $this->auth_data->user_id;
@@ -63,9 +65,9 @@ class Recipe extends MY_Controller {
       }
     }
 
+    // Print view
     $this->template->printView('recipes/Recipe/create');
 
   }
-
 
 }

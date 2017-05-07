@@ -20,4 +20,15 @@ class Recipes_model extends MY_Model {
     return $result = $query->result();
   }
 
+  // Get all data from selected recipe
+  public function getRecipe($recipe) {
+
+    $query = $this->db
+        ->from('recipes')
+        ->where('title', $recipe)
+        ->get();
+
+    return $result = $query->result();
+  }
+
 }
