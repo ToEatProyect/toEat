@@ -10,8 +10,8 @@
         <div class="form-group <?php echo form_error('title') ? 'has-error' : NULL ?>">
           <label for="title">Título de la receta</label>
           <input type="text" class="form-control"
-                 value="<?php set_value('title') ?>"
-                 id="title" name="title"/>
+                 value="<?php echo set_value('title') ?>"
+                 id="title" name="title" required/>
           <?php if(form_error('title')): ?>
             <span class="text-danger"><?php echo form_error('title') ?></span>
           <?php endif; ?>
@@ -22,7 +22,7 @@
           <label for="recipe_description">Descripción de la receta</label>
           <textarea id="recipe_description" name="recipe_description"
                     class="form-control"
-                    rows="20"><?php set_value('recipe_description') ?></textarea>
+                    rows="20" required><?php echo set_value('recipe_description') ?></textarea>
           <?php if(form_error('recipe_description')): ?>
             <span class="text-danger"><?php echo form_error('recipe_description') ?></span>
           <?php endif; ?>
@@ -32,8 +32,8 @@
         <div class="form-group <?php echo form_error('cooking_time') ? 'has-error' : NULL ?>">
           <label for="cooking_time">Tiempo de cocción</label>
           <input type="text" class="form-control"
-                 value="<?php set_value('cooking_time') ?>"
-                 id="cooking_time" name="cooking_time"/>
+                 value="<?php echo set_value('cooking_time') ?>"
+                 id="cooking_time" name="cooking_time" required/>
           <?php if(form_error('cooking_time')): ?>
             <span class="text-danger"><?php echo form_error('cooking_time') ?></span>
           <?php endif; ?>
