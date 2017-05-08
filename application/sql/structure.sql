@@ -200,11 +200,11 @@ CREATE TABLE IF NOT EXISTS recipes(
   id_owner INT(10) UNSIGNED NOT NULL,
   slug VARCHAR(90) NOT NULL UNIQUE,
   description VARCHAR(800) NOT NULL,
-#   cookingTime INT(3) NOT NULL,
+  cooking_time INT(3) NOT NULL,
   created_at DATETIME NOT NULL,
-#   lastModDate DATETIME NULL,
+  lastModDate DATETIME NOT NULL,
 #   image LONGBLOB NOT NULL,
-#   published INT(1),
+  published INT(1) NOT NULL DEFAULT 0,
   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
 );
 

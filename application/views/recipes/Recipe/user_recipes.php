@@ -13,7 +13,9 @@
             <thead>
               <tr>
                 <th>Nombre de la receta</th>
+                <th>Tiempo de cocción</th>
                 <th>Fecha creación</th>
+                <th>Publicada</th>
               </tr>
             </thead>
 
@@ -22,7 +24,15 @@
 
               <tr>
                 <td><?php echo $recipe->title ?></td>
+                <td><?php echo $recipe->cooking_time ?></td>
                 <td><?php echo $recipe->created_at ?></td>
+
+                  <?php if($recipe->published == 0): ?>
+                    <td>No</td>
+                  <?php else: ?>
+                    <td>Si</td>
+                  <?php endif; ?>
+
               </tr>
 
             <?php endforeach; ?>

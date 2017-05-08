@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['create_recipe_rules'] = [
 
-    // Title
-    [
+  // Title
+  [
       "field" => "title",
       "label" => "title",
       "rules" => "trim|required|max_length[80]|is_unique[recipes.title]|alpha_numeric_spaces",
@@ -16,8 +16,8 @@ $config['create_recipe_rules'] = [
     ]
   ],
 
-    // Description
-    [
+  // Description
+  [
       "field" => "recipe_description",
       "label" => "recipe_description",
       "rules" => "trim|required|max_length[800]|alpha_numeric",
@@ -25,6 +25,18 @@ $config['create_recipe_rules'] = [
       "required" => "Este campo es obligatorio",
       "alpha_numeric" => "Solo se admiten letras y números en este campo",
       "max_length" => "La longitud máxima es de 800 caracteres",
+    ]
+  ],
+
+  // Cooking time
+  [
+    "field" => "cooking_time",
+    "label" => "cooking_time",
+    "rules" => "trim|required|max_length[3]|numeric",
+    "errors" => [
+      "required" => "Este campo es obligatorio",
+      "numeric" => "Solo se admiten números en este campo",
+      "max_length" => "La longitud máxima es de 3 números",
     ]
   ],
 

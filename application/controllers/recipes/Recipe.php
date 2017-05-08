@@ -54,11 +54,15 @@ class Recipe extends MY_Controller {
       $recipe_data['title'] = $this->input->post('title');
       $recipe_data['slug'] = $this->slug->parseSlug($this->input->post('title'));
       $recipe_data['description'] = $this->input->post('recipe_description');
+      $recipe_data['cooking_time'] = $this->input->post('cooking_time');
       $recipe_data['created_at'] = date("Y-m-d H:i:s");
+      $recipe_data['lastModDate'] = date("Y-m-d H:i:s");
       $recipe_data['id_owner'] = $this->auth_data->user_id;
+      $recipe_data['published'] = 'DEFAULT';
 
       $this->db->set($recipe_data)->insert('recipes');
 
+      // Created recipe? go to "my recipes"
       if( $this->db->affected_rows() == 1 ) {
 
         return redirect(site_url("/recipes/my-recipes"));
