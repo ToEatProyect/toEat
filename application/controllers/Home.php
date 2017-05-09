@@ -116,7 +116,7 @@ class Home extends MY_Controller {
       // Load data to send
       $this->email->to($to);
       $this->email->subject($subject);
-      $this->email->message($body);
+      $this->email->message($header . $body);
 
       // Send email
       $this->email->send();

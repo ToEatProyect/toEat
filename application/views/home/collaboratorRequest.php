@@ -49,7 +49,10 @@
 
       <!-- Education -->
       <div class="form-group <?php echo form_error('education') ? 'has-error' : NULL ?>">
-        <label for="education">Descripción de la receta</label>
+        <label for="education">
+          Formación gastronómica
+          <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
+        </label>
         <textarea id="education" name="education"
                   class="form-control"
                   rows="15" required><?php echo set_value('education') ?></textarea>
