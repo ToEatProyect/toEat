@@ -82,6 +82,48 @@ class Home extends MY_Controller {
       }
     }
 
+    // Print view
     $this->template->printView('home/createAccount');
   }
+
+  // New collaborator request
+  public function collaboratorRequest() {
+
+    // Load validation library, validation config and validation rules
+    $this->load->library(['form_validation', 'email']);
+    $this->config->load('form_validation/home');
+    $this->form_validation->set_rules(config_item('new_collaborator_request_rules'));
+
+    if($this->form_validation->run()) {
+
+      // If we want to save this information in DB, it's ready to use
+      // We only need to add new vars
+      $user_data['username'] = $this->input->post('username');
+      $user_data['name'] = $this->input->post('name');
+      $user_data['email'] = $this->input->post('email');
+      $user_data['education'] = $this->input->post('education');
+
+      // Prepare data to send by email
+      $to = 'toeatsite@gmail.com';
+      $subject = 'Solicitud de nuevo colaborador';
+      $header = 'Un nuevo usuario solicita cuenta de colaborador en ToEat!\n\n';
+
+      $body =  'Username: ' . $user_data['username'] . '\n';
+      $body .= 'Nombre' . $user_data['name'] . '\n';
+      $body .= 'Email' . $user_data['email'] . '\n';
+      $body .= 'Formación' . $user_data['education'] . '\n\n';
+
+      // Load data to send
+      $this->email->to($to);
+      $this->email->subject($subject);
+      $this->email->message($body);
+
+      // Send email
+      $this->email->send();
+    }
+
+    // Print view
+    $this->template->printView('home/collaboratorRequest');
+  }
+
 }

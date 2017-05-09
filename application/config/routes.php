@@ -10,6 +10,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route[LOGIN_PAGE] = 'home/login';
 $route['logout'] = 'home/logout';
 $route['create-account'] = 'home/createAccount';
+$route['new-collaborator-request'] = 'home/collaboratorRequest';
 
 // Recipes
 $route['recipes/new-recipe'] = 'recipes/Recipe/newRecipe';
