@@ -4,40 +4,72 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-      <?php echo form_open() ?>
+      <?php echo form_open_multipart() ?>
       
         <!-- Title -->
         <div class="form-group <?php echo form_error('title') ? 'has-error' : NULL ?>">
-          <label for="title">Título de la receta</label>
+          <label for="title">
+            Título de la receta
+            <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
+          </label>
           <input type="text" class="form-control"
                  value="<?php echo set_value('title') ?>"
-                 id="title" name="title" required/>
+                 id="title"
+                 name="title"
+                 required/>
           <?php if(form_error('title')): ?>
             <span class="text-danger"><?php echo form_error('title') ?></span>
           <?php endif; ?>
         </div><!-- /Title -->
 
+        <!-- Cooking time -->
+        <div class="form-group <?php echo form_error('cooking_time') ? 'has-error' : NULL ?>">
+          <label for="cooking_time">
+            Tiempo de cocción
+            <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
+          </label>
+          <input type="text"
+                 class="form-control"
+                 value="<?php echo set_value('cooking_time') ?>"
+                 id="cooking_time"
+                 name="cooking_time"
+                 placeholder="En minutos"
+                 required/>
+          <?php if(form_error('cooking_time')): ?>
+            <span class="text-danger"><?php echo form_error('cooking_time') ?></span>
+          <?php endif; ?>
+        </div><!-- /Cooking time -->
+
         <!-- Description -->
         <div class="form-group <?php echo form_error('recipe_description') ? 'has-error' : NULL ?>">
-          <label for="recipe_description">Descripción de la receta</label>
-          <textarea id="recipe_description" name="recipe_description"
+          <label for="recipe_description">
+            Descripción de la receta
+            <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
+          </label>
+          <textarea id="recipe_description"
+                    name="recipe_description"
                     class="form-control"
-                    rows="20" required><?php echo set_value('recipe_description') ?></textarea>
+                    rows="12"
+                    required><?php echo set_value('recipe_description') ?></textarea>
           <?php if(form_error('recipe_description')): ?>
             <span class="text-danger"><?php echo form_error('recipe_description') ?></span>
           <?php endif; ?>
         </div><!-- /Description -->
 
-        <!-- Cooking time -->
-        <div class="form-group <?php echo form_error('cooking_time') ? 'has-error' : NULL ?>">
-          <label for="cooking_time">Tiempo de cocción</label>
-          <input type="text" class="form-control"
-                 value="<?php echo set_value('cooking_time') ?>"
-                 id="cooking_time" name="cooking_time" required/>
-          <?php if(form_error('cooking_time')): ?>
-            <span class="text-danger"><?php echo form_error('cooking_time') ?></span>
-          <?php endif; ?>
-        </div><!-- /Cooking time -->
+      <!-- Img recipe -->
+      <div class="form-group <?php echo form_error('image') ? 'has-error' : NULL ?>">
+        <label for="image">
+          Imagen de la receta
+          <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
+        </label>
+        <input type="file"
+               id="image"
+               name="image"
+               required/>
+        <?php if(isset($upload_file_error)): ?>
+          <span class="text-danger"><?php echo $upload_file_error ?></span>
+        <?php endif; ?>
+      </div><!-- /Img recipe -->
 
       <input type="submit" class="btn btn-success" value="Crear receta">
 

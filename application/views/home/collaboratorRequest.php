@@ -11,9 +11,13 @@
           Nombre y apellidos
           <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
         </label>
-        <input type="text" class="form-control"
+        <input type="text"
+               class="form-control"
                value="<?php echo set_value("name") ?>"
-               id="name" name="name" maxlength="60" required />
+               id="name"
+               name="name"
+               maxlength="60"
+               required />
         <?php if(form_error('name')): ?>
           <span class="text-danger"><?php echo form_error('name') ?></span>
         <?php endif; ?>
@@ -25,9 +29,12 @@
           Nombre de usuario
           <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
         </label>
-        <input type="text" class="form-control"
+        <input type="text"
+               class="form-control"
                value="<?php echo set_value("username") ?>"
-               id="username" name="username" maxlength="50"/>
+               id="username"
+               name="username"
+               maxlength="50"/>
         <?php if(form_error('username')): ?>
           <span class="text-danger"><?php echo form_error('username') ?></span>
         <?php endif; ?>
@@ -41,7 +48,9 @@
         </label>
         <input type="text" class="form-control"
                value="<?php echo set_value("email") ?>"
-               id="email" name="email" maxlength="50"/>
+               id="email"
+               name="email"
+               maxlength="50"/>
         <?php if(form_error('email')): ?>
           <span class="text-danger"><?php echo form_error('email') ?></span>
         <?php endif; ?>
@@ -53,9 +62,11 @@
           Formación gastronómica
           <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
         </label>
-        <textarea id="education" name="education"
+        <textarea id="education"
+                  name="education"
                   class="form-control"
-                  rows="15" required><?php echo set_value('education') ?></textarea>
+                  rows="10"
+                  required><?php echo set_value('education') ?></textarea>
         <?php if(form_error('education')): ?>
           <span class="text-danger"><?php echo form_error('education') ?></span>
         <?php endif; ?>

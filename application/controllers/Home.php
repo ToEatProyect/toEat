@@ -62,6 +62,7 @@ class Home extends MY_Controller {
 
     if($this->form_validation->run()) {
 
+      // Load user data
       $user_data['user_id'] = $this->users_model->get_unused_id();
       $user_data['username'] = $this->input->post('username');
       $user_data['name'] = $this->input->post('name');
@@ -75,7 +76,7 @@ class Home extends MY_Controller {
       if( $this->db->affected_rows() == 1 ) {
 
         //Send flash data
-        //$this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente");
+        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente");
 
         //Login the user
         return redirect(site_url("/"));
@@ -109,9 +110,9 @@ class Home extends MY_Controller {
       $header = 'Un nuevo usuario solicita cuenta de colaborador en ToEat!\n\n';
 
       $body =  'Username: ' . $user_data['username'] . '\n';
-      $body .= 'Nombre' . $user_data['name'] . '\n';
-      $body .= 'Email' . $user_data['email'] . '\n';
-      $body .= 'Formación' . $user_data['education'] . '\n\n';
+      $body .= 'Nombre: ' . $user_data['name'] . '\n';
+      $body .= 'Email: ' . $user_data['email'] . '\n';
+      $body .= 'Formación: ' . $user_data['education'] . '\n\n';
 
       // Load data to send
       $this->email->to($to);

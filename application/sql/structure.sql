@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS recipes(
   cooking_time INT(3) NOT NULL,
   created_at DATETIME NOT NULL,
   lastModDate DATETIME NOT NULL,
-#   image LONGBLOB NOT NULL,
+  image VARCHAR(100) NOT NULL,
   published INT(1) NOT NULL DEFAULT 0,
   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
 );
