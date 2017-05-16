@@ -9,9 +9,12 @@
     </div>
     <!-- /.col-md-8 -->
     <div class="col-md-4">
-      <h1>Business Name or Tagline</h1>
-      <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-      <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+      <h1>To Eat!</h1>
+      <p>
+        ¿Buscas algo muy concreto? ¿Estás en casa y no sabes que cocinar?
+        ¡Ningun problema! Nosotros te ayudamos a encontrar justo lo que necesitas
+      </p>
+      <a class="btn btn-success btn-lg" href="#">¡Pulsa aquí!</a>
     </div>
     <!-- /.col-md-4 -->
   </div>

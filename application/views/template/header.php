@@ -24,4 +24,6 @@
   
   <?php // Include menu ?>
   <?php include 'menu.php'; ?>
-  
+
+  <?php // Include notifications ?>
+  <?php include 'addons/_notifications.php'; ?>

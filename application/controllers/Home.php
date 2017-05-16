@@ -97,30 +97,43 @@ class Home extends MY_Controller {
 
     if($this->form_validation->run()) {
 
-      // If we want to save this information in DB, it's ready to use
-      // We only need to add new vars
+      // Load new collaborator request data
+      $user_data['id'] = 'DEFAULT';
       $user_data['username'] = $this->input->post('username');
       $user_data['name'] = $this->input->post('name');
       $user_data['email'] = $this->input->post('email');
       $user_data['education'] = $this->input->post('education');
+      $user_data['created_at'] = date("Y-m-d H:i:s");
 
-      // Prepare data to send by email
-      $to = 'toeatsite@gmail.com';
-      $subject = 'Solicitud de nuevo colaborador';
-      $header = 'Un nuevo usuario solicita cuenta de colaborador en ToEat!\n\n';
+      $this->db->set($user_data)->insert('new_collaborator_request');
 
-      $body =  'Username: ' . $user_data['username'] . '\n';
-      $body .= 'Nombre: ' . $user_data['name'] . '\n';
-      $body .= 'Email: ' . $user_data['email'] . '\n';
-      $body .= 'Formación: ' . $user_data['education'] . '\n\n';
+      if( $this->db->affected_rows() == 1 ) {
 
-      // Load data to send
-      $this->email->to($to);
-      $this->email->subject($subject);
-      $this->email->message($header . $body);
+        // Prepare data to send by email
+        $to = 'toeatsite@gmail.com';
+        $subject = 'Solicitud de nuevo colaborador';
+        $header = 'Un nuevo usuario solicita cuenta de colaborador en ToEat!\n\n';
 
-      // Send email
-      $this->email->send();
+        $body =  'Username: ' . $user_data['username'] . '\n';
+        $body .= 'Nombre: ' . $user_data['name'] . '\n';
+        $body .= 'Email: ' . $user_data['email'] . '\n';
+        $body .= 'Formación: ' . $user_data['education'] . '\n\n';
+
+        // Load data to send
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($header . $body);
+
+        // Send email
+        $this->email->send();
+
+        //Send flash data
+        $this->session->set_flashdata("notify", "Solicitud realizada con éxito");
+
+        //Login the user
+        return redirect(site_url("/"));
+      }
+
     }
 
     // Print view
