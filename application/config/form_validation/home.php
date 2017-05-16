@@ -103,7 +103,7 @@ $config['new_collaborator_request_rules'] = [
   [
     "field" => "username",
     "label" => "username",
-    "rules" => "trim|required|max_length[20]|min_length[4]|alpha_numeric|is_unique[users.username]",
+    "rules" => "trim|required|max_length[20]|min_length[4]|alpha_numeric|is_unique[users.username]|is_unique[new_collaborator_request.username]",
     "errors" => [
       "required" => "Este campo es obligatorio",
       "max_length" => "La longitud máxima es de 20 caracteres",
@@ -117,14 +117,14 @@ $config['new_collaborator_request_rules'] = [
   [
     "field" => "email",
     "label" => "email",
-    "rules" => "trim|required|valid_email|max_length[50]|is_unique[users.email]",
+    "rules" => "trim|required|valid_email|max_length[50]|is_unique[users.email]|is_unique[new_collaborator_request.email]",
     "errors" => [
       "required" => "Este campo es obligatorio",
       "valid_email" => "Introduce un email válido",
       "max_length" => "La longitud máxima es de 50 caracteres",
       "min_length" => "La longitud minima es de 4 carácteres",
       "alpha_numeric" => "Formato no válido",
-      "is_unique" => "Ya existe un usuario registrado con ese nombre de usuario"
+      "is_unique" => "Este correo electrónico ya está en uso"
     ]
   ],
 

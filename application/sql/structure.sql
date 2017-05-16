@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `username_or_email_on_hold` (
 
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(10) unsigned NOT NULL,
-  `username` varchar(12) DEFAULT NULL,
+  `username` varchar(20) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `auth_level` tinyint(3) unsigned NOT NULL,
@@ -262,3 +262,13 @@ CREATE TABLE IF NOT EXISTS recipes(
 #   CONSTRAINT fk_rec_cat_categorization FOREIGN KEY (categorization) REFERENCES categorization(idCategorization),
 #   CONSTRAINT fk_rec_cat_recipe FOREIGN KEY (recipe) REFERENCES recipes(idRecipe)
 # );
+
+-- TABLE 9 - New collaborator request --
+CREATE TABLE IF NOT EXISTS new_collaborator_request(
+  id INT(5) PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(20) NOT NULL UNIQUE,
+  email VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  education VARCHAR(4000) NOT NULL,
+  created_at DATETIME NOT NULL
+);
