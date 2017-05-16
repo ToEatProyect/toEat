@@ -58,7 +58,7 @@ $config['create_account_rules'] = [
         "max_length" => "La longitud máxima es de 50 caracteres",
         "min_length" => "La longitud minima es de 4 carácteres",
         "alpha_numeric" => "Formato no válido",
-        "is_unique" => "Ya existe un usuario registrado con ese nombre de usuario"
+        "is_unique" => "Este correo electrónico ya está en uso"
     ]
   ],
 

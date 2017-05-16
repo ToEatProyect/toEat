@@ -15,7 +15,7 @@
               <th>Nombre de usuario</th>
               <th>Nombre y apellidos</th>
               <th>Correo</th>
-              <th>Fecha creación</th>
+              <th>Fecha de la solicitud</th>
             </tr>
             </thead>
 

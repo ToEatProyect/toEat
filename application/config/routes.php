@@ -15,3 +15,6 @@ $route['new-collaborator-request'] = 'home/collaboratorRequest';
 // Recipes
 $route['recipes/new-recipe'] = 'recipes/Recipe/newRecipe';
 $route['recipes/my-recipes'] = 'recipes/Recipe';
+
+// Administration
+$route['users/collaborators-request'] = 'administration/collaboratorListRequest';
