@@ -247,12 +247,12 @@ CREATE TABLE IF NOT EXISTS recipes(
 #   CONSTRAINT fk_rec_ingr_ingredients FOREIGN KEY (ingredient) REFERENCES ingredients(idIngredient)
 # );
 
-# -- TABLE 7 - Categorization --
-# CREATE TABLE IF NOT EXISTS categorization(
-#   id INT(3) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-#   category VARCHAR(40) NOT NULL,
-#   parent_category VARCHAR(40) NULL
-# );
+-- TABLE 7 - Categorization --
+CREATE TABLE IF NOT EXISTS categorization(
+  id INT(3) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(40) NOT NULL,
+  parent_category VARCHAR(40) NULL
+);
 
 # -- TABLE 8 - Rec_cat --
 # CREATE TABLE IF NOT EXISTS rec_cat(

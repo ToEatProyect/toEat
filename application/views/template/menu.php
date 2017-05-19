@@ -35,6 +35,8 @@
             <ul class="dropdown-menu">
               <li><a href="/recipes/new-recipe">Nueva receta</a></li>
               <li><a href="/users/collaborators-request">Solicitudes de colaborador</a></li>
+              <li><a href="/category/new">Nueva categoría</a></li>
+              <li><a href="/category/list">Listado categorías</a></li>
               <li><a href="/logout">Desconectar</a></li>
             </ul>
 

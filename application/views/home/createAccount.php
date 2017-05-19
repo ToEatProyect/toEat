@@ -45,7 +45,7 @@
           <?php if(form_error('email')): ?>
             <span class="text-danger"><?php echo form_error('email') ?></span>
           <?php endif; ?>
-        </div><!-- /Password -->
+        </div><!-- /Email -->
 
         <!-- Password -->
         <div class="form-group <?php echo form_error('pass') ? 'has-error' : NULL ?>">

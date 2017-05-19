@@ -1,0 +1,53 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+      <?php echo form_open('') ?>
+      <!-- Name -->
+      <div class="form-group <?php echo form_error('name') ? 'has-error' : NULL ?>">
+        <label for="name">
+          Nombre de la categoría
+          <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
+        </label>
+        <input type="text" class="form-control"
+               value="<?php echo set_value("name") ?>"
+               id="name"
+               name="name"
+               maxlength="40"
+               required />
+        <?php if(form_error('name')): ?>
+          <span class="text-danger"><?php echo form_error('name') ?></span>
+        <?php endif; ?>
+      </div><!-- /Name -->
+
+      <!-- Parent category -->
+      <div class="form-group <?php echo form_error('parent_category') ? 'has-error' : NULL ?>">
+        <label for="parent_category">Categoría superior</label>
+        <select id="parent_category" name="parent_category" class="form-control">
+          <option value="0">Sin categoría</option>
+
+          // Are there parent categories? fill select
+          <?php if(count($p_category)): ?>
+
+            <?php foreach ($p_category as $category): ?>
+
+              <option value="<?php echo $category->id ?>"><?php echo $category->name ?></option>
+
+            <?php endforeach; ?>
+
+          <?php endif; ?>
+
+        </select>
+        <?php if(form_error('parent_category')): ?>
+          <span class="text-danger"><?php echo form_error('parent_category') ?></span>
+        <?php endif; ?>
+      </div><!-- /Parent category -->
+
+      <input type="submit" class="btn btn-success" value="Crear categoría">
+      <?php echo form_close('') ?>
+
+    </div>
+  </div>
+</div>
