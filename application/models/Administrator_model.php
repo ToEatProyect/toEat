@@ -29,7 +29,17 @@ class Administrator_model extends MY_Model {
       ->where('username', $request)
       ->get();
 
-    return $result = $query->result();
+    return $result = $query->row();
+  }
+
+  // Delete request
+  public function deleteRequest($request) {
+
+    $query = $this->db
+        ->where('username', $request)
+        ->delete('new_collaborator_request');
+
+    return $result = $query;
   }
 
   // ------------------------------------------------- Categories --------------------------------------------------- //
@@ -50,6 +60,16 @@ class Administrator_model extends MY_Model {
     $query = $this->db->query('SELECT * FROM categorization WHERE parent_category IS NULL');
 
     return $result = $query->result();
+  }
+
+  public function getCategory($value) {
+
+    $query = $this->db
+        ->from('categorization')
+        ->where('name', $value)
+        ->get();
+
+    return $result = $query->row();
   }
 
 }

@@ -45,7 +45,7 @@
         <?php endif; ?>
       </div><!-- /Parent category -->
 
-      <input type="submit" class="btn btn-success" value="Crear categoría">
+      <input type="submit" class="btn btn-success" value="Enviar">
       <?php echo form_close('') ?>
 
     </div>

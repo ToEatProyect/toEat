@@ -20,6 +20,8 @@ $route['recipes/my-recipes'] = 'recipes/Recipe';
 $route['users/collaborators-request'] = 'administration/collaboratorListRequest';
 $route['users/collaborators-request/(:any)'] = 'administration/show_collaboratorRequest/$1';
 $route['users/new'] = 'administration/newUser';
+$route['users/collaborators-request/(:any)/accept'] = 'administration/acceptCollaborator/$1';
+$route['users/collaborators-request/(:any)/deny'] = 'administration/denyCollaborator/$1';
 
 // Administration - category
 $route['category/new'] = 'administration/newCategory';

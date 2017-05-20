@@ -45,7 +45,7 @@ class Administration extends MY_Controller {
     if($this->form_validation->run()) {
 
       // Generate random password
-      $password = _randomPassword();
+      $password = $this->_randomPassword();
 
       // Load user data
       $user_data['user_id'] = $this->users_model->get_unused_id();
@@ -91,8 +91,8 @@ class Administration extends MY_Controller {
         // Send email
         $this->email->send();
 
-        //Send flash data
-        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente");
+        // Send flash data
+        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente" . $password);
 
         //
         return redirect(site_url("/"));
@@ -126,6 +126,82 @@ class Administration extends MY_Controller {
 
     $this->template->printView('administration/show_collaboratorRequest', $viewData);
 
+  }
+
+  // Accept a collaborator request
+  public function acceptCollaborator($value = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($value == null) {
+      return show_404();
+    }
+
+    $requestData = $this->administrator_model->getRequest($value);
+
+    // user doesn't exist? show 404 error
+    if($requestData == null) {
+      return show_404();
+    }
+
+    $this->load->model("users_model");
+
+    // Generate random password
+    $password = $this->_randomPassword();
+
+    // Load user data
+    $user_data['user_id'] = $this->users_model->get_unused_id();
+    $user_data['username'] = $requestData->username;
+    $user_data['name'] = $requestData->name;
+    $user_data['email'] = $requestData->email;
+    $user_data['passwd'] = $this->authentication->hash_passwd($password);
+    $user_data['auth_level'] = '3';
+    $user_data['created_at'] = date("Y-m-d H:i:s");
+
+    $this->db->set($user_data)->insert('users');
+
+    if( $this->db->affected_rows() == 1 ) {
+
+      // Delete request from "new_collaborator_request"
+      $this->administrator_model->deleteRequest($user_data['username']);
+
+      // Set flash data
+      $this->session->set_flashdata("notify", "Usuario <strong>".$user_data['username']."</strong> aceptado como colaborador." . $password);
+
+      // TODO: Send password by email
+
+      // Redirect user to collaborator list request
+      return redirect('/users/collaborators-request');
+    }
+  }
+
+  // Deny a collaborator request
+  public function denyCollaborator($value = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($value == null) {
+      echo '1';
+      return show_404();
+    }
+
+    $requestData = $this->administrator_model->getRequest($value);
+
+    // user doesn't exist? show 404 error
+    if($requestData == null) {
+      echo '2';
+      return show_404();
+    }
+
+    $this->administrator_model->deleteRequest($requestData->username);
+
+    // Set flash data
+    $this->session->set_flashdata("notify", "Solicitud borrada con éxito.");
+
+    // Redirect user to collaborator list request
+    return redirect('/users/collaborators-request');
   }
 
   // ------------------------------------------------- Categories --------------------------------------------------- //
@@ -195,6 +271,36 @@ class Administration extends MY_Controller {
 
     // Print view
     $this->template->printView('administration/newCategory', $viewData);
+  }
+
+  // Modify an existing category
+  // TODO: COMPLETE FUNCTION
+  public function modCategory($category = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($category == null) {
+      return show_404();
+    }
+
+    $categoryData = $this->administrator_model->getCategory($category);
+
+    // user doesn't exist?
+    if($categoryData == null) {
+      return show_404();
+    }
+
+    $viewData = [
+      'category' => $categoryData
+    ];
+
+    if($this->form_validation->run()) {
+
+
+    }
+
+    $this->template->printView('administration/show_collaboratorRequest', $viewData);
   }
 
   // --------------------------------------------- Private methods -------------------------------------------------- //

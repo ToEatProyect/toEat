@@ -4,7 +4,6 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-      <?php foreach ($request as $data): ?>
       <div class="panel panel-success">
         <div class="panel-heading">
           <h3 class="panel-title">Solicitud de usuario</h3>
@@ -12,24 +11,23 @@
         <div class="panel-body">
 
           <p>Nombre</p>
-          <p class="well"><?php echo $data->name ?></p>
+          <p class="well"><?php echo $request->name ?></p>
 
           <p>Nombre de usuario</p>
-          <p class="well"><?php echo $data->username ?></p>
+          <p class="well"><?php echo $request->username ?></p>
 
           <p>Email</p>
-          <p class="well"><?php echo $data->email ?></p>
+          <p class="well"><?php echo $request->email ?></p>
 
           <p>Formación</p>
-          <p class="well"><?php echo $data->education ?></p>
+          <p class="well"><?php echo $request->education ?></p>
 
           <div class="btn-group btn-group-justified">
-            <a href="" class="btn btn-success">Aceptar</a>
-            <a href="" class="btn btn-success">Rechazar</a>
+            <a href="<?php echo $request->username ?>/accept" class="btn btn-success">Aceptar</a>
+            <a href="<?php echo $request->username ?>/deny" class="btn btn-success">Rechazar</a>
           </div>
         </div><!-- /.panel-body -->
       </div><!-- /.panel -->
-      <?php endforeach; ?>
 
     </div>
   </div>
