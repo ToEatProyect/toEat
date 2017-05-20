@@ -12,6 +12,8 @@ class Administration extends MY_Controller {
   }
 
 
+  // -------------------------------------------------- Users ------------------------------------------------------- //
+
   // Displays the list of collaborator requests
   public function collaboratorListRequest() {
 
@@ -28,6 +30,105 @@ class Administration extends MY_Controller {
     // Print view
     $this->template->printView('administration/collaboratorList', $viewData);
   }
+
+  // Create a new user
+  public function newUser() {
+
+    // TODO: Add permission restriction
+
+    // Load validation library, validation config and validation rules
+    $this->load->library("form_validation");
+    $this->config->load('form_validation/administration/administration');
+    $this->load->model("users_model");
+    $this->form_validation->set_rules(config_item('create_new_user_rules'));
+
+    if($this->form_validation->run()) {
+
+      // Generate random password
+      $password = _randomPassword();
+
+      // Load user data
+      $user_data['user_id'] = $this->users_model->get_unused_id();
+      $user_data['username'] = $this->input->post('username');
+      $user_data['name'] = $this->input->post('name');
+      $user_data['email'] = $this->input->post('email');
+      $user_data['passwd'] = $this->authentication->hash_passwd($password);
+      $user_data['auth_level'] = $this->input->post('role');;
+      $user_data['created_at'] = date("Y-m-d H:i:s");
+
+      $this->db->set($user_data)->insert('users');
+
+      if( $this->db->affected_rows() == 1 ) {
+
+        $config = Array(
+          'protocol' => 'smtp',
+          'smtp_host' => 'ssl://smtp.gmail.com',
+          'smtp_port' => 80,
+          'smtp_user' => 'toeatsite@gmail.com',
+          'smtp_pass' => '',
+          'mailtype'  => 'html',
+          'charset'   => 'iso-8859-1'
+        );
+
+        // Load email library
+        $this->load->library('email');
+
+        // Prepare data to send by email
+        $to = 'toeatsite@gmail.com';
+        $subject = 'Solicitud de nuevo colaborador';
+        $header = 'Ya tienes tu cuenta de ToEat!\n\n';
+
+        $body =  'Username: ' . $user_data['username'] . '\n';
+        $body .= 'Nombre: ' . $user_data['name'] . '\n';
+        $body .= 'Email: ' . $user_data['email'] . '\n';
+        $body .= 'Contraseña: ' . $password . '\n\n';
+
+        // Load data to send
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($header . $body);
+
+        // Send email
+        $this->email->send();
+
+        //Send flash data
+        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente");
+
+        //
+        return redirect(site_url("/"));
+      }
+    }
+
+    // Print view
+    $this->template->printView('administration/newUser');
+  }
+
+  // Show all data from a collaborator request to accept or deny
+  public function show_collaboratorRequest($user = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($user == null) {
+      return show_404();
+    }
+
+    $requestData = $this->administrator_model->getRequest($user);
+
+    // user doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    $viewData = [
+      'request' => $requestData
+    ];
+
+    $this->template->printView('administration/show_collaboratorRequest', $viewData);
+
+  }
+
+  // ------------------------------------------------- Categories --------------------------------------------------- //
 
   // Displays the list of categories
   public function categoriesList() {
@@ -79,12 +180,11 @@ class Administration extends MY_Controller {
 
       if( $this->db->affected_rows() == 1 ) {
 
-        //Send flash data
+        // Send flash data
         $this->session->set_flashdata("notify", "Categoría <strong>".$category_data["name"]."</strong> creada con éxito");
 
-        // TODO: Assign URL correctly
-        //Login the user
-        return redirect(site_url("/category/new"));
+        // Redirect to category list
+        return redirect(site_url("/category/list"));
       }
     }
 
@@ -95,6 +195,22 @@ class Administration extends MY_Controller {
 
     // Print view
     $this->template->printView('administration/newCategory', $viewData);
+  }
+
+  // --------------------------------------------- Private methods -------------------------------------------------- //
+
+  // Create a random password
+  private function _randomPassword() {
+    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $pass = array();
+    $alphaLength = strlen($alphabet) - 1;
+    for ($i = 0; $i < 10; $i++) {
+      $n = rand(0, $alphaLength);
+      $pass[] = $alphabet[$n];
+    }
+
+    // Return the array, like a string
+    return implode($pass);
   }
 
 }

@@ -16,8 +16,10 @@ $route['new-collaborator-request'] = 'home/collaboratorRequest';
 $route['recipes/new-recipe'] = 'recipes/Recipe/newRecipe';
 $route['recipes/my-recipes'] = 'recipes/Recipe';
 
-// Administration - collaborator
+// Administration - users
 $route['users/collaborators-request'] = 'administration/collaboratorListRequest';
+$route['users/collaborators-request/(:any)'] = 'administration/show_collaboratorRequest/$1';
+$route['users/new'] = 'administration/newUser';
 
 // Administration - category
 $route['category/new'] = 'administration/newCategory';

@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -37,6 +37,7 @@
               <li><a href="/users/collaborators-request">Solicitudes de colaborador</a></li>
               <li><a href="/category/new">Nueva categoría</a></li>
               <li><a href="/category/list">Listado categorías</a></li>
+              <li><a href="/users/new">Nuevo usuario (admin)</a></li>
               <li><a href="/logout">Desconectar</a></li>
             </ul>
 

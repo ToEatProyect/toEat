@@ -21,10 +21,10 @@
             <?php foreach ($categories as $category): ?>
 
               <tr>
-                <td><?php echo $category->c_name ?></td>
+                <td><a href=""><?php echo $category->c_name ?></a></td>
 
                 <?php if($category->parent == NULL): ?>
-                  <td>Sin categoría padre</td>
+                  <td>Sin categoría</td>
                 <?php else: ?>
                   <td><?php echo $category->parent ?></td>
                 <?php endif; ?>
@@ -39,8 +39,11 @@
         <?php // No collaborator request? ?>
       <?php else: ?>
 
-        <h1>Actualmente no existe ninguna categoría</h1>
-        <a href="/category/new" class="btn btn-default">Crear categoría</a>
+        <div class="jumbotron">
+          <h1>Sin resultados</h1>
+          <p>Actualmente no existe ninguna categoría creada</p>
+          <p><a href="/category/new" class="btn btn-primary btn-lg">Crear categoría</a></p>
+        </div>
 
       <?php endif; ?>
 

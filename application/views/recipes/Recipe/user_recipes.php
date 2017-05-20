@@ -44,9 +44,11 @@
       <?php // No recipes? ?>
       <?php else: ?>
 
-        <h1>Aún no has creado ninguna receta</h1>
-        <p>¿Qué esperas? Empieza ya</p>
-        <a href="/recipes/new-recipe" class="btn btn-default">Crear receta</a>
+        <div class="jumbotron">
+          <h1>No hay recetas</h1>
+          <p>¿Aún no has creado ninguna receta? ¿Qué esperas? ¡Empieza ya!</p>
+          <p><a href="/recipes/new-recipe" class="btn btn-success">Crear receta</a></p>
+        </div>
 
       <?php endif; ?>
 

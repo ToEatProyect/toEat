@@ -23,7 +23,7 @@
             <?php foreach ($requests as $request): ?>
 
               <tr>
-                <td><?php echo $request->username ?></td>
+                <td><a href="/users/collaborators-request/<?php echo $request->username ?>"><?php echo $request->username ?></a></td>
                 <td><?php echo $request->name ?></td>
                 <td><?php echo $request->email ?></td>
                 <td><?php echo $request->created_at ?></td>
@@ -38,7 +38,10 @@
         <?php // No collaborator request? ?>
       <?php else: ?>
 
-        <h1>En este momento no hay ninguna solicitud para nuevos colaboradores pendiente</h1>
+        <div class="jumbotron">
+          <h1>Sin resultados</h1>
+          <p>En este momento no hay ninguna solicitud para nuevos colaboradores pendiente</p>
+        </div>
 
       <?php endif; ?>
 

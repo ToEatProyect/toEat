@@ -7,11 +7,11 @@ $config['create_recipe_rules'] = [
   [
       "field" => "title",
       "label" => "title",
-      "rules" => "trim|required|min_lenght[4]|max_length[50]|is_unique[recipes.title]|alpha_numeric_spaces",
+      "rules" => "trim|required|min_length[4]|max_length[50]|is_unique[recipes.title]|alpha_numeric_spaces",
       "errors" => [
       "required" => "Este campo es obligatorio",
       "alpha_numeric_spaces" => "Solo se admiten letras en este campo",
-      "min_lenght" => "La longitud mínima es de 4 caracteres",
+      "min_length" => "La longitud mínima es de 4 caracteres",
       "max_length" => "La longitud máxima es de 50 caracteres",
       "is_unique" => "Ya existe otra receta con este título"
     ]

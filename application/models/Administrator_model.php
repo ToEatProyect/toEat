@@ -9,7 +9,7 @@ class Administrator_model extends MY_Model {
     $this->load->database();
   }
 
-  // ----------------------------------------------- Collaborator --------------------------------------------------- //
+  // -------------------------------------------------- Users ------------------------------------------------------- //
 
   // Get all data from table "new_collaborator_request"
   public function getAll_collaboratorRequest() {
@@ -39,7 +39,7 @@ class Administrator_model extends MY_Model {
 
     $query = $this->db->query('SELECT c.id, c.name as c_name, cp.name as parent
       FROM categorization as c LEFT JOIN categorization as cp
-      ON c.id = cp.parent_category ORDER BY c_name');
+      ON cp.id = c.parent_category ORDER BY c_name');
 
     return $result = $query->result();
   }
