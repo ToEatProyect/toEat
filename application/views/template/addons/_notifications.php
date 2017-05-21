@@ -2,7 +2,7 @@
 
 if($this->session->flashdata("notify")): ?>
 
-  <div class="alert alert-info alert-dismissible notifications" role="alert">
+  <div class="alert alert-success alert-dismissible notifications" role="alert">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <?php echo $this->session->flashdata("notify") ?>
   </div>

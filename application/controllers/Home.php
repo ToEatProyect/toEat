@@ -128,7 +128,7 @@ class Home extends MY_Controller {
         $this->email->send();
 
         //Send flash data
-        $this->session->set_flashdata("notify", "Solicitud realizada con éxito.<br/><br/> Si es aceptado se le notificará mediante email por el correo que facilitado");
+        $this->session->set_flashdata("notify", "Solicitud realizada con éxito.<br/><br/> Si es aceptado se le notificará mediante email por el correo que ha facilitado");
 
         //Login the user
         return redirect(site_url("/"));
