@@ -24,6 +24,7 @@
 
           <div class="btn-group btn-group-justified">
             <a href="<?php echo $request->username ?>/accept" class="btn btn-success">Aceptar</a>
+            <a href="/users/collaborators-request" class="btn btn-success">Volver</a>
             <a href="<?php echo $request->username ?>/deny" class="btn btn-success">Rechazar</a>
           </div>
         </div><!-- /.panel-body -->
