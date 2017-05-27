@@ -31,9 +31,11 @@
           // Are there parent categories? fill select
           <?php if(count($p_category)): ?>
 
-            <?php foreach ($p_category as $category): ?>
+            <?php foreach ($p_category as $item): ?>
 
-              <option value="<?php echo $category->id ?>"><?php echo $category->name ?></option>
+              <option value="<?php echo $item->id ?>"
+                <?php echo  set_select('parent_category', $item->id); ?>
+              ><?php echo $item->name ?></option>
 
             <?php endforeach; ?>
 
@@ -45,7 +47,7 @@
         <?php endif; ?>
       </div><!-- /Parent category -->
 
-      <input type="submit" class="btn btn-success" value="Crear categoría">
+      <input type="submit" class="btn btn-success" value="Continuar">
       <?php echo form_close('') ?>
 
     </div>

@@ -54,9 +54,9 @@
           <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
         </label>
         <select class="form-control" id="role" name="role">
-          <option value="1">Normal</option>
-          <option value="3">Colaborador</option>
-          <option value="6">Moderador</option>
+          <option value="1" <?php echo  set_select('role', '1'); ?>>Normal</option>
+          <option value="3" <?php echo  set_select('role', '3'); ?>>Colaborador</option>
+          <option value="6" <?php echo  set_select('role', '6'); ?>>Moderador</option>
         </select>
       </div><!-- /Role -->
 
