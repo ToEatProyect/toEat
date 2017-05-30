@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS recipes(
   cooking_time INT(3) NOT NULL,
   created_at DATETIME NOT NULL,
   lastModDate DATETIME NOT NULL,
-  image VARCHAR(100) NOT NULL,
+  image VARCHAR(90) NOT NULL,
   published INT(1) NOT NULL DEFAULT 0,
   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
 );
@@ -230,12 +230,12 @@ CREATE TABLE IF NOT EXISTS recipes(
 #   CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id_recipe)
 # );
 
-# -- TABLE 5 - Ingredients --
-# CREATE TABLE IF NOT EXISTS ingredients(
-#   idIngredient INT(4) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-#   ingredientName VARCHAR(30) NOT NULL,
-#   image BLOB NOT NULL
-# );
+-- TABLE 5 - Ingredients --
+CREATE TABLE IF NOT EXISTS ingredients(
+  id INT(5) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(40) NOT NULL,
+  slug VARCHAR(60) NOT NULL
+);
 
 # -- TABLE 6 - Rec_ingr --
 # CREATE TABLE IF NOT EXISTS rec_ingr(
@@ -251,6 +251,7 @@ CREATE TABLE IF NOT EXISTS recipes(
 CREATE TABLE IF NOT EXISTS categorization(
   id INT(3) UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   name VARCHAR(40) NOT NULL,
+  slug VARCHAR(60) NOT NULL,
   parent_category VARCHAR(40) NULL
 );
 

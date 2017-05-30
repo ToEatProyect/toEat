@@ -16,13 +16,18 @@ $route['new-collaborator-request'] = 'home/collaboratorRequest';
 $route['recipes/new-recipe'] = 'recipes/Recipe/newRecipe';
 $route['recipes/my-recipes'] = 'recipes/Recipe';
 
+// Ingredient
+$route['ingredients'] = 'recipes/Ingredients';
+$route['ingredients/new'] = 'recipes/Ingredients/newIngredient';
+
 // Administration - users
+$route['users/new'] = 'administration/newUser';
 $route['users/collaborators-request'] = 'administration/collaboratorListRequest';
 $route['users/collaborators-request/(:any)'] = 'administration/show_collaboratorRequest/$1';
-$route['users/new'] = 'administration/newUser';
 $route['users/collaborators-request/(:any)/accept'] = 'administration/acceptCollaborator/$1';
 $route['users/collaborators-request/(:any)/deny'] = 'administration/denyCollaborator/$1';
 
 // Administration - category
 $route['category/new'] = 'administration/newCategory';
+$route['category/modify/(:any)'] = 'administration/newCategory/$1';
 $route['category/list'] = 'administration/categoriesList';

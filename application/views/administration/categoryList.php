@@ -21,7 +21,7 @@
             <?php foreach ($categories as $category): ?>
 
               <tr>
-                <td><a href=""><?php echo $category->c_name ?></a></td>
+                <td><a href="/category/modify/<?php echo $category->c_name ?>"><?php echo $category->c_name ?></a></td>
 
                 <?php if($category->parent == NULL): ?>
                   <td>Sin categoría</td>
@@ -36,13 +36,13 @@
           </table>
         </div>
 
-        <?php // No collaborator request? ?>
+        <?php // No category? ?>
       <?php else: ?>
 
         <div class="jumbotron">
           <h1>Sin resultados</h1>
           <p>Actualmente no existe ninguna categoría creada</p>
-          <p><a href="/category/new" class="btn btn-primary btn-lg">Crear categoría</a></p>
+          <p><a href="/category/new" class="btn btn-success btn-lg">Crear categoría</a></p>
         </div>
 
       <?php endif; ?>

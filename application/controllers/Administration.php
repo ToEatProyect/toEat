@@ -274,7 +274,6 @@ class Administration extends MY_Controller {
   }
 
   // Modify an existing category
-  // TODO: COMPLETE FUNCTION
   public function modCategory($category = null) {
 
     // TODO: Add permission restriction
@@ -291,16 +290,52 @@ class Administration extends MY_Controller {
       return show_404();
     }
 
-    $viewData = [
-      'category' => $categoryData
-    ];
+    // Save "id" to update
+    $id = $categoryData->id;
+
+    // Get parent categories
+    $parentCategories = $this->administrator_model->getParentCategories();
+
+    // Load validation library, validation config and validation rules
+    $this->load->library("form_validation");
+    $this->config->load('form_validation/administration/administration');
+    $this->form_validation->set_rules(config_item('create_category_rules'));
 
     if($this->form_validation->run()) {
 
+      // Load user data
+      $category_data['id'] = $id;
+      $category_data['name'] = $this->input->post('name');
 
+      // Does the category have parent category?
+      if($this->input->post('parent_category') == '0') {
+
+        $category_data['parent_category'] = null;
+      }
+      else {
+
+        $category_data['parent_category'] = $this->input->post('parent_category');
+      }
+
+      $this->db->update('categorization', $category_data, array('id' => $id));
+
+      if( $this->db->affected_rows() == 1 ) {
+
+        // Send flash data
+        $this->session->set_flashdata("notify", "Categoría <strong>".$category_data["name"]."</strong> modificada con éxito");
+
+        // Redirect to category list
+        return redirect(site_url("/category/list"));
+      }
     }
 
-    $this->template->printView('administration/show_collaboratorRequest', $viewData);
+    // View data
+    $viewData = [
+      'category' => $categoryData,
+      'p_category' => $parentCategories
+    ];
+
+    $this->template->printView('administration/newCategory', $viewData);
   }
 
   // --------------------------------------------- Private methods -------------------------------------------------- //

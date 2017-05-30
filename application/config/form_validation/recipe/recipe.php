@@ -1,5 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['create_recipe_rules'] = [
 
@@ -21,7 +20,7 @@ $config['create_recipe_rules'] = [
   [
       "field" => "recipe_description",
       "label" => "recipe_description",
-      "rules" => "trim|required|max_length[800]|alpha_numeric",
+      "rules" => "trim|required|max_length[800]|alpha_numeric_spaces",
       "errors" => [
       "required" => "Este campo es obligatorio",
       "alpha_numeric" => "Solo se admiten letras y números en este campo",

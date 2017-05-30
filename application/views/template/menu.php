@@ -38,6 +38,8 @@
               <li><a href="/category/new">Nueva categoría</a></li>
               <li><a href="/category/list">Listado categorías</a></li>
               <li><a href="/users/new">Nuevo usuario (admin)</a></li>
+              <li><a href="/ingredients">Listado ingredientes</a></li>
+              <li><a href="/ingredients/new">Nuevo ingrediente</a></li>
               <li><a href="/logout">Desconectar</a></li>
             </ul>
 
