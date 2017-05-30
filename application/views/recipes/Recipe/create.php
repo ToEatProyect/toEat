@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
 
-      <?php echo form_open_multipart() ?>
+      <?php echo form_open() ?>
       
         <!-- Title -->
         <div class="form-group <?php echo form_error('title') ? 'has-error' : NULL ?>">
@@ -55,21 +55,6 @@
             <span class="text-danger"><?php echo form_error('recipe_description') ?></span>
           <?php endif; ?>
         </div><!-- /Description -->
-
-      <!-- Img recipe -->
-      <div class="form-group <?php echo form_error('image') ? 'has-error' : NULL ?>">
-        <label for="image">
-          Imagen de la receta
-          <span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span>
-        </label>
-        <input type="file"
-               id="image"
-               name="image"
-               required/>
-        <?php if(isset($upload_file_error)): ?>
-          <span class="text-danger"><?php echo $upload_file_error ?></span>
-        <?php endif; ?>
-      </div><!-- /Img recipe -->
 
       <input type="submit" class="btn btn-success" value="Crear receta">
 

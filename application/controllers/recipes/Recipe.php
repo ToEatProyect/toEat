@@ -42,16 +42,6 @@ class Recipe extends MY_Controller {
       return redirect( site_url( '/' ) );
     }
 
-    // Load img config
-    $config['upload_path'] = '/assets/img/recipes/';
-    $config['allowed_types'] = 'gif|jpg|png';
-    $config['max_size'] = '4000';
-    $config['max_width'] = '2024';
-    $config['max_height'] = '2008';
-
-    // Load upload library
-    $this->load->library('upload', $config);
-
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
     $this->config->load('form_validation/recipe/recipe');
@@ -67,7 +57,7 @@ class Recipe extends MY_Controller {
       $recipe_data['cooking_time'] = $this->input->post('cooking_time');
       $recipe_data['created_at'] = date("Y-m-d H:i:s");
       $recipe_data['lastModDate'] = date("Y-m-d H:i:s");
-      $recipe_data['image'] = 'tmp_name';
+      $recipe_data['image'] = 'img-default-test.jpg';
       $recipe_data['id_owner'] = $this->auth_data->user_id;
       $recipe_data['published'] = 'DEFAULT';
 
@@ -77,22 +67,13 @@ class Recipe extends MY_Controller {
       // Created recipe? upload img
       if( $this->db->affected_rows() == 1 ) {
 
-        // Failed to upload image?
-        if( ! $this->upload->do_upload('image')) {
+        //Send flash data
+        $this->session->set_flashdata("notify", "<strong>Receta creada correctamente</strong><br/><br/>
+          Solo te falta agregar la imagen. 
+          Una vez hecho esto, los moderadores la revisarán y la darán de alta si los datos cumplen las normas");
 
-          $viewData = ['upload_file_error' => $this->upload->display_errors()];
-          return $this->template->printView('recipes/Recipe/create', $viewData);
-        }
-        // Image upload is ok?
-        else {
-
-          // Get img data from library
-          $file_info = $this->upload->data();
-          $recipe_data['image'] = $file_info['file_name'];
-
-          // TODO: guardar el nombre de la imagen en la base de datos (slug de la receta)
-        }
-
+        //Login the user
+        return redirect(site_url("/recipes/my-recipes"));
       }
     }
 
@@ -100,5 +81,4 @@ class Recipe extends MY_Controller {
     $this->template->printView('recipes/Recipe/create');
 
   }
-
 }
