@@ -35,7 +35,7 @@
                     <?php else: ?>
                       <p class="text-success">Publicada</p>
                     <?php endif; ?>
-                    <a class="btn btn-success" href="">Detalles <i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></a>
+                    <a class="btn btn-success" href="/recipes/show/<?php echo $recipe->slug ?>">Detalles <i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></a>
                   </div>
                 </div>
               </div>

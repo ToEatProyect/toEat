@@ -25,10 +25,20 @@ class Recipes_model extends MY_Model {
 
     $query = $this->db
         ->from('recipes')
-        ->where('title', $recipe)
+        ->where('slug', $recipe)
         ->get();
 
-    return $result = $query->result();
+    return $result = $query->row();
+  }
+
+  // Get recipe owner
+  public function get_recipeOwner($recipe) {
+
+    $query = $this->db->query("SELECT username FROM users 
+      INNER JOIN recipes ON users.user_id = recipes.id_owner 
+      WHERE recipes.slug = '" . $recipe . "'");
+
+    return $result = $query->row();
   }
 
 }

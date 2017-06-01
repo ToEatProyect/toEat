@@ -53,7 +53,7 @@ class Recipe extends MY_Controller {
       $recipe_data['id'] = 'DEFAULT';
       $recipe_data['title'] = $this->input->post('title');
       $recipe_data['slug'] = $this->slug->parseSlug($this->input->post('title'));
-      $recipe_data['description'] = $this->input->post('recipe_description');
+      $recipe_data['description'] = nl2br($this->input->post('recipe_description'));
       $recipe_data['cooking_time'] = $this->input->post('cooking_time');
       $recipe_data['created_at'] = date("Y-m-d H:i:s");
       $recipe_data['lastModDate'] = date("Y-m-d H:i:s");
@@ -81,4 +81,35 @@ class Recipe extends MY_Controller {
     $this->template->printView('recipes/Recipe/create');
 
   }
+
+  // Show recipe to all user
+  public function show($data = null) {
+
+    // TODO: Add permission restriction
+
+    // no recipe? show 404 error
+    if($data == null) {
+      return show_404();
+    }
+
+    // Get recipe data
+    $requestData = $this->recipes_model->getRecipe($data);
+
+    // recipe doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    // Get username owner
+    $requestOwner = $this->recipes_model->get_recipeOwner($data);
+
+    $viewData = [
+      'recipe' => $requestData,
+      'owner' => $requestOwner->username
+    ];
+
+    $this->template->printView('recipes/Recipe/show', $viewData);
+
+  }
+
 }
