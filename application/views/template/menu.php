@@ -15,7 +15,7 @@
       </a>
     </div>
     <!-- /.navbar-header -->
-    <div id="navbar" class="navbar-collapse collapse">
+    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-left">
         <?php if(isset($userData)): ?>
