@@ -107,7 +107,6 @@
                 <?php endif; ?>
               </div><!-- /Score -->
 
-
               <input type="submit" class="btn btn-success" value="Enviar comentario">
 
             </fieldset>
