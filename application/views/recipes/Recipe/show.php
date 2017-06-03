@@ -7,7 +7,26 @@
     <div class="col-md-8">
       <h2 class="text-success"><?php echo $recipe->title ?></h2>
       <blockquote>
-        <p>Puntuación: <?php echo $avg_score ?></p>
+        <p>Puntuación:
+
+        <?php if($avg_score == null): ?>
+
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+
+        <?php else: ?>
+
+          <?php for( $i = 1; $i <= $avg_score; $i++ ): ?>
+
+            <i class="fa fa-star" aria-hidden="true"></i>
+
+          <?php endfor; ?>
+
+        <?php endif; ?></p>
+
         <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</p>
         <small>Creada por <cite title="Source Title"><?php echo $owner ?></cite></small>
       </blockquote>
@@ -138,6 +157,9 @@
       <?php // If the recipe has comments, view them ?>
       <?php if(count($comments) > 0): ?>
 
+        <h3>Comentarios de los usuarios</h3>
+        <hr>
+
         <?php foreach ($comments as $comment): ?>
 
           <?php
@@ -147,16 +169,24 @@
 
           ?>
 
-          <h3>Comentarios de los usuarios</h3>
-          <hr>
-
-          <div class="panel panel-default">
-            <div class="panel-heading"><?php echo $comment->username ?></div>
+          <div class="panel panel-default comment-separator">
+            <div class="panel-heading">
+              <strong><?php echo $comment->username ?></strong> el
+              <strong><?php echo $date->format('d/m/Y') ?></strong> a las
+              <strong><?php echo $date->format('H:i:s') ?></strong>
+            </div>
             <div class="panel-body">
-              <p><strong><?php echo $date->format('d-m-Y') . ' | ' . $date->format('H:i:s') ?></strong></p>
               <p class="text-justify"><?php echo $comment->text ?></p>
             </div>
-            <div class="panel-footer"><strong>Puntuación: <?php echo $comment->score ?></strong></div>
+            <div class="panel-footer">
+
+              Puntuación:
+
+              <?php for( $i = 1; $i <= $comment->score; $i++ ): ?>
+
+                <i class="fa fa-star" aria-hidden="true"></i>
+
+              <?php endfor; ?>
           </div>
 
         <?php endforeach; ?>

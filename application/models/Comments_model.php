@@ -17,7 +17,7 @@ class Comments_model extends MY_Model {
       FROM users INNER JOIN comments
       ON users.user_id = comments.id_user
       WHERE id_recipe = '" . $recipe . "'
-      ORDER BY created_at");
+      ORDER BY created_at DESC");
 
     return $result = $query->result();
   }
