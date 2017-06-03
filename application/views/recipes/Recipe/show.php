@@ -19,9 +19,13 @@
 
         <?php else: ?>
 
-          <?php for( $i = 1; $i <= $avg_score; $i++ ): ?>
+          <?php for( $i = 0; $i < 5; $i++ ): ?>
 
-            <i class="fa fa-star" aria-hidden="true"></i>
+            <?php if($avg_score > $i): ?>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            <?php else: ?>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            <?php endif; ?>
 
           <?php endfor; ?>
 
@@ -69,7 +73,6 @@
         </div>
         <div class="panel-body">
           Pasos
-          <?php if(isset($user_loggin)){echo $user_loggin;} ?>
         </div>
       </div><!-- /Steps -->
 
@@ -182,11 +185,16 @@
 
               Puntuación:
 
-              <?php for( $i = 1; $i <= $comment->score; $i++ ): ?>
-
-                <i class="fa fa-star" aria-hidden="true"></i>
+              <?php for( $i = 0; $i < 5; $i++ ): ?>
+                <?php if($comment->score > $i): ?>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                <?php else: ?>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+                <?php endif; ?>
 
               <?php endfor; ?>
+
+            </div>
           </div>
 
         <?php endforeach; ?>
