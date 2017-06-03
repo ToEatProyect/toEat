@@ -168,13 +168,13 @@
           <?php
 
           // Reformat date to print
-          $date = new DateTime($recipe->created_at);
+          $date = new DateTime($comment->created_at);
 
           ?>
 
           <div class="panel panel-default comment-separator">
             <div class="panel-heading">
-              <strong><?php echo $comment->username ?></strong> el
+              <strong><?php echo $comment->username ?></strong>, el
               <strong><?php echo $date->format('d/m/Y') ?></strong> a las
               <strong><?php echo $date->format('H:i:s') ?></strong>
             </div>
