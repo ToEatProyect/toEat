@@ -20,9 +20,10 @@ $config['create_recipe_rules'] = [
   [
       "field" => "recipe_description",
       "label" => "recipe_description",
-      "rules" => "trim|required|max_length[800]",
+      "rules" => "trim|required|min_length[4]|max_length[800]",
       "errors" => [
       "required" => "Este campo es obligatorio",
+      "min_length" => "La longitud mínima es de 4 caracteres",
       "max_length" => "La longitud máxima es de 800 caracteres",
     ]
   ],
@@ -38,5 +39,32 @@ $config['create_recipe_rules'] = [
       "max_length" => "La longitud máxima es de 3 números",
     ]
   ],
+
+];
+
+$config['create_comment_rules'] = [
+
+  // Opinion
+  [
+    "field" => "opinion_description",
+    "label" => "opinion_description",
+    "rules" => "trim|required|min_length[4]|max_length[200]",
+    "errors" => [
+      "required" => "Este campo es obligatorio",
+      "max_length" => "La longitud máxima es de 200 caracteres",
+      "min_length" => "La longitud mínima es de 4 caracteres",
+    ]
+  ],
+
+  // Score
+  [
+    "field" => "score",
+    "label" => "score",
+    "rules" => "required",
+    "errors" => [
+      "required" => "Puntua la receta"
+    ]
+  ],
+
 
 ];

@@ -48,7 +48,7 @@ class Home extends MY_Controller {
   // Create a new account
   public function createAccount() {
 
-    // Redirect user if he is not logged
+    // Redirect user if he is logged
     if($this->is_logged_in()){
 
       return redirect(site_url('/'));
@@ -102,7 +102,7 @@ class Home extends MY_Controller {
       $user_data['username'] = $this->input->post('username');
       $user_data['name'] = $this->input->post('name');
       $user_data['email'] = $this->input->post('email');
-      $user_data['education'] = $this->input->post('education');
+      $user_data['education'] = nl2br($this->input->post('education'));
       $user_data['created_at'] = date("Y-m-d H:i:s");
 
       $this->db->set($user_data)->insert('new_collaborator_request');

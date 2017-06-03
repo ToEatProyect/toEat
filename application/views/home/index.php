@@ -26,7 +26,7 @@
   <div class="row">
     <div class="col-lg-12">
       <div class="well text-center">
-        Si quieres colaborar con nosotros creando recetas puedes hacerlo haciendo clic <a href="/new-collaborator-request">aquí</a>
+        <strong>Si quieres colaborar con nosotros creando recetas puedes hacerlo haciendo clic <a href="/new-collaborator-request">aquí</a></strong>
       </div>
     </div>
     <!-- /.col-lg-12 -->

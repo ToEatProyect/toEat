@@ -217,18 +217,18 @@ CREATE TABLE IF NOT EXISTS recipes(
 #   CONSTRAINT fk_steps_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
 # );
 
-# -- TABLE 4 - Comments --
-# CREATE TABLE IF NOT EXISTS comments(
-#   id_user INT(10) UNSIGNED NOT NULL,
-#   id_recipe INT(10) UNSIGNED NOT NULL,
-#   text TEXT NOT NULL,
-#   creationDate DATETIME NOT NULL,
-#   lastModDate DATETIME NULL,
-#   score INT(1),
-#   PRIMARY KEY (id_user, id_recipe),
-#   CONSTRAINT fk_comments_users FOREIGN KEY (id_user) REFERENCES users(id_user),
-#   CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id_recipe)
-# );
+-- TABLE 4 - Comments --
+CREATE TABLE IF NOT EXISTS comments(
+  id_user INT(10) UNSIGNED NOT NULL,
+  id_recipe INT(10) UNSIGNED NOT NULL,
+  text VARCHAR(200) NOT NULL,
+  created_at DATETIME NOT NULL,
+  lastModDate DATETIME NULL,
+  score INT(1),
+  PRIMARY KEY (id_user, id_recipe),
+  CONSTRAINT fk_comments_users FOREIGN KEY (id_user) REFERENCES users(user_id),
+  CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
+);
 
 -- TABLE 5 - Ingredients --
 CREATE TABLE IF NOT EXISTS ingredients(
