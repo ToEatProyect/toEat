@@ -44,10 +44,10 @@ class Administrator_model extends MY_Model {
 
   // ------------------------------------------------- Categories --------------------------------------------------- //
 
-  // Get all categories to view
+  // Get all categories to view in list
   public function getAll_categories() {
 
-    $query = $this->db->query('SELECT c.id, c.name as c_name, cp.name as parent
+    $query = $this->db->query('SELECT c.id, c.name as c_name, cp.name as parent, c.slug
       FROM categorization as c LEFT JOIN categorization as cp
       ON cp.id = c.parent_category ORDER BY c_name');
 
@@ -62,6 +62,18 @@ class Administrator_model extends MY_Model {
     return $result = $query->result();
   }
 
+  // Get all children categories from a parent
+  public function getChildrenCategory_fromParent($parent) {
+
+    $query = $this->db
+      ->from('new_collaborator_request')
+      ->where('id', $parent)
+      ->get();
+
+    return $result = $query->result();
+  }
+
+  // Get 1 category
   public function getCategory($value) {
 
     $query = $this->db
@@ -70,6 +82,17 @@ class Administrator_model extends MY_Model {
         ->get();
 
     return $result = $query->row();
+  }
+
+  // Get the number of children categories that have a parent category
+  public function parent_haveChildren($value) {
+
+    $query = $this->db
+      ->from('categorization')
+      ->where('name', $value)
+      ->get();
+
+    return $result = $query->num_rows();
   }
 
 }

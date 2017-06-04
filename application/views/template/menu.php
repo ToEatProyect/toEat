@@ -18,6 +18,27 @@
     <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
 
       <ul class="nav navbar-nav navbar-left">
+
+        <?php for( $i = 0; $i < sizeof($menu); $i++): ?>
+
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+              <?php echo $menu[$i]['title'] ?>
+              <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu">
+
+              <?php for( $j = 1; $j <= $menu[$i]['n_child']; $j++): ?>
+                <li><a href="/recipes/<?php echo $menu[$i]['children']['item-' . $j]['slug'] ?>"><?php echo $menu[$i]['children']['item-' . $j]['name']?></a></li>
+              <?php endfor; ?>
+
+            </ul>
+
+          </li>
+
+        <?php endfor; ?>
+
         <?php if(isset($userData)): ?>
           <li><a href="/recipes/my-recipes">Mis recetas</a></li>
         <?php endif; ?>
