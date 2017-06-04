@@ -18,14 +18,10 @@ class Template {
     
     $headerViewData = array();
     $footerViewData = array();
-    
-    $userData = $this->_CI->authentication->user_status(0);
-    if($userData) {
-      $headerViewData['userData'] = $userData;
-    }
 
-    // Set title
+    // Set headerViewData
     $headerViewData['title'] = $this->_setTitleViewData();
+    $headerViewData['userData'] = $this->_setUserData();
     
     $this->_CI->load->view('/template/header', $headerViewData);
     $this->_CI->load->view($template, $templateData);
@@ -48,6 +44,14 @@ class Template {
     }
     else {
       return $title = $this->_title;
+    }
+  }
+
+  private function _setUserData() {
+
+    $userData = $this->_CI->authentication->user_status(0);
+    if($userData) {
+      return $userData;
     }
   }
 }
