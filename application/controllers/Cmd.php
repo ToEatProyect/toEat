@@ -34,7 +34,6 @@ class Cmd extends MY_Controller{
         ->insert(db_table('user_table'));
 
     if ($this->db->affected_rows() == 1) {
-      echo 'Admin user created successfully';
       return 0;
     } else {
       return -1;
