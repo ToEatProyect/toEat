@@ -250,9 +250,12 @@ class Administration extends MY_Controller {
 
     if($this->form_validation->run()) {
 
+      $this->load->library('slug');
+
       // Load user data
       $category_data['id'] = 'DEFAULT';
       $category_data['name'] = $this->input->post('name');
+      $category_data['slug'] = $this->slug->parseSlug($this->input->post('name'));
 
       // Does the category have parent category?
       if($this->input->post('parent_category') == '0') {
