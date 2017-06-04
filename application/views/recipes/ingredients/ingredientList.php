@@ -49,7 +49,6 @@
         <div class="jumbotron">
           <h1>Sin resultados</h1>
           <p>Actualmente no existe ningun ingrediente creado</p>
-          <p><a href="/ingredients/new" class="btn btn-success btn-lg">Crear ingrediente</a></p>
         </div>
 
       <?php endif; ?>

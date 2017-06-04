@@ -13,6 +13,8 @@ class Home extends MY_Controller {
   // Home page
   public function index() {
 
+    $this->template->setTitle('Home');
+
     $this->template->printView('home/index');
   }
 
@@ -24,6 +26,8 @@ class Home extends MY_Controller {
 
       return redirect( site_url( '/' ) );
     }
+
+    $this->template->setTitle('Login');
 
     $viewData = [];
 
@@ -53,6 +57,8 @@ class Home extends MY_Controller {
 
       return redirect(site_url('/'));
     }
+
+    $this->template->setTitle('Crear nueva cuenta');
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -89,6 +95,8 @@ class Home extends MY_Controller {
 
   // New collaborator request
   public function collaboratorRequest() {
+
+    $this->template->setTitle('Solicitud de colaborador');
 
     // Load validation library, validation config and validation rules
     $this->load->library(['form_validation', 'email']);

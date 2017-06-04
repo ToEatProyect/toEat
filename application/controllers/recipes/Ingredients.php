@@ -19,6 +19,8 @@ class Ingredients extends MY_Controller {
 
     // TODO: Add permission restriction
 
+    $this->template->setTitle('Listado de ingredientes');
+
     $requestData = $this->ingredient_model->getAll();
 
     $viewData = [
@@ -32,6 +34,8 @@ class Ingredients extends MY_Controller {
   public function newIngredient() {
 
     // TODO: Add permission restriction
+
+    $this->template->setTitle('Nuevo ingrediente');
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");

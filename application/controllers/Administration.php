@@ -19,6 +19,8 @@ class Administration extends MY_Controller {
 
     // TODO: Add permission restriction
 
+    $this->template->setTitle('Solicitudes de nuevos colaboradores');
+
     // Get all collaborator request
     $requests = $this->administrator_model->getAll_collaboratorRequest();
 
@@ -35,6 +37,8 @@ class Administration extends MY_Controller {
   public function newUser() {
 
     // TODO: Add permission restriction
+
+    $this->template->setTitle('Crear nuevo usuario');
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -120,6 +124,8 @@ class Administration extends MY_Controller {
       return show_404();
     }
 
+    $this->template->setTitle('Solicitud de ' . $requestData->username);
+
     $viewData = [
       'request' => $requestData
     ];
@@ -144,6 +150,8 @@ class Administration extends MY_Controller {
     if($requestData == null) {
       return show_404();
     }
+
+    $this->template->setTitle('Aceptar colaborador');
 
     $this->load->model("users_model");
 
@@ -183,7 +191,6 @@ class Administration extends MY_Controller {
 
     // no user? show 404 error
     if($value == null) {
-      echo '1';
       return show_404();
     }
 
@@ -191,9 +198,10 @@ class Administration extends MY_Controller {
 
     // user doesn't exist? show 404 error
     if($requestData == null) {
-      echo '2';
       return show_404();
     }
+
+    $this->template->setTitle('Denegar colaborador');
 
     $this->administrator_model->deleteRequest($requestData->username);
 
@@ -211,6 +219,8 @@ class Administration extends MY_Controller {
 
     // TODO: Add permission restriction
 
+    $this->template->setTitle('Listado de categorías');
+
     // Get all categories
     $categories = $this->administrator_model->getAll_categories();
 
@@ -227,6 +237,8 @@ class Administration extends MY_Controller {
   public function newCategory() {
 
     // TODO: Add permission restriction
+
+    $this->template->setTitle('Nueva categoría');
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -289,6 +301,8 @@ class Administration extends MY_Controller {
     if($categoryData == null) {
       return show_404();
     }
+
+    $this->template->setTitle('Modificar categoría');
 
     // Save "id" to update
     $id = $categoryData->id;

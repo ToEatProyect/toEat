@@ -20,6 +20,8 @@ class Recipe extends MY_Controller {
       return redirect( site_url( '/' ) );
     }
 
+    $this->template->setTitle('Mis recetas');
+
     // Get all recipes from logued user
     $recipes = $this->recipes_model->getRecipes_fromUser($this->auth_data->user_id);
 
@@ -41,6 +43,8 @@ class Recipe extends MY_Controller {
 
       return redirect( site_url( '/' ) );
     }
+
+    $this->template->setTitle('Nueva receta');
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -97,6 +101,10 @@ class Recipe extends MY_Controller {
     if($requestData == null) {
       return show_404();
     }
+
+    $this->template->setTitle($requestData->title);
+
+    // TODO: If this recipe is not published, can not be seen
 
     // Get data from DB
     $requestOwner = $this->recipes_model->get_recipeOwner($data);
