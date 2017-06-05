@@ -355,6 +355,27 @@ class Administration extends MY_Controller {
     $this->template->printView('administration/newCategory', $viewData);
   }
 
+  // View all recipes from a category
+  public function recipeList_fromCategory($category = null) {
+
+    // no user? show 404 error
+    if($category == null) {
+      return show_404();
+    }
+
+    $category = $this->administrator_model->getCategory($category);
+    $recipesData = $this->administrator_model->getRecipes_fromCategory($category);
+
+    $this->template->setTitle($category->title);
+
+    $viewData = [
+      'recipes' => $recipesData,
+      'c_name' => $category->title
+    ];
+
+    $this->template->printView('administration/categoryRecipes', $viewData);
+  }
+
   // --------------------------------------------- Private methods -------------------------------------------------- //
 
   // Create a random password

@@ -30,7 +30,7 @@
             <ul class="dropdown-menu">
 
               <?php for( $j = 1; $j <= $menu[$i]['n_child']; $j++): ?>
-                <li><a href="/recipes/<?php echo $menu[$i]['children']['item-' . $j]['slug'] ?>"><?php echo $menu[$i]['children']['item-' . $j]['name']?></a></li>
+                <li><a href="/recipes/category/<?php echo $menu[$i]['children']['item-' . $j]['slug'] ?>"><?php echo $menu[$i]['children']['item-' . $j]['name']?></a></li>
               <?php endfor; ?>
 
             </ul>

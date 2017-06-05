@@ -73,26 +73,26 @@ class Administrator_model extends MY_Model {
     return $result = $query->result();
   }
 
-  // Get 1 category
+  // Get 1 category data
   public function getCategory($value) {
 
     $query = $this->db
         ->from('categorization')
-        ->where('name', $value)
+        ->where('slug', $value)
         ->get();
 
     return $result = $query->row();
   }
 
-  // Get the number of children categories that have a parent category
-  public function parent_haveChildren($value) {
+  public function getRecipes_fromCategory($category) {
 
-    $query = $this->db
-      ->from('categorization')
-      ->where('name', $value)
-      ->get();
+    $query = $this->db->query("SELECT recipes.title ,recipes.slug, recipes.lastModDate, recipes.image FROM recipes
+      INNER JOIN rec_cat ON recipes.id = rec_cat.recipe
+      INNER JOIN categorization ON rec_cat.category = categorization.id
+      WHERE categorization.slug = '" . $category . "'
+      ORDER BY recipes.lastModDate");
 
-    return $result = $query->num_rows();
+    return $result = $query->result();
   }
 
 }
