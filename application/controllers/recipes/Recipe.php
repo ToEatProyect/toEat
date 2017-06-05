@@ -8,7 +8,7 @@ class Recipe extends MY_Controller {
     parent::__construct();
     $this->load->helper(['form', 'url', 'auth']);
     $this->load->library(['template', 'slug']);
-    $this->load->model(['recipes_model', 'comments_model']);
+    $this->load->model(['recipes_model', 'comments_model', 'administrator_model']);
   }
 
   // Get all recipes from logued user
@@ -46,6 +46,8 @@ class Recipe extends MY_Controller {
 
     $this->template->setTitle('Nueva receta');
 
+    $categories = $this->_createCategorySelects();
+
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
     $this->config->load('form_validation/recipe/recipe');
@@ -71,6 +73,17 @@ class Recipe extends MY_Controller {
       // Created recipe?
       if( $this->db->affected_rows() == 1 ) {
 
+        $last_recipe = $this->db->insert_id();
+        $category_recipe_data = array();
+
+        for( $i = 0; $i < sizeof($categories); $i++) {
+
+          $category_recipe_data['category'] = $this->input->post('category-' . $i);
+          $category_recipe_data['recipe'] = $last_recipe;
+
+          $this->db->set($category_recipe_data)->insert('rec_cat');
+        }
+
         // Send flash data
         $this->session->set_flashdata("notify", "<strong>Receta creada correctamente</strong><br/><br/>
           Solo te falta agregar la imagen. 
@@ -81,8 +94,13 @@ class Recipe extends MY_Controller {
       }
     }
 
+    // View data
+    $viewData = [
+      'categories' => $categories
+    ];
+
     // Print view
-    $this->template->printView('recipes/Recipe/create');
+    $this->template->printView('recipes/Recipe/create', $viewData);
 
   }
 
@@ -170,6 +188,48 @@ class Recipe extends MY_Controller {
     // Print view
     $this->template->printView('recipes/Recipe/show', $viewData);
 
+  }
+
+  // ---------------------------------------------- Private methods ------------------------------------------------- //
+
+  // Retrieve data to build menu
+  private function _createCategorySelects() {
+
+    $result = array();
+
+    $menu_items = $this->administrator_model->getAll_categories();
+
+    foreach ($menu_items as $item) {
+
+      if($item->parent != null){
+        continue;
+      }
+
+      $menu_elements = [];
+      $menu_elements['title'] = $item->c_name;
+      $menu_elements['children'] = array();
+
+      $x = 1;
+
+      foreach ($menu_items as $child_item){
+
+        if($child_item->parent != $item->c_name) {
+          continue;
+        }
+
+        $menu_elements['children']['item-' . $x] = array();
+        $menu_elements['children']['item-' . $x]['id'] = $child_item->id;
+        $menu_elements['children']['item-' . $x]['name'] = $child_item->c_name;
+
+        $x++;
+      }
+
+      $menu_elements['n_child'] = $x-1;
+
+      $result[] = $menu_elements;
+    }
+
+    return $result;
   }
 
 }

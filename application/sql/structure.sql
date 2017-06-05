@@ -255,14 +255,14 @@ CREATE TABLE IF NOT EXISTS categorization(
   parent_category VARCHAR(40) NULL
 );
 
-# -- TABLE 8 - Rec_cat --
-# CREATE TABLE IF NOT EXISTS rec_cat(
-#   category INT(3) UNSIGNED NOT NULL,
-#   recipe INT(10) UNSIGNED NOT NULL,
-#   PRIMARY KEY (categorization, recipe),
-#   CONSTRAINT fk_rec_cat_categorization FOREIGN KEY (categorization) REFERENCES categorization(idCategorization),
-#   CONSTRAINT fk_rec_cat_recipe FOREIGN KEY (recipe) REFERENCES recipes(idRecipe)
-# );
+-- TABLE 8 - Rec_cat --
+CREATE TABLE IF NOT EXISTS rec_cat(
+  category INT(3) UNSIGNED NOT NULL,
+  recipe INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (category, recipe),
+  CONSTRAINT fk_rec_cat_categorization FOREIGN KEY (category) REFERENCES categorization(id),
+  CONSTRAINT fk_rec_cat_recipe FOREIGN KEY (recipe) REFERENCES recipes(id)
+);
 
 -- TABLE 9 - New collaborator request --
 CREATE TABLE IF NOT EXISTS new_collaborator_request(
