@@ -1,6 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
 <div class="container">
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="jumbotron">
+        <h1>Listado de categorías</h1>
+        <p>Si es necesario, se pueden crear nuevas categorías en el siguiente botón.</p>
+        <p><a href="/category/new" class="btn btn-success btn-lg">Crear categoría</a></p>
+      </div>
+
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
 
@@ -21,7 +34,7 @@
             <?php foreach ($categories as $category): ?>
 
               <tr>
-                <td><a href="/category/modify/<?php echo $category->c_name ?>"><?php echo $category->c_name ?></a></td>
+                <td><a href="/category/modify/<?php echo $category->slug ?>"><?php echo $category->c_name ?></a></td>
 
                 <?php if($category->parent == NULL): ?>
                   <td>Sin categoría</td>

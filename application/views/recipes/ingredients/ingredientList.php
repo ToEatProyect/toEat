@@ -34,7 +34,7 @@
             <?php foreach ($ingredients as $ingredient): ?>
 
               <tr>
-                <td><a href="/ingredients/modify/<?php echo $ingredient->name ?>"><?php echo $ingredient->name ?></a></td>
+                <td><a href="/ingredients/modify/<?php echo $ingredient->slug ?>"><?php echo $ingredient->name ?></a></td>
               </tr>
 
             <?php endforeach; ?>

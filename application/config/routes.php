@@ -31,5 +31,5 @@ $route['users/collaborators-request/(:any)/deny'] = 'administration/denyCollabor
 
 // Administration - category
 $route['category/new'] = 'administration/newCategory';
-$route['category/modify/(:any)'] = 'administration/newCategory/$1';
+$route['category/modify/(:any)'] = 'administration/modCategory/$1';
 $route['category/list'] = 'administration/categoriesList';

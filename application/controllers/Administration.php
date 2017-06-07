@@ -305,13 +305,13 @@ class Administration extends MY_Controller {
       return show_404();
     }
 
-    $this->template->setTitle('Modificar categoría');
-
-    // Save "id" to update
-    $id = $categoryData->id;
+    $this->template->setTitle('Modificar ' . $categoryData->name);
 
     // Get parent categories
     $parentCategories = $this->administrator_model->getParentCategories();
+
+    // Check if a category have childs
+    $numChilds = $this->administrator_model->category_haveChild($categoryData->id);
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -320,9 +320,12 @@ class Administration extends MY_Controller {
 
     if($this->form_validation->run()) {
 
+      $this->load->library('slug');
+
       // Load user data
-      $category_data['id'] = $id;
+      $category_data['id'] = $this->input->post('id');
       $category_data['name'] = $this->input->post('name');
+      $category_data['slug'] = $this->slug->parseSlug($this->input->post('name'));
 
       // Does the category have parent category?
       if($this->input->post('parent_category') == '0') {
@@ -334,7 +337,7 @@ class Administration extends MY_Controller {
         $category_data['parent_category'] = $this->input->post('parent_category');
       }
 
-      $this->db->update('categorization', $category_data, array('id' => $id));
+      $this->db->update('categorization', $category_data, array('id' => $category_data['id']));
 
       if( $this->db->affected_rows() == 1 ) {
 
@@ -349,28 +352,35 @@ class Administration extends MY_Controller {
     // View data
     $viewData = [
       'category' => $categoryData,
-      'p_category' => $parentCategories
+      'p_category' => $parentCategories,
+      'numChilds' => $numChilds
     ];
 
-    $this->template->printView('administration/newCategory', $viewData);
+    $this->template->printView('administration/modCategory', $viewData);
   }
 
   // View all recipes from a category
   public function recipeList_fromCategory($category = null) {
 
-    // no user? show 404 error
+    // No category? show 404 error
     if($category == null) {
       return show_404();
     }
 
-    $category = $this->administrator_model->getCategory($category);
+    $_title = $this->administrator_model->getCategory($category);
+
+    // Category doesn't exist? show 404 error
+    if($_title == null) {
+      return show_404();
+    }
+
     $recipesData = $this->administrator_model->getRecipes_fromCategory($category);
 
-    $this->template->setTitle($category->title);
+    $this->template->setTitle($_title->title);
 
     $viewData = [
       'recipes' => $recipesData,
-      'c_name' => $category->title
+      'c_title' => $_title->title
     ];
 
     $this->template->printView('administration/categoryRecipes', $viewData);

@@ -84,6 +84,23 @@ class Administrator_model extends MY_Model {
     return $result = $query->row();
   }
 
+  // Check if a category have children categories
+  public function category_haveChild($category) {
+
+    $query = $this->db
+      ->from('categorization')
+      ->where('parent_category', $category)
+      ->get();
+
+    $result = $query->num_rows();
+
+    if($result > 0)
+      return true;
+    else
+      return false;
+  }
+
+  // Get all recipes from a category
   public function getRecipes_fromCategory($category) {
 
     $query = $this->db->query("SELECT recipes.title ,recipes.slug, recipes.lastModDate, recipes.image FROM recipes
