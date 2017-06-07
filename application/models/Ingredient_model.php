@@ -21,4 +21,15 @@ class Ingredient_model extends MY_Model {
     return $result = $query->result();
   }
 
+  // Get all data from 1 ingredient
+  public function getIngredient($ingredient) {
+
+    $query = $this->db
+      ->from('ingredients')
+      ->where('slug', $ingredient)
+      ->get();
+
+    return $result = $query->row();
+  }
+
 }

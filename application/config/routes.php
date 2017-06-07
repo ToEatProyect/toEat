@@ -21,6 +21,7 @@ $route['recipes/category/(:any)'] = 'administration/recipeList_fromCategory/$1';
 // Ingredient
 $route['ingredients'] = 'recipes/Ingredients';
 $route['ingredients/new'] = 'recipes/Ingredients/newIngredient';
+$route['ingredients/modify/(:any)'] = 'recipes/Ingredients/modIngredient/$1';
 
 // Administration - users
 $route['users/new'] = 'administration/newUser';

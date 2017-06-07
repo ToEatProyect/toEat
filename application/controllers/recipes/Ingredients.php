@@ -67,4 +67,57 @@ class Ingredients extends MY_Controller {
     $this->template->printView('recipes/ingredients/create');
   }
 
+  // Modify an existing category
+  public function modIngredient($ingredient = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($ingredient == null) {
+      return show_404();
+    }
+
+    $ingredientData = $this->ingredient_model->getIngredient($ingredient);
+
+    // user doesn't exist?
+    if($ingredientData == null) {
+      return show_404();
+    }
+
+    $this->template->setTitle('Modificar ' . $ingredientData->name);
+
+    // Load validation library, validation config and validation rules
+    $this->load->library("form_validation");
+    $this->config->load('form_validation/recipe/ingredient');
+    $this->form_validation->set_rules(config_item('create_ingredient_rules'));
+
+    if($this->form_validation->run()) {
+
+      $this->load->library('slug');
+
+      // Load user data
+      $ingredient_data['id'] = $this->input->post('id');
+      $ingredient_data['name'] = $this->input->post('name');
+      $ingredient_data['slug'] = $this->slug->parseSlug($this->input->post('name'));
+
+      $this->db->update('ingredients', $ingredient_data, array('id' => $ingredient_data['id']));
+
+      if( $this->db->affected_rows() == 1 ) {
+
+        // Send flash data
+        $this->session->set_flashdata("notify", "Categoría <strong>".$ingredient_data["name"]."</strong> modificada con éxito");
+
+        // Redirect to category list
+        return redirect(site_url("/ingredients"));
+      }
+    }
+
+    // View data
+    $viewData = [
+      'ingredient' => $ingredientData,
+    ];
+
+    $this->template->printView('recipes/ingredients/update', $viewData);
+  }
+
 }
