@@ -514,20 +514,46 @@ class Administration extends MY_Controller {
       return show_404();
     }
 
-    $_title = $this->administrator_model->getCategory($category);
+    $categoryData = $this->administrator_model->getCategory($category);
 
     // Category doesn't exist? show 404 error
-    if($_title == null) {
+    if($categoryData == null) {
       return show_404();
     }
 
     $recipesData = $this->administrator_model->getRecipes_fromCategory($category);
 
-    $this->template->setTitle($_title->title);
+    if($recipesData ){
+      $haveRecipes = true;
+    }
+    else{
+      $haveRecipes = false;
+    }
+
+    $this->template->setTitle($categoryData->name);
+
+    $this->load->model('comments_model');
+    $recipes = array();
+    $recipes[] = array();
+    $i = 0;
+
+    foreach ($recipesData as $item) {
+
+      $avg_score = $this->comments_model->get_avgScore($item->id);
+
+      $recipes[$i]['id'] = $item->id;
+      $recipes[$i]['title'] = $item->title;
+      $recipes[$i]['slug'] = $item->slug;
+      $recipes[$i]['modDate'] = $item->lastModDate;
+      $recipes[$i]['image'] = $item->image;
+      $recipes[$i]['avg_score'] = intval($avg_score->score);
+      $i++;
+    }
 
     $viewData = [
-      'recipes' => $recipesData,
-      'c_title' => $_title->title
+      'recipes' => $recipes,
+      'c_name' => $categoryData->name,
+      'haveRecipes' => $haveRecipes
     ];
 
     $this->template->printView('administration/categoryRecipes', $viewData);

@@ -8,41 +8,74 @@
         <h1><strong><?php echo $c_name ?></strong></h1>
       </div>
 
-      <?php if(count($recipes > 0)): ?>
+      <?php if($haveRecipes): ?>
 
-        <?php foreach ($recipes as $recipe): ?>
+        <?php $i = 0 ?>
 
-          <?php
+        <?php for( $j = 0; $j < sizeof($recipes); $j++ ): ?>
 
-          // Reformat date to print
-          $date = new DateTime($recipe->lastModDate);
-
-          ?>
-
-          <?php for( $i = 0; $i < 4; $i++): ?>
-
+          <?php if($i == 0): ?>
             <div class="row">
-              <div class="col-md-3 col-sm-6">
+          <?php endif; ?>
+            <div class="col-md-3 col-sm-6">
 
-                <div class="thumbnail">
-                  <img class="img-responsive" src="/assets/img/recipes/<?php echo $recipe->image ?>" />
-                  <div class="caption">
-                    <h5 class="recipe-title"><?php echo $recipe->title ?></h5>
-                    <p><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $date->format('d-m-Y'); ?></p>
-                    <a class="btn btn-success" href="/recipes/show/<?php echo $recipe->slug ?>">Detalles <i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></a>
-                  </div>
-                </div>
+              <img class="img-responsive" src="/assets/img/recipes/<?php echo $recipes[$j]['image'] ?>" />
+              <div class="caption">
 
+                <p class="star-separator">
+
+                  <?php if($recipes[$j]['avg_score'] == null): ?>
+
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+
+                  <?php else: ?>
+
+                    <?php for( $x = 0; $x < 5; $x++ ): ?>
+
+                      <?php if($recipes[$j]['avg_score'] > $x): ?>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                      <?php else: ?>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                      <?php endif; ?>
+
+                    <?php endfor; ?>
+
+                  <?php endif; ?>
+
+                </p>
+
+                <h5 class="recipe-title">
+                  <a class="text-success" href="/recipes/show/<?php echo $recipes[$j]['slug'] ?>"><?php echo $recipes[$j]['title'] ?></a>
+                </h5>
               </div>
 
-              <?php if($i = 1): ?>
-                <div class="clearfix visible-sm-block"></div>
-              <?php endif; ?>
             </div>
+          <?php if($i == 1): ?>
+            <div class="clearfix visible-sm-block"></div>
+          <?php endif; ?>
 
-          <?php endfor; ?>
+          <?php if($i == 3): ?>
+            </div>
+          <?php endif; ?>
 
-        <?php endforeach; ?>
+          <?php
+            if($i == 3){
+              $i = 0;
+            }
+            else{
+              $i++;
+            }
+          ?>
+
+        <?php endfor; ?>
+
+        <?php if($i != 3): ?>
+          </div>
+        <?php endif; ?>
 
       <?php endif; ?>
 
