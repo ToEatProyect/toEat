@@ -33,6 +33,38 @@ class Administration extends MY_Controller {
     $this->template->printView('administration/collaboratorList', $viewData);
   }
 
+  // User list
+  public function userList() {
+
+    // TODO: Add permission restriction
+
+    $this->template->setTitle('Usuarios');
+
+    $requestData = $this->administrator_model->getAll_users();
+
+    foreach ($requestData as $item) {
+      if($item->auth_level == 1) {
+        $item->auth_level = 'Registrado';
+      }
+      elseif ($item->auth_level == 3) {
+        $item->auth_level = 'Colaborador';
+      }
+      elseif ($item->auth_level == 6) {
+        $item->auth_level = 'Moderador';
+      }
+      else {
+        $item->auth_level = 'Admin';
+      }
+    }
+
+    $viewData = [
+      'users' => $requestData
+    ];
+
+    // Print view
+    $this->template->printView('administration/userList', $viewData);
+  }
+
   // Create a new user
   public function newUser() {
 
@@ -105,6 +137,121 @@ class Administration extends MY_Controller {
 
     // Print view
     $this->template->printView('administration/newUser');
+  }
+
+  // Update data from a user
+  public function modUser($user) {
+
+    // TODO: Add permission restriction
+
+    // no recipe? show 404 error
+    if($user == null) {
+      return show_404();
+    }
+
+    // Get user data
+    $requestData = $this->administrator_model->getUser($user);
+
+    // User doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    $userTypes = [
+
+      [
+        'auth_level' => 1,
+        'name' => 'Normal'
+      ],
+
+      [
+        'auth_level' => 3,
+        'name' => 'Colaborador'
+      ],
+
+      [
+        'auth_level' => 6,
+        'name' => 'Moderador'
+      ]
+
+    ];
+
+    // View data
+    $viewData = [
+      'user' => $requestData,
+      'userTypes' => $userTypes
+    ];
+
+    $this->template->setTitle('Modificar usuario ' . $requestData->username);
+
+    // Load validation library, validation config and validation rules
+    $this->load->library("form_validation");
+    $this->config->load('form_validation/administration/administration');
+    $this->form_validation->set_rules(config_item('create_new_user_rules'));
+
+    if($this->form_validation->run()) {
+
+      // Load user data
+      $user_data['user_id'] = $this->input->post('id');
+      $user_data['username'] = $this->input->post('username');
+      $user_data['name'] = $this->input->post('name');
+      $user_data['email'] = $this->input->post('email');
+      $user_data['auth_level'] = $this->input->post('role');
+
+      // Generate random password if is required
+      $password = $this->_randomPassword();
+      if($this->input->post('new-pass') != null) {
+        $user_data['passwd'] = $this->authentication->hash_passwd($password);
+      }
+
+
+      $this->db->update('users', $user_data, array('user_id' => $user_data['user_id']));
+
+      if( $this->db->affected_rows() == 1 ) {
+
+        $config = Array(
+          'protocol' => 'smtp',
+          'smtp_host' => 'ssl://smtp.gmail.com',
+          'smtp_port' => 80,
+          'smtp_user' => 'toeatsite@gmail.com',
+          'smtp_pass' => '',
+          'mailtype'  => 'html',
+          'charset'   => 'iso-8859-1'
+        );
+
+        // Load email library
+        $this->load->library('email');
+
+        // Prepare data to send by email
+        $to = 'toeatsite@gmail.com';
+        $subject = 'Actualización de cuenta - ToEat!';
+        $header = 'Tu cuenta de ToEat! ha sido actualizada\n\n';
+
+        $body =  'Username: ' . $user_data['username'] . '\n';
+        $body .= 'Nombre: ' . $user_data['name'] . '\n';
+        $body .= 'Email: ' . $user_data['email'] . '\n';
+        if($this->input->post('new-pass') != null) {
+          $body .= 'Contraseña: ' . $password . '\n\n';
+        }
+
+        // Load data to send
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($header . $body);
+
+        // Send email
+        $this->email->send();
+
+        // Send flash data
+        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente" . $password);
+
+        //
+        return redirect(site_url("/users"));
+      }
+    }
+
+    // Print view
+    $this->template->printView('administration/modUser', $viewData);
   }
 
   // Show all data from a collaborator request to accept or deny

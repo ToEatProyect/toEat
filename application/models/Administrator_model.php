@@ -11,6 +11,28 @@ class Administrator_model extends MY_Model {
 
   // -------------------------------------------------- Users ------------------------------------------------------- //
 
+  // Get all users
+  public function getAll_users() {
+
+    $query = $this->db
+      ->from('users')
+      ->order_by('auth_level', 'DESC')
+      ->get();
+
+    return $result = $query->result();
+  }
+
+  // Get 1 user
+  public function getUser($user) {
+
+    $query = $this->db
+      ->from('users')
+      ->where('username', $user)
+      ->get();
+
+    return $result = $query->row();
+  }
+
   // Get all data from table "new_collaborator_request"
   public function getAll_collaboratorRequest() {
 

@@ -24,7 +24,9 @@ $route['ingredients/new'] = 'recipes/Ingredients/newIngredient';
 $route['ingredients/modify/(:any)'] = 'recipes/Ingredients/modIngredient/$1';
 
 // Administration - users
+$route['users'] = 'administration/userList';
 $route['users/new'] = 'administration/newUser';
+$route['users/modify/(:any)'] = 'administration/modUser/$1';
 $route['users/collaborators-request'] = 'administration/collaboratorListRequest';
 $route['users/collaborators-request/(:any)'] = 'administration/show_collaboratorRequest/$1';
 $route['users/collaborators-request/(:any)/accept'] = 'administration/acceptCollaborator/$1';
