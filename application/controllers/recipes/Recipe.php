@@ -17,6 +17,10 @@ class Recipe extends MY_Controller {
     // Redirect user if it doesn't belong to the selected level
     if( ! $this->verify_min_level(3)) {
 
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
       return redirect( site_url( '/' ) );
     }
 

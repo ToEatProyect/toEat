@@ -27,3 +27,6 @@
 
   <?php // Include notifications ?>
   <?php include 'addons/_notifications.php'; ?>
+
+  <?php // Include alerts ?>
+  <?php include 'addons/_alerts.php'; ?>
