@@ -62,7 +62,13 @@
           <h3 class="panel-title">Ingredientes (1 ración)</h3>
         </div>
         <div class="panel-body">
-          Listado de ingredientes
+
+          <?php foreach ($ingredients as $ingredient): ?>
+
+            <strong><?php echo $ingredient->name ?>: </strong><?php echo $ingredient->quantity ?><br/>
+
+          <?php endforeach; ?>
+
         </div>
       </div><!-- /Ingredients -->
 
@@ -72,7 +78,15 @@
           <h3 class="panel-title">Instrucciones</h3>
         </div>
         <div class="panel-body">
-          Pasos
+
+          <?php foreach ($steps as $step): ?>
+
+            <h4><strong>Paso <?php echo $step->numStep ?></strong></h4>
+            <hr>
+            <?php echo $step->description ?>
+
+          <?php endforeach; ?>
+
         </div>
       </div><!-- /Steps -->
 

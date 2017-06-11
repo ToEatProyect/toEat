@@ -164,12 +164,15 @@ class Recipe extends MY_Controller {
     $requestOwner = $this->recipes_model->get_recipeOwner($data);
     $requestComments = $this->comments_model->getAll_fromRecipe($requestData->id);
     $requestAvg = $this->comments_model->get_avgScore($requestData->id);
-
+    $requestIngredients = $this->ingredient_model->getAll_fromRecipe($requestData->id);
+    $requestSteps = $this->recipes_model->getSteps($requestData->id);
 
     $viewData = [
       'recipe' => $requestData,
       'owner' => $requestOwner->username,
       'comments' => $requestComments,
+      'ingredients' => $requestIngredients,
+      'steps' => $requestSteps,
       'avg_score' => intval($requestAvg->score)
     ];
 

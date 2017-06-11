@@ -41,4 +41,16 @@ class Recipes_model extends MY_Model {
     return $result = $query->row();
   }
 
+  // get all steps from a recipe
+  public function getSteps($recipe) {
+
+    $query = $this->db
+      ->from('steps')
+      ->where('id_recipe', $recipe)
+      ->order_by('numStep')
+      ->get();
+
+    return $result = $query->result();
+  }
+
 }

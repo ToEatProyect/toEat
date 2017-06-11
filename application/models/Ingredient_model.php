@@ -32,6 +32,7 @@ class Ingredient_model extends MY_Model {
     return $result = $query->row();
   }
 
+  // Get all ingredients from a recipe
   public function getAll_fromRecipe($recipe) {
 
     $query = $this->db->query('SELECT ingredients.name, rec_ingr.quantity FROM ingredients
