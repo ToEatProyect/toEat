@@ -25,7 +25,7 @@ class Comments_model extends MY_Model {
   // Get all data from a comment from one recipe
   public function getOne_fromRecipe($slug_recipe, $user) {
 
-    $query = $this->db->query("SELECT recipes.title, comments.text, comments.score FROM recipes
+    $query = $this->db->query("SELECT recipes.slug, recipes.title, comments.text, comments.score FROM recipes
       INNER JOIN comments ON recipes.id = comments.id_recipe
       WHERE recipes.slug = '" . $slug_recipe . "' AND comments.id_user = " . $user);
 

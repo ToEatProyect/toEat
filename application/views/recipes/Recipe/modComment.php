@@ -9,7 +9,7 @@
 
       <div class="panel panel-default">
         <div class="panel-heading">
-          <?php echo $comment->title ?>
+          <strong><?php echo $comment->title ?></strong>
         </div>
         <div class="panel-body">
 
@@ -75,7 +75,10 @@
             <?php endif; ?>
           </div><!-- /Score -->
 
-          <input type="submit" class="btn btn-success" value="Enviar comentario">
+          <div class="btn-group">
+            <input type="submit" class="btn btn-success" value="Modificar comentario">
+            <a href="/my-comments/<?php echo $comment->slug ?>/delete" class="btn btn-success">Eliminar</a>
+          </div>
 
         </div>
       </div>

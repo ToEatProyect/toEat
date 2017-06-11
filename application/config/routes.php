@@ -40,3 +40,4 @@ $route['category/list'] = 'administration/categoriesList';
 // Comments
 $route['my-comments'] = 'recipes/Comments';
 $route['my-comments/(:any)'] = 'recipes/Comments/modComment/$1';
+$route['my-comments/(:any)/delete'] = 'recipes/Comments/deleteComment/$1';

@@ -95,5 +95,34 @@ class Comments extends MY_Controller {
     $this->template->printView('recipes/Recipe/modComment', $viewData);
   }
 
+  // Delete comment
+  public function deleteComment($slug_recipe) {
+
+    if( ! $this->is_logged_in()){
+      return redirect( site_url( '/' ) );
+    }
+
+    // no recipe? show 404 error
+    if($slug_recipe == null) {
+      return show_404();
+    }
+
+    // Get recipe data
+    $requestData = $this->recipes_model->getRecipe($slug_recipe);
+
+    // recipe doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    $this->template->setTitle('Borrar comentario');
+
+    // Delete comment
+    $this->db->delete('comments', array('id_user' => $this->auth_data->user_id, 'id_recipe' => $requestData->id));
+
+    // Redirect
+    redirect(site_url("/my-comments"));
+  }
+
 
 }
