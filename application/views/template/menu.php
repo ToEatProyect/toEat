@@ -72,26 +72,6 @@
         <?php endif; ?>
       </ul>
 
-      <!-- Search form -->
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <form class="navbar-form navbar-right" action="/search/" method="get">
-            <div class="input-group">
-
-              <input type="text" class="form-control" name="q" placeholder="Search">
-
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-default">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-
-            </div>
-          </form>
-        </li>
-      </ul>
-      <!-- /Search form -->
-
     </div><!-- /.navbar-collapse -->
   </div>
   <!-- /.container -->

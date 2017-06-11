@@ -16,5 +16,8 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="/assets/js/bootstrap.min.js"></script>
 
+<!-- Personalized JavaScript -->
+<script src="/assets/js/main.js"></script>
+
 </body>
 </html>

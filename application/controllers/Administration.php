@@ -243,7 +243,7 @@ class Administration extends MY_Controller {
         $this->email->send();
 
         // Send flash data
-        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> registrado correctamente" . $password);
+        $this->session->set_flashdata("notify", "Usuario <strong>".$user_data["username"]."</strong> modificado correctamente " . $password);
 
         //
         return redirect(site_url("/users"));

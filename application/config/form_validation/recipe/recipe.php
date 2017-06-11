@@ -40,6 +40,18 @@ $config['create_recipe_rules'] = [
     ]
   ],
 
+  // Steps
+  [
+    "field" => "step[]",
+    "label" => "step",
+    "rules" => "trim|required|min_length[4]|max_length[800]",
+    "errors" => [
+      "required" => "Este campo es obligatorio",
+      "min_length" => "La longitud mínima es de 4 caracteres",
+      "max_length" => "La longitud máxima es de 800 caracteres",
+    ]
+  ],
+
 ];
 
 $config['create_comment_rules'] = [

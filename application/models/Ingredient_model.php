@@ -32,4 +32,13 @@ class Ingredient_model extends MY_Model {
     return $result = $query->row();
   }
 
+  public function getAll_fromRecipe($recipe) {
+
+    $query = $this->db->query('SELECT ingredients.name, rec_ingr.quantity FROM ingredients
+      INNER JOIN rec_ingr ON ingredients.id = rec_ingr.ingredient
+      WHERE rec_ingr.recipe = ' . $recipe);
+
+    return $result = $query->result();
+  }
+
 }

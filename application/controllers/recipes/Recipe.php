@@ -8,7 +8,7 @@ class Recipe extends MY_Controller {
     parent::__construct();
     $this->load->helper(['form', 'url', 'auth']);
     $this->load->library(['template', 'slug']);
-    $this->load->model(['recipes_model', 'comments_model', 'administrator_model']);
+    $this->load->model(['recipes_model', 'comments_model', 'administrator_model', 'ingredient_model']);
   }
 
   // Get all recipes from logued user
@@ -51,6 +51,7 @@ class Recipe extends MY_Controller {
     $this->template->setTitle('Nueva receta');
 
     $categories = $this->_createCategorySelects();
+    $ingredients = $this->ingredient_model->getAll();
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -78,6 +79,8 @@ class Recipe extends MY_Controller {
       if( $this->db->affected_rows() == 1 ) {
 
         $last_recipe = $this->db->insert_id();
+
+        // Insert categories - recipe
         $category_recipe_data = array();
 
         for( $i = 0; $i < sizeof($categories); $i++) {
@@ -86,6 +89,34 @@ class Recipe extends MY_Controller {
           $category_recipe_data['recipe'] = $last_recipe;
 
           $this->db->set($category_recipe_data)->insert('rec_cat');
+        }
+
+        // Insert ingredients - recipe
+        $ingredient_recipe_data = array();
+
+        foreach ($ingredients as $item) {
+
+          if($this->input->post('ingr-' . $item->id) != null){
+
+            $ingredient_recipe_data['recipe'] = $last_recipe;
+            $ingredient_recipe_data['ingredient'] = $this->input->post('ingr-' . $item->id);
+            $ingredient_recipe_data['quantity'] = $this->input->post('amount-' . $item->id);
+
+            $this->db->set($ingredient_recipe_data)->insert('rec_ingr');
+          }
+        }
+
+        // Insert steps
+        $steps_data = array();
+
+        for ( $i = 0; $i < sizeof($_POST['step']); $i++) {
+
+          $steps_data['id_recipe'] = $last_recipe;
+          $steps_data['numStep'] = $i + 1;
+          $steps_data['description'] = nl2br($this->input->post('step[' . $i . ']'));
+
+          $this->db->set($steps_data)->insert('steps');
+
         }
 
         // Send flash data
@@ -100,7 +131,8 @@ class Recipe extends MY_Controller {
 
     // View data
     $viewData = [
-      'categories' => $categories
+      'categories' => $categories,
+      'ingredients' => $ingredients
     ];
 
     // Print view
@@ -132,6 +164,7 @@ class Recipe extends MY_Controller {
     $requestOwner = $this->recipes_model->get_recipeOwner($data);
     $requestComments = $this->comments_model->getAll_fromRecipe($requestData->id);
     $requestAvg = $this->comments_model->get_avgScore($requestData->id);
+
 
     $viewData = [
       'recipe' => $requestData,

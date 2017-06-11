@@ -76,11 +76,11 @@
 
           <?php for($i = 0; $i < sizeof($userTypes); $i++): ?>
             <?php if($userTypes[$i]['auth_level'] == $user->auth_level): ?>
-              <option value="1" <?php echo  set_select('role', $userTypes[$i]['auth_level'], TRUE) ?>>
+              <option value="<?php echo $userTypes[$i]['auth_level'] ?>" <?php echo  set_select('role', $userTypes[$i]['auth_level'], TRUE) ?>>
                 <?php echo $userTypes[$i]['name'] ?>
               </option>
             <?php else: ?>
-              <option value="1" <?php echo  set_select('role', $userTypes[$i]['auth_level']) ?>>
+              <option value="<?php echo $userTypes[$i]['auth_level'] ?>" <?php echo  set_select('role', $userTypes[$i]['auth_level']) ?>>
                 <?php echo $userTypes[$i]['name'] ?>
               </option>
             <?php endif; ?>

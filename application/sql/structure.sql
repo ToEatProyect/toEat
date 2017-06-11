@@ -208,14 +208,14 @@ CREATE TABLE IF NOT EXISTS recipes(
   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
 );
 
-# -- TABLE 3 - Steps --
-# CREATE TABLE IF NOT EXISTS steps(
-#   id_recipe INT(10) UNSIGNED NOT NULL,
-#   numStep INT(2) UNSIGNED NOT NULL,
-#   description VARCHAR(800) NOT NULL,
-#   image LONGBLOB NOT NULL,
-#   CONSTRAINT fk_steps_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
-# );
+-- TABLE 3 - Steps --
+CREATE TABLE IF NOT EXISTS steps(
+  id_recipe INT(10) UNSIGNED NOT NULL,
+  numStep INT(2) UNSIGNED NOT NULL,
+  description VARCHAR(800) NOT NULL,
+  PRIMARY KEY (id_recipe, numStep),
+  CONSTRAINT fk_steps_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
+);
 
 -- TABLE 4 - Comments --
 CREATE TABLE IF NOT EXISTS comments(
@@ -237,15 +237,15 @@ CREATE TABLE IF NOT EXISTS ingredients(
   slug VARCHAR(60) NOT NULL
 );
 
-# -- TABLE 6 - Rec_ingr --
-# CREATE TABLE IF NOT EXISTS rec_ingr(
-#   recipe INT(10) UNSIGNED NOT NULL,
-#   ingredient INT(4) UNSIGNED NOT NULL,
-#   quantity VARCHAR(25) NOT NULL, -- Provisional
-#   PRIMARY KEY (recipe, ingredient),
-#   CONSTRAINT fk_rec_ingr_recipe FOREIGN KEY (recipe) REFERENCES recipes(idRecipe),
-#   CONSTRAINT fk_rec_ingr_ingredients FOREIGN KEY (ingredient) REFERENCES ingredients(idIngredient)
-# );
+-- TABLE 6 - Rec_ingr --
+CREATE TABLE IF NOT EXISTS rec_ingr(
+  recipe INT(10) UNSIGNED NOT NULL,
+  ingredient INT(4) UNSIGNED NOT NULL,
+  quantity VARCHAR(40) NOT NULL,
+  PRIMARY KEY (recipe, ingredient),
+  CONSTRAINT fk_rec_ingr_recipe FOREIGN KEY (recipe) REFERENCES recipes(id),
+  CONSTRAINT fk_rec_ingr_ingredients FOREIGN KEY (ingredient) REFERENCES ingredients(id)
+);
 
 -- TABLE 7 - Categorization --
 CREATE TABLE IF NOT EXISTS categorization(

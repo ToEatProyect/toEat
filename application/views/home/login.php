@@ -18,7 +18,7 @@
         <div class="form-group">
           <label for="login_pass">Contraseña</label>
           <input type="password" class="form-control" name="login_pass" id="login_pass" maxlength="255" />
-          <?php if(isset($login_error_message)): ?>
+          <?php if(isset($login_string)): ?>
             <span class="text-danger">Datos incorrectos. Inténtelo de nuevo.</span>
           <?php endif; ?>
         </div><!-- /Password -->

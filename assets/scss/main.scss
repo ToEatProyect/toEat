@@ -47,8 +47,19 @@ footer {
   margin-top: 5px !important;
 }
 
+.btn-separator{
+  margin-top: 10px;
+}
+
 /* ----------------------------------- CSS COMMENTS ------------------------------------ */
 
 .comment-separator{
   margin-bottom: 20px;
+}
+
+/* ---------------------------------- CSS INGREDIENTS ---------------------------------- */
+
+.ingredient-container{
+  height: 400px;
+  overflow: auto;
 }
