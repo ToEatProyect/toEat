@@ -144,7 +144,7 @@ class Administration extends MY_Controller {
 
     // TODO: Add permission restriction
 
-    // no recipe? show 404 error
+    // no user? show 404 error
     if($user == null) {
       return show_404();
     }
