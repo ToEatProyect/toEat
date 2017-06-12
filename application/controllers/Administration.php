@@ -530,6 +530,11 @@ class Administration extends MY_Controller {
       $haveRecipes = false;
     }
 
+    $collaborator = false;
+    if($this->is_logged_in()){
+      $collaborator = $this->auth_data->auth_level;
+    }
+
     $this->template->setTitle($categoryData->name);
 
     $this->load->model('comments_model');
@@ -553,7 +558,8 @@ class Administration extends MY_Controller {
     $viewData = [
       'recipes' => $recipes,
       'c_name' => $categoryData->name,
-      'haveRecipes' => $haveRecipes
+      'haveRecipes' => $haveRecipes,
+      'collaborator' => $collaborator
     ];
 
     $this->template->printView('administration/categoryRecipes', $viewData);

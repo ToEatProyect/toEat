@@ -4,11 +4,11 @@
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
 
-      <div class="jumbotron">
-        <h1><strong><?php echo $c_name ?></strong></h1>
-      </div>
-
       <?php if($haveRecipes): ?>
+
+        <div class="jumbotron">
+          <h1><strong><?php echo $c_name ?></strong></h1>
+        </div>
 
         <?php $i = 0 ?>
 
@@ -76,6 +76,22 @@
         <?php if($i != 3): ?>
           </div>
         <?php endif; ?>
+
+      <?php else: ?>
+
+        <div class="row">
+          <div class="col-md-12 category-recipes-container">
+
+            <div class="text-center"><i class="fa fa-cutlery fa-5x category-icon" aria-hidden="true"></i></div>
+            <h4 class="text-center">Aún no hay ninguna receta para esta categoría</h4>
+
+            <?php if($collaborator != false && $collaborator == 3): ?>
+              <p class="text-center">¡Ánimo! Tu puedes ser el primero</p>
+              <div class="text-center"><a href="/recipes/new-recipe" class="btn btn-success">Crear receta <i class="fa fa-plus" aria-hidden="true"></i></a></div>
+            <?php endif; ?>
+
+          </div>
+        </div>
 
       <?php endif; ?>
 

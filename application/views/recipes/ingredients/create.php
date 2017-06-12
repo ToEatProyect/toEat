@@ -34,7 +34,7 @@
         <?php endif; ?>
       </div><!-- /Name -->
 
-      <input type="submit" class="btn btn-success" value="Continuar">
+      <input type="submit" class="btn btn-success" value="Crear ingrediente">
       <?php echo form_close('') ?>
 
     </div>

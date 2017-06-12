@@ -41,6 +41,7 @@
 
         <?php if(isset($userData)): ?>
           <li><a href="/recipes/my-recipes">Mis recetas</a></li>
+          <li><a href="/my-comments">Mis comentarios</a></li>
         <?php endif; ?>
       </ul>
 
@@ -62,6 +63,7 @@
               <li><a href="/users">Lista usuarios (admin)</a></li>
               <li><a href="/ingredients">Listado ingredientes</a></li>
               <li><a href="/ingredients/new">Nuevo ingrediente</a></li>
+              <li><a href="">Cambiar contraseña</a></li>
               <li><a href="/logout">Desconectar</a></li>
             </ul>
 
