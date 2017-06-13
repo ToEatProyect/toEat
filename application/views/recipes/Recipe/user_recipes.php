@@ -25,7 +25,7 @@
 
               <div class="col-sm-4 col-md-3">
                 <div class="thumbnail">
-                  <a href="/recipes/show/<?php echo $recipe->slug ?>">
+                  <a href="<?php echo print_recipe_url($recipe) ?>">
                     <?php echo print_recipe_image($recipe, "img img-responsive") ?>
                   </a>
                   <div class="caption">
