@@ -104,4 +104,7 @@ $(function() {
     _uploader.init();
   }
 
+  /* Multiple selects
+   * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - */
+  $('.wz-multiple').multipleSelect();
 });

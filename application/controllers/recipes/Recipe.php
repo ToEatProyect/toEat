@@ -74,7 +74,6 @@ class Recipe extends MY_Controller {
       $recipe_data['image'] = null;
       $recipe_data['id_owner'] = $this->auth_data->user_id;
       $recipe_data['published'] = 'DEFAULT';
-      $recipe_data['str_ingredients'] = $this->_getRecipeIngredientsString($recipe_ingredients);
 
       // Insert new recipe
       $this->db->set($recipe_data)->insert('recipes');
@@ -276,25 +275,13 @@ class Recipe extends MY_Controller {
     foreach($allIngredients as $item) {
       if(!$this->input->post("ingr-". $item->id)) { continue; }
 
-      $itm = (object) array(
+      $itm = (object) [
         "ingredient" => $item,
         "amount" => $this->input->post("amount-" . $item->id) ? $this->input->post("amount-" . $item->id) : 1
-      );
+      ];
 
       $result[] = $itm;
     }
     return $result;
-  }
-
-  //Retrieve recipe ingredients string
-  private function _getRecipeIngredientsString($ingredients) {
-
-    $slugsArr = [];
-
-    foreach($ingredients as $item) {
-      $slugsArr[] = $item->ingredient->slug;
-    }
-
-    return implode(",", $slugsArr);
   }
 }

@@ -205,7 +205,6 @@ CREATE TABLE IF NOT EXISTS recipes(
   lastModDate DATETIME NOT NULL,
   image VARCHAR(90),
   published INT(1) NOT NULL DEFAULT 0,
-  str_ingredients TEXT,
   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
 );
 

@@ -60,4 +60,9 @@ class Recipes_model extends MY_Model {
       ->update("recipes");
   }
 
+  //Peerforms a search
+  public function search($searchText, $searchIngredients) {
+    return [];
+  }
+
 }

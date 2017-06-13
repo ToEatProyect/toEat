@@ -16,6 +16,9 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+  <!-- Multiple select -->
+  <link rel="stylesheet" href="/assets/bower/multiple-select/multiple-select.css">
+
   <!-- Custom CSS -->
   <link rel="stylesheet" type="text/css" href="/assets/css/main.min.css"/>
   

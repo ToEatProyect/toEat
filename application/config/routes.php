@@ -12,6 +12,9 @@ $route['logout'] = 'home/logout';
 $route['create-account'] = 'home/createAccount';
 $route['new-collaborator-request'] = 'home/collaboratorRequest';
 
+//Search
+$route["search"] = "search/index";
+
 // Recipes
 $route['recipes/new-recipe'] = 'recipes/Recipe/newRecipe';
 $route['recipes/my-recipes'] = 'recipes/Recipe';
