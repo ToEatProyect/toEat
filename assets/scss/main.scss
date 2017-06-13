@@ -67,6 +67,33 @@ footer {
   margin-top: 10px;
 }
 
+//Change recipe image
+.btn-plupload-change-recipe-image {
+  position: relative;
+  cursor: pointer;
+
+  .change-text{
+    position: absolute;
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .5);
+    bottom: 0;
+    display: none;
+    right: 0;
+    left: 0;
+    z-index: 3;
+  }
+
+  &:hover .change-text{
+    display: block;
+  }
+
+  &.is-uploading .change-text{
+    display: none !important;
+  }
+}
+
 /* ----------------------------------- CSS COMMENTS ------------------------------------ */
 
 .comment-separator{

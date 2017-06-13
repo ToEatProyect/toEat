@@ -25,17 +25,18 @@
           <?php if(!$can_edit): ?>
             <?php echo print_recipe_image($recipe, "img img-responsive") ?>
           <?php else: ?>
-            <label class="btn btn-default"
+            <label class="btn-plupload-change-recipe-image"
                    data-plupload-change-recipe-image
                    data-recipe-slug="<?php echo $recipe->slug ?>"
                    data-recipe-id="<?php echo $recipe->id ?>">
               <?php echo print_recipe_image($recipe, "img img-responsive") ?>
-              <div class="progress">
-                <div class="progress-bar hide" role="progressbar"
+              <div class="progress hide">
+                <div class="progress-bar" role="progressbar"
                      aria-valuenow="0"
                      aria-valuemin="0" aria-valuemax="100"
                      style="width: 0%;">0%</div>
               </div>
+              <span class="change-text">Cambiar</span>
             </label>
           <?php endif; ?>
         </div>

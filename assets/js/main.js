@@ -45,7 +45,6 @@ $(function() {
     var _uploaderImage = _uploaderButton.find('img');
     var _uploaderProgressBar = _uploaderButton.find('.progress-bar');
 
-
     var _uploader = new plupload.Uploader({
       'runtimes': 'html5',
       'multi_selection': false,
@@ -76,7 +75,9 @@ $(function() {
           .attr('aria-valuenow', '0')
           .css({'width': '0%'})
           .text('0%')
-          .removeClass('hide');
+          .parent().removeClass('hide');
+
+      _uploaderButton.addClass('is-uploading');
 
       //Start upload
       _file.upload();
@@ -84,9 +85,11 @@ $(function() {
 
     _uploader.bind('FileUploaded', function(instance, file) {
 
-      console.log('File %o', file);
       setTimeout(function () {
-        _uploaderProgressBar.hide();
+        _uploaderProgressBar
+            .parent().hide();
+
+        _uploaderButton.removeClass('is-uploading');
       }, 1500);
 
     });
