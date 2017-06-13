@@ -6,12 +6,12 @@
     <h3 class="page-title clearfix">
 
       <p class="pull-left">
-        <?php echo $recipe->title ?> <?php echo print_recipe_score($avg_score) ?> <br />
-        <small>- Creada por <cite title="Source Title"><?php echo $owner ?></cite></small>
+        <?php echo $recipe->title ?> <span class="recipe-score"><?php echo print_recipe_score($avg_score) ?></span> <br />
+        <small class="recipe-owner">- Creada por <cite title="Source Title"><?php echo $owner ?></cite></small>
       </p>
 
       <p class="pull-right">
-        <small><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</small>
+        <small class="recipe-time"><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</small>
       </p>
     </h3>
 

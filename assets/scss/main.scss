@@ -28,7 +28,7 @@ footer {
 
 /* ---------------------------------- GLOBAL CSS ------------------------------------ */
 .page-title {
-  font-size: 24px;
+  font-size: 40px;
 
   padding-bottom: 5px;
   padding-left: 10px;
@@ -40,6 +40,15 @@ footer {
   margin-bottom: 15px;
   margin-left: 15%;
   margin-right: 15%;
+
+  .recipe-owner{
+    font-size: 40%;
+  }
+
+  .recipe-score, .recipe-time{
+    font-size: 15px;
+  }
+
 }
 
 /* -------------------------------- CSS NOTIFICATIONS ---------------------------------- */
