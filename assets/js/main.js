@@ -106,5 +106,7 @@ $(function() {
 
   /* Multiple selects
    * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - */
-  $('.wz-multiple').multipleSelect();
+  $('.wz-multiple').multipleSelect({
+    'placeholder': 'Ingredientes...'
+  });
 });

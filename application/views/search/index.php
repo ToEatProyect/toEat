@@ -21,7 +21,7 @@
 
       <div class="col-md-2">
         <div class="form-group">
-          <select class="form-control wz-multiple" name="ingredients[]" multiple="multiple">
+          <select class="form-control wz-multiple" name="ingredients[]" multiple="multiple" placeholder="Ingredientes...">
             <?php foreach($all_ingredients as $ingredient): ?>
               <option value="<?php echo $ingredient->id ?>"
               <?php echo
