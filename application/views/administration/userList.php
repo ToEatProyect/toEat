@@ -34,7 +34,7 @@
             <?php foreach ($users as $user): ?>
 
               <tr>
-                <td><a href="/users/modify/<?php echo $user->username ?>"><?php echo $user->username ?></a></td>
+                <td><a href="/users/<?php echo $user->username ?>"><?php echo $user->username ?></a></td>
                 <td><?php echo $user->email ?></td>
                 <td><?php echo $user->created_at ?></td>
                 <td><?php echo $user->auth_level ?></td>

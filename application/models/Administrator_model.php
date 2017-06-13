@@ -122,6 +122,17 @@ class Administrator_model extends MY_Model {
       return false;
   }
 
+  // Check if a category have recipes
+  public function category_haveRecipes($category) {
+
+    $query = $this->db
+      ->from('rec_cat')
+      ->where('category', $category)
+      ->get();
+
+    return $result = $query->num_rows();
+  }
+
   // Get all recipes from a category
   public function getRecipes_fromCategory($category) {
 

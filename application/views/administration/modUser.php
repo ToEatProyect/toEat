@@ -76,19 +76,27 @@
 
           <?php for($i = 0; $i < sizeof($userTypes); $i++): ?>
             <?php if($userTypes[$i]['auth_level'] == $user->auth_level): ?>
+
               <option value="<?php echo $userTypes[$i]['auth_level'] ?>" <?php echo  set_select('role', $userTypes[$i]['auth_level'], TRUE) ?>>
                 <?php echo $userTypes[$i]['name'] ?>
               </option>
+
             <?php else: ?>
+
               <option value="<?php echo $userTypes[$i]['auth_level'] ?>" <?php echo  set_select('role', $userTypes[$i]['auth_level']) ?>>
                 <?php echo $userTypes[$i]['name'] ?>
               </option>
+
             <?php endif; ?>
           <?php endfor; ?>
         </select>
       </div><!-- /Role -->
 
-      <input type="submit" class="btn btn-success" value="Modificar usuario">
+
+      <div class="btn-group">
+        <input type="submit" class="btn btn-success" value="Modificar usuario">
+        <a href="/users/<?php echo $user->username ?>/delete" class="btn btn-success <?php echo $user->auth_level==9 ? 'disabled' : NULL ?>">Eliminar usuario</a>
+      </div>
       <?php echo form_close('') ?>
 
     </div>

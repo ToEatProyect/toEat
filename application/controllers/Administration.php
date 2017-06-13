@@ -140,7 +140,7 @@ class Administration extends MY_Controller {
   }
 
   // Update data from a user
-  public function modUser($user) {
+  public function modUser($user = null) {
 
     // TODO: Add permission restriction
 
@@ -174,12 +174,6 @@ class Administration extends MY_Controller {
         'name' => 'Moderador'
       ]
 
-    ];
-
-    // View data
-    $viewData = [
-      'user' => $requestData,
-      'userTypes' => $userTypes
     ];
 
     $this->template->setTitle('Modificar usuario ' . $requestData->username);
@@ -250,8 +244,46 @@ class Administration extends MY_Controller {
       }
     }
 
+    // View data
+    $viewData = [
+      'user' => $requestData,
+      'userTypes' => $userTypes
+    ];
+
     // Print view
     $this->template->printView('administration/modUser', $viewData);
+  }
+
+  // Delete user
+  public function delete_user($user = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($user == null) {
+      return show_404();
+    }
+
+    // Get user data
+    $requestData = $this->administrator_model->getUser($user);
+
+    // User doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    $this->template->setTitle('Borrar usuario');
+
+    if($requestData->auth_level != 9) {
+
+      $this->db->delete('users', array('username' => $requestData->username));
+
+      // Set flash data
+      $this->session->set_flashdata("notify", "Usuario " . $requestData->username . " borrado con éxito.");
+    }
+
+    // Redirect user to user list
+    return redirect('/users');
   }
 
   // Show all data from a collaborator request to accept or deny
@@ -457,8 +489,9 @@ class Administration extends MY_Controller {
     // Get parent categories
     $parentCategories = $this->administrator_model->getParentCategories();
 
-    // Check if a category have childs
+    // Check if a category have childs and recipes
     $numChilds = $this->administrator_model->category_haveChild($categoryData->id);
+    $numRecipes = $this->administrator_model->category_haveRecipes($categoryData->id);
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -500,10 +533,45 @@ class Administration extends MY_Controller {
     $viewData = [
       'category' => $categoryData,
       'p_category' => $parentCategories,
-      'numChilds' => $numChilds
+      'numChilds' => $numChilds,
+      'numRecipes' => $numRecipes
     ];
 
     $this->template->printView('administration/modCategory', $viewData);
+  }
+
+  // Delete category
+  public function deleteCategory($category = null) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($category == null) {
+      return show_404();
+    }
+
+    $categoryData = $this->administrator_model->getCategory($category);
+
+    // user doesn't exist?
+    if($categoryData == null) {
+      return show_404();
+    }
+
+    $this->template->setTitle('Eliminar categoria');
+
+    $numChilds = $this->administrator_model->category_haveChild($categoryData->id);
+    $numRecipes = $this->administrator_model->category_haveRecipes($categoryData->id);
+
+    if( ! $numChilds && $numRecipes == 0) {
+
+      $this->db->delete('categorization', array('slug' => $categoryData->slug));
+
+      // Set flash data
+      $this->session->set_flashdata("notify", "Categoría " . $categoryData->name . " borrada con éxito.");
+    }
+
+    // Redirect user to category list
+    return redirect('/category/list');
   }
 
   // View all recipes from a category

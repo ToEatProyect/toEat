@@ -40,7 +40,11 @@
         <?php endif; ?>
       </div><!-- /Name -->
 
-      <input type="submit" class="btn btn-success" value="Modificar ingrediente">
+      <div class="btn-group">
+        <input type="submit" class="btn btn-success" value="Modificar ingrediente">
+        <a href="/ingredients/modify/<?php echo $ingredient->slug ?>/delete" class="btn btn-success <?php echo $hasRecipes > 0 ? 'disabled' : NULL ?>">Eliminar ingrediente</a>
+      </div>
+
       <?php echo form_close('') ?>
 
     </div>

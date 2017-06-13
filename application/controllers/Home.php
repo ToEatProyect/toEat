@@ -15,6 +15,10 @@ class Home extends MY_Controller {
 
     $this->template->setTitle('Home');
 
+    $this->load->model(['recipes_model', 'comments_model']);
+
+
+
     $this->template->printView('home/index');
   }
 

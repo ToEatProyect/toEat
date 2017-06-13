@@ -31,7 +31,7 @@
       <!-- Parent category -->
       <div class="form-group <?php echo form_error('parent_category') ? 'has-error' : NULL ?>">
         <label for="parent_category">Categoría superior</label>
-        <select id="parent_category" name="parent_category" class="form-control" <?php echo $numChilds ? 'disabled' : NULL ?>>
+        <select id="parent_category" name="parent_category" class="form-control" <?php echo $numChilds || $numRecipes > 0 ? 'disabled' : NULL ?>>
           <option value="0">Sin categoría</option>
 
           // Are there parent categories? fill select
@@ -40,11 +40,7 @@
             <?php foreach ($p_category as $item): ?>
 
               <option value="<?php echo $item->id ?>"
-                <?php if($category->parent_category == $item->id): ?>
-                  <?php echo  set_select('parent_category', $item->id, TRUE); ?>
-                <?php else: ?>
-                  <?php echo  set_select('parent_category', $item->id); ?>
-                <?php endif; ?>
+                  <?php echo  set_select('parent_category', $item->id, $category->parent_category == $item->id ? TRUE : FALSE); ?>
               ><?php echo $item->name ?></option>
 
             <?php endforeach; ?>
@@ -57,7 +53,11 @@
         <?php endif; ?>
       </div><!-- /Parent category -->
 
-      <input type="submit" class="btn btn-success" value="Modificar categoría">
+      <div class="btn-group">
+        <input type="submit" class="btn btn-success" value="Modificar categoría">
+        <a href="/category/modify/<?php echo $category->slug ?>/delete" class="btn btn-success
+          <?php echo $numChilds || $numRecipes > 0 ? 'disabled' : NULL ?>">Eliminar categoría</a>
+      </div>
       <?php echo form_close('') ?>
 
     </div>

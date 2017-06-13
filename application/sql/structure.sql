@@ -205,7 +205,7 @@ CREATE TABLE IF NOT EXISTS recipes(
   lastModDate DATETIME NOT NULL,
   image VARCHAR(90),
   published INT(1) NOT NULL DEFAULT 0,
-  CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id)
+  CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id) ON DELETE CASCADE
 );
 
 -- TABLE 3 - Steps --
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS steps(
   numStep INT(2) UNSIGNED NOT NULL,
   description VARCHAR(800) NOT NULL,
   PRIMARY KEY (id_recipe, numStep),
-  CONSTRAINT fk_steps_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
+  CONSTRAINT fk_steps_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id) ON DELETE CASCADE
 );
 
 -- TABLE 4 - Comments --
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS comments(
   lastModDate DATETIME NULL,
   score INT(1),
   PRIMARY KEY (id_user, id_recipe),
-  CONSTRAINT fk_comments_users FOREIGN KEY (id_user) REFERENCES users(user_id),
+  CONSTRAINT fk_comments_users FOREIGN KEY (id_user) REFERENCES users(user_id) ON DELETE CASCADE,
   CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
 );
 
@@ -243,7 +243,7 @@ CREATE TABLE IF NOT EXISTS rec_ingr(
   ingredient INT(4) UNSIGNED NOT NULL,
   quantity VARCHAR(40) NOT NULL,
   PRIMARY KEY (recipe, ingredient),
-  CONSTRAINT fk_rec_ingr_recipe FOREIGN KEY (recipe) REFERENCES recipes(id),
+  CONSTRAINT fk_rec_ingr_recipe FOREIGN KEY (recipe) REFERENCES recipes(id) ON DELETE CASCADE,
   CONSTRAINT fk_rec_ingr_ingredients FOREIGN KEY (ingredient) REFERENCES ingredients(id)
 );
 
@@ -261,7 +261,7 @@ CREATE TABLE IF NOT EXISTS rec_cat(
   recipe INT(10) UNSIGNED NOT NULL,
   PRIMARY KEY (category, recipe),
   CONSTRAINT fk_rec_cat_categorization FOREIGN KEY (category) REFERENCES categorization(id),
-  CONSTRAINT fk_rec_cat_recipe FOREIGN KEY (recipe) REFERENCES recipes(id)
+  CONSTRAINT fk_rec_cat_recipe FOREIGN KEY (recipe) REFERENCES recipes(id) ON DELETE CASCADE
 );
 
 -- TABLE 9 - New collaborator request --

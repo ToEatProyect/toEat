@@ -115,9 +115,41 @@ class Ingredients extends MY_Controller {
     // View data
     $viewData = [
       'ingredient' => $ingredientData,
+      'hasRecipes' => $this->ingredient_model->ingredient_hasRecipe($ingredientData->id)
     ];
 
     $this->template->printView('recipes/ingredients/update', $viewData);
+  }
+
+  // Delete ingredient
+  public function deleteIngredient($ingredient) {
+
+    // TODO: Add permission restriction
+
+    // no user? show 404 error
+    if($ingredient == null) {
+      return show_404();
+    }
+
+    $ingredientData = $this->ingredient_model->getIngredient($ingredient);
+
+    // user doesn't exist?
+    if($ingredientData == null) {
+      return show_404();
+    }
+
+    $this->template->setTitle('Eliminar ingrediente');
+
+    if($this->ingredient_model->ingredient_hasRecipe($ingredientData->id) == 0) {
+
+      $this->db->delete('ingredients', array('id' => $ingredientData->id));
+
+      // Set flash data
+      $this->session->set_flashdata("notify", "Ingrediente borrado con éxito.");
+    }
+
+    // Redirect user to category list
+    return redirect('/ingredients');
   }
 
 }

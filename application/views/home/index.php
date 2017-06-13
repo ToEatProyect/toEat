@@ -14,7 +14,7 @@
         ¿Buscas algo muy concreto? ¿Estás en casa y no sabes que cocinar?
         ¡Ningun problema! Nosotros te ayudamos a encontrar justo lo que necesitas
       </p>
-      <a class="btn btn-success btn-lg" href="#">¡Pulsa aquí!</a>
+      <a class="btn btn-success btn-lg" href="/search/index">¡Pulsa aquí!</a>
     </div>
     <!-- /.col-md-4 -->
   </div>

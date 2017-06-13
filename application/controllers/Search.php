@@ -19,6 +19,8 @@ class Search extends MY_Controller {
       "recipes" => null
     ];
 
+    $this->template->setTitle('Buscar');
+
     //If we have looked for some parameters
     if($this->input->post()) {
 

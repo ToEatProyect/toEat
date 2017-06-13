@@ -32,6 +32,17 @@ class Ingredient_model extends MY_Model {
     return $result = $query->row();
   }
 
+  // Check if a ingredient is in use
+  public function ingredient_hasRecipe($ingredient) {
+
+    $query = $this->db
+      ->from('rec_ingr')
+      ->where('ingredient', $ingredient)
+      ->get();
+
+    return $result = $query->num_rows();
+  }
+
   // Get all ingredients from a recipe
   public function getAll_fromRecipe($recipe) {
 

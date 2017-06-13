@@ -25,11 +25,13 @@ $route['recipes/category/(:any)'] = 'administration/recipeList_fromCategory/$1';
 $route['ingredients'] = 'recipes/Ingredients';
 $route['ingredients/new'] = 'recipes/Ingredients/newIngredient';
 $route['ingredients/modify/(:any)'] = 'recipes/Ingredients/modIngredient/$1';
+$route['ingredients/modify/(:any)/delete'] = 'recipes/Ingredients/deleteIngredient/$1';
 
 // Administration - users
 $route['users'] = 'administration/userList';
 $route['users/new'] = 'administration/newUser';
-$route['users/modify/(:any)'] = 'administration/modUser/$1';
+$route['users/(:any)'] = 'administration/modUser/$1';
+$route['users/(:any)/delete'] = 'administration/delete_user/$1';
 $route['users/collaborators-request'] = 'administration/collaboratorListRequest';
 $route['users/collaborators-request/(:any)'] = 'administration/show_collaboratorRequest/$1';
 $route['users/collaborators-request/(:any)/accept'] = 'administration/acceptCollaborator/$1';
@@ -38,6 +40,7 @@ $route['users/collaborators-request/(:any)/deny'] = 'administration/denyCollabor
 // Administration - category
 $route['category/new'] = 'administration/newCategory';
 $route['category/modify/(:any)'] = 'administration/modCategory/$1';
+$route['category/modify/(:any)/delete'] = 'administration/deleteCategory/$1';
 $route['category/list'] = 'administration/categoriesList';
 
 // Comments
