@@ -30,7 +30,7 @@ footer {
 .page-title {
   font-size: 40px;
 
-  padding-bottom: 5px;
+  padding: 0;
   padding-left: 10px;
 
   border: 0;
@@ -42,7 +42,7 @@ footer {
   margin-right: 15%;
 
   .recipe-owner{
-    font-size: 40%;
+    font-size: 12px;
   }
 
   .recipe-score, .recipe-time{

@@ -45,15 +45,13 @@ class Recipe extends MY_Controller {
   public function newRecipe() {
 
     // Redirect user if it doesn't belong to the selected level
-    if( ! $this->verify_min_level(3)) {
-
-      return redirect( site_url( '/' ) );
+    if( ! $this->verify_min_level(3)) {return redirect( site_url( '/' ) );
     }
 
     $this->template->setTitle('Nueva receta');
 
+    $allIngredients = $this->ingredient_model->getAll();
     $categories = $this->_createCategorySelects();
-    $ingredients = $this->ingredient_model->getAll();
 
     // Load validation library, validation config and validation rules
     $this->load->library("form_validation");
@@ -61,6 +59,9 @@ class Recipe extends MY_Controller {
     $this->form_validation->set_rules(config_item('create_recipe_rules'));
 
     if($this->form_validation->run()) {
+
+      //get wich are recipe ingredients
+      $recipe_ingredients = $this->_getRecipeIngredients($allIngredients);
 
       // Load recipe data
       $recipe_data['id'] = 'DEFAULT';
@@ -73,9 +74,12 @@ class Recipe extends MY_Controller {
       $recipe_data['image'] = null;
       $recipe_data['id_owner'] = $this->auth_data->user_id;
       $recipe_data['published'] = 'DEFAULT';
+      $recipe_data['str_ingredients'] = $this->_getRecipeIngredientsString($recipe_ingredients);
 
       // Insert new recipe
       $this->db->set($recipe_data)->insert('recipes');
+
+
 
       // Created recipe?
       if( $this->db->affected_rows() == 1 ) {
@@ -93,19 +97,13 @@ class Recipe extends MY_Controller {
           $this->db->set($category_recipe_data)->insert('rec_cat');
         }
 
-        // Insert ingredients - recipe
-        $ingredient_recipe_data = array();
-
-        foreach ($ingredients as $item) {
-
-          if($this->input->post('ingr-' . $item->id) != null){
-
-            $ingredient_recipe_data['recipe'] = $last_recipe;
-            $ingredient_recipe_data['ingredient'] = $this->input->post('ingr-' . $item->id);
-            $ingredient_recipe_data['quantity'] = $this->input->post('amount-' . $item->id);
-
-            $this->db->set($ingredient_recipe_data)->insert('rec_ingr');
-          }
+        //Insert ingredients
+        foreach($recipe_ingredients as $item) {
+          $this->db->set(array(
+            "recipe" => $last_recipe,
+            "ingredient" => $item->ingredient->id,
+            "quantity" => $item->amount
+          ))->insert("rec_ingr");
         }
 
         // Insert steps
@@ -134,12 +132,11 @@ class Recipe extends MY_Controller {
     // View data
     $viewData = [
       'categories' => $categories,
-      'ingredients' => $ingredients
+      'ingredients' => $allIngredients
     ];
 
     // Print view
     $this->template->printView('recipes/Recipe/create', $viewData);
-
   }
 
   // Show recipe
@@ -272,4 +269,32 @@ class Recipe extends MY_Controller {
     return $result;
   }
 
+  //Retrieve recipe ingredients
+  private function _getRecipeIngredients($allIngredients) {
+    $result = [];
+
+    foreach($allIngredients as $item) {
+      if(!$this->input->post("ingr-". $item->id)) { continue; }
+
+      $itm = (object) array(
+        "ingredient" => $item,
+        "amount" => $this->input->post("amount-" . $item->id) ? $this->input->post("amount-" . $item->id) : 1
+      );
+
+      $result[] = $itm;
+    }
+    return $result;
+  }
+
+  //Retrieve recipe ingredients string
+  private function _getRecipeIngredientsString($ingredients) {
+
+    $slugsArr = [];
+
+    foreach($ingredients as $item) {
+      $slugsArr[] = $item->ingredient->slug;
+    }
+
+    return implode(",", $slugsArr);
+  }
 }
