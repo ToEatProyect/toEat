@@ -15,6 +15,7 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/bower/plupload/js/plupload.min.js"></script>
 
 <!-- Personalized JavaScript -->
 <script src="/assets/js/main.js"></script>

@@ -3,92 +3,100 @@
 <div class="container">
   <div class="row">
 
+    <h3 class="page-title clearfix">
+
+      <p class="pull-left">
+        <?php echo $recipe->title ?> <?php echo print_recipe_score($avg_score) ?> <br />
+        <small>- Creada por <cite title="Source Title"><?php echo $owner ?></cite></small>
+      </p>
+
+      <p class="pull-right">
+        <small><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</small>
+      </p>
+    </h3>
+
     <!-- Recipe container -->
-    <div class="col-md-8">
-      <h2 class="text-success"><?php echo $recipe->title ?></h2>
-      <blockquote>
-        <p>Puntuación:
+    <div class="col-md-10 col-md-offset-1">
 
-        <?php if($avg_score == null): ?>
-
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-          <i class="fa fa-star-o" aria-hidden="true"></i>
-
-        <?php else: ?>
-
-          <?php for( $i = 0; $i < 5; $i++ ): ?>
-
-            <?php if($avg_score > $i): ?>
-              <i class="fa fa-star" aria-hidden="true"></i>
-            <?php else: ?>
-              <i class="fa fa-star-o" aria-hidden="true"></i>
-            <?php endif; ?>
-
-          <?php endfor; ?>
-
-        <?php endif; ?></p>
-
-        <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</p>
-        <small>Creada por <cite title="Source Title"><?php echo $owner ?></cite></small>
-      </blockquote>
-
-      <hr><!-- Line separator -->
-
-      <!-- Image -->
       <div class="row">
-        <div class="col-md-8 col-md-offset-2 recipe-img">
-            <img class="img-responsive" src="/assets/img/recipes/<?php echo $recipe->image ?>" />
+
+        <!-- Image  -->
+        <div class="col-md-4">
+          <?php if(!$can_edit): ?>
+            <?php echo print_recipe_image($recipe, "img img-responsive") ?>
+          <?php else: ?>
+            <label class="btn btn-default"
+                   data-plupload-change-recipe-image
+                   data-recipe-slug="<?php echo $recipe->slug ?>"
+                   data-recipe-id="<?php echo $recipe->id ?>">
+              <?php echo print_recipe_image($recipe, "img img-responsive") ?>
+              <div class="progress">
+                <div class="progress-bar hide" role="progressbar"
+                     aria-valuenow="0"
+                     aria-valuemin="0" aria-valuemax="100"
+                     style="width: 0%;">0%</div>
+              </div>
+            </label>
+          <?php endif; ?>
         </div>
-      </div><!-- /Image -->
+
+        <div class="col-md-8">
+
+          <!-- Description panel -->
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Descripción</h3>
+            </div>
+            <div class="panel-body">
+              <?php echo $recipe->description ?>
+            </div>
+          </div><!-- /Description panel -->
+
+          <!-- Ingredients panel -->
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Ingredientes (1 ración)</h3>
+            </div>
+            <div class="panel-body">
+
+              <?php foreach ($ingredients as $ingredient): ?>
+
+                <strong><?php echo $ingredient->name ?>: </strong><?php echo $ingredient->quantity ?><br/>
+
+              <?php endforeach; ?>
+
+            </div>
+          </div><!-- /Ingredients panel -->
+
+        </div>
+
+      </div>
 
       <hr><!-- Line separator -->
 
-      <!-- Description -->
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h3 class="panel-title">Descripción</h3>
-        </div>
-        <div class="panel-body">
-          <?php echo $recipe->description ?>
-        </div>
-      </div><!-- /Description -->
+      <div class="row">
+        <div class="col-md-12">
 
-      <!-- Ingredients -->
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h3 class="panel-title">Ingredientes (1 ración)</h3>
-        </div>
-        <div class="panel-body">
+          <!-- Steps -->
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Instrucciones</h3>
+            </div>
+            <div class="panel-body">
 
-          <?php foreach ($ingredients as $ingredient): ?>
+              <?php foreach ($steps as $step): ?>
 
-            <strong><?php echo $ingredient->name ?>: </strong><?php echo $ingredient->quantity ?><br/>
+                <h4><strong>Paso <?php echo $step->numStep ?></strong></h4>
+                <hr>
+                <?php echo $step->description ?>
 
-          <?php endforeach; ?>
+              <?php endforeach; ?>
+
+            </div>
+          </div><!-- /Steps -->
 
         </div>
-      </div><!-- /Ingredients -->
-
-      <!-- Steps -->
-      <div class="panel panel-success">
-        <div class="panel-heading">
-          <h3 class="panel-title">Instrucciones</h3>
-        </div>
-        <div class="panel-body">
-
-          <?php foreach ($steps as $step): ?>
-
-            <h4><strong>Paso <?php echo $step->numStep ?></strong></h4>
-            <hr>
-            <?php echo $step->description ?>
-
-          <?php endforeach; ?>
-
-        </div>
-      </div><!-- /Steps -->
+      </div>
 
       <?php // User (no owner) is logged in and he don't have comment in this recipe?>
       <?php if(isset($user_loggin) && $user_loggin != $owner && $user_haveComment == false): ?>
@@ -216,6 +224,7 @@
       <?php endif; ?>
 
     </div><!-- /Recipe container -->
+
     <div class="col-md-4">
 
     </div>

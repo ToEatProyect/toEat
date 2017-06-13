@@ -25,7 +25,9 @@
 
               <div class="col-sm-4 col-md-3">
                 <div class="thumbnail">
-                  <img class="img-responsive" src="/assets/img/recipes/<?php echo $recipe->image ?>" />
+                  <a href="/recipes/show/<?php echo $recipe->slug ?>">
+                    <?php echo print_recipe_image($recipe, "img img-responsive") ?>
+                  </a>
                   <div class="caption">
                     <h5 class="recipe-title"><?php echo $recipe->title ?></h5>
                     <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</p>
@@ -35,7 +37,6 @@
                     <?php else: ?>
                       <p class="text-success">Publicada</p>
                     <?php endif; ?>
-                    <a class="btn btn-success" href="/recipes/show/<?php echo $recipe->slug ?>">Detalles <i class="fa fa-angle-double-right fa-lg" aria-hidden="true"></i></a>
                   </div>
                 </div>
               </div>

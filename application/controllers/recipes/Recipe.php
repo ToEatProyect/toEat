@@ -14,6 +14,8 @@ class Recipe extends MY_Controller {
   // Get all recipes from logued user
   public function index() {
 
+    $this->load->helper(["recipes"]);
+
     // Redirect user if it doesn't belong to the selected level
     if( ! $this->verify_min_level(3)) {
 
@@ -68,7 +70,7 @@ class Recipe extends MY_Controller {
       $recipe_data['cooking_time'] = $this->input->post('cooking_time');
       $recipe_data['created_at'] = date("Y-m-d H:i:s");
       $recipe_data['lastModDate'] = date("Y-m-d H:i:s");
-      $recipe_data['image'] = 'img-default-test.jpg';
+      $recipe_data['image'] = null;
       $recipe_data['id_owner'] = $this->auth_data->user_id;
       $recipe_data['published'] = 'DEFAULT';
 
@@ -143,6 +145,8 @@ class Recipe extends MY_Controller {
   // Show recipe
   public function show($data = null) {
 
+    $this->load->helper(["recipes"]);
+
     // no recipe? show 404 error
     if($data == null) {
       return show_404();
@@ -173,7 +177,8 @@ class Recipe extends MY_Controller {
       'comments' => $requestComments,
       'ingredients' => $requestIngredients,
       'steps' => $requestSteps,
-      'avg_score' => intval($requestAvg->score)
+      'avg_score' => intval($requestAvg->score),
+      'can_edit' => $this->verify_min_level(6) //Moderators and above can edit
     ];
 
     // If someone is logged in, we get his username
@@ -183,12 +188,7 @@ class Recipe extends MY_Controller {
 
       // Check if the user has any comments created in the current recipe
       $user_haveComment = $this->comments_model->user_haveComment($this->auth_data->user_id);
-
-      if($user_haveComment > 0)
-        $userComments = true;
-      else
-        $userComments = false;
-
+      $userComments = $user_haveComment > 0;
       $viewData['user_haveComment'] = $userComments;
     }
 

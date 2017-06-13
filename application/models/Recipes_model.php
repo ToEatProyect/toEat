@@ -53,4 +53,11 @@ class Recipes_model extends MY_Model {
     return $result = $query->result();
   }
 
+  //Sets an image to an especific recipe
+  public function setImage($recipeId, $image) {
+    $this->db->set("image", $image)
+      ->where("id", $recipeId)
+      ->update("recipes");
+  }
+
 }

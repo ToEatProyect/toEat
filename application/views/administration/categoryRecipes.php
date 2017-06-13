@@ -17,37 +17,20 @@
           <?php endif; ?>
             <div class="col-md-3 col-sm-6">
 
-              <img class="img-responsive" src="/assets/img/recipes/<?php echo $recipes[$j]['image'] ?>" />
+              <a href="<?php echo print_recipe_url($recipes[$j]) ?>">
+                <?php echo print_recipe_image($recipes[$j], "img img-responsive") ?>
+              </a>
+
               <div class="caption">
 
                 <p class="star-separator">
-
-                  <?php if($recipes[$j]['avg_score'] == null): ?>
-
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-
-                  <?php else: ?>
-
-                    <?php for( $x = 0; $x < 5; $x++ ): ?>
-
-                      <?php if($recipes[$j]['avg_score'] > $x): ?>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                      <?php else: ?>
-                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                      <?php endif; ?>
-
-                    <?php endfor; ?>
-
-                  <?php endif; ?>
-
+                  <?php echo print_recipe_score($recipes[$j]["avg_score"]) ?>
                 </p>
 
                 <h5 class="recipe-title">
-                  <a class="text-success" href="/recipes/show/<?php echo $recipes[$j]['slug'] ?>"><?php echo $recipes[$j]['title'] ?></a>
+                  <a class="text-success" href="<?php echo print_recipe_url($recipes[$j]) ?>">
+                    <?php echo $recipes[$j]['title'] ?>
+                  </a>
                 </h5>
               </div>
 

@@ -509,6 +509,8 @@ class Administration extends MY_Controller {
   // View all recipes from a category
   public function recipeList_fromCategory($category = null) {
 
+    $this->load->helper(["recipes"]);
+
     // No category? show 404 error
     if($category == null) {
       return show_404();
