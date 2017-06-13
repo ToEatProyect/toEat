@@ -3,7 +3,13 @@
 <div class="container">
   <div class="row">
 
-    <h3 class="page-title"><?php echo $c_name; ?></h3>
+    <h3 class="page-title">
+      <?php if($category->parent_category == 1): ?>
+        Recetas de <?php echo $c_name; ?>
+      <?php elseif($category->parent_category == 13): ?>
+        Recetas para <?php echo $c_name ?>
+      <?php endif; ?>
+    </h3>
 
     <div class="col-md-10 col-md-offset-1">
       <?php if($haveRecipes): ?>

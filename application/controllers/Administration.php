@@ -559,6 +559,7 @@ class Administration extends MY_Controller {
 
     $viewData = [
       'recipes' => $recipes,
+      'category' => $categoryData,
       'c_name' => $categoryData->name,
       'haveRecipes' => $haveRecipes,
       'collaborator' => $collaborator
