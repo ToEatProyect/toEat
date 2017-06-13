@@ -2,13 +2,11 @@
 
 <div class="container">
   <div class="row">
+
+    <h3 class="page-title"><?php echo $c_name; ?></h3>
+
     <div class="col-md-10 col-md-offset-1">
-
       <?php if($haveRecipes): ?>
-
-        <div class="jumbotron">
-          <h1><strong><?php echo $c_name ?></strong></h1>
-        </div>
 
         <?php $i = 0 ?>
 
@@ -94,7 +92,7 @@
         </div>
 
       <?php endif; ?>
-
     </div>
+
   </div>
 </div>

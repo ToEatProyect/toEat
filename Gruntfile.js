@@ -9,6 +9,18 @@ module.exports = function (grunt) {
   
   // DOC: https://github.com/sindresorhus/grunt-sass
   grunt.initConfig({
+    'watch': {
+      'options': {
+        'debounceDelay': 250,
+      },
+      'app': {
+        'files': ['assets/scss/**/**.scss'],
+        'tasks': [
+          'sass',
+          'cssmin'
+        ]
+      }
+    },
     'sass': {
       'options': {'sourceMap': false, 'precision': 8},
       'main': {
