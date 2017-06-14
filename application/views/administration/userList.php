@@ -34,7 +34,11 @@
             <?php foreach ($users as $user): ?>
 
               <tr>
-                <td><a href="/users/<?php echo $user->username ?>"><?php echo $user->username ?></a></td>
+                <?php if($user->auth_level == 9): ?>
+                  <td><?php echo $user->username ?></td>
+                <?php else: ?>
+                  <td><a href="/users/show/<?php echo $user->username ?>"><?php echo $user->username ?></a></td>
+                <?php endif; ?>
                 <td><?php echo $user->email ?></td>
                 <td><?php echo $user->created_at ?></td>
                 <td><?php echo $user->auth_level ?></td>

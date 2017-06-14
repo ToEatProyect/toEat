@@ -95,7 +95,7 @@
 
       <div class="btn-group">
         <input type="submit" class="btn btn-success" value="Modificar usuario">
-        <a href="/users/<?php echo $user->username ?>/delete" class="btn btn-success <?php echo $user->auth_level==9 ? 'disabled' : NULL ?>">Eliminar usuario</a>
+        <a href="/users/show/<?php echo $user->username ?>/delete" class="btn btn-success <?php echo $user->auth_level==9 ? 'disabled' : NULL ?>">Eliminar usuario</a>
       </div>
       <?php echo form_close('') ?>
 

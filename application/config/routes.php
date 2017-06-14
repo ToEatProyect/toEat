@@ -30,8 +30,8 @@ $route['ingredients/modify/(:any)/delete'] = 'recipes/Ingredients/deleteIngredie
 // Administration - users
 $route['users'] = 'administration/userList';
 $route['users/new'] = 'administration/newUser';
-$route['users/(:any)'] = 'administration/modUser/$1';
-$route['users/(:any)/delete'] = 'administration/delete_user/$1';
+$route['users/show/(:any)'] = 'administration/modUser/$1';
+$route['users/show/(:any)/delete'] = 'administration/delete_user/$1';
 $route['users/collaborators-request'] = 'administration/collaboratorListRequest';
 $route['users/collaborators-request/(:any)'] = 'administration/show_collaboratorRequest/$1';
 $route['users/collaborators-request/(:any)/accept'] = 'administration/acceptCollaborator/$1';
