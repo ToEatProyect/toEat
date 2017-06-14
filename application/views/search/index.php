@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<div class="container">
+<div class="container min-size-view-container">
   <div class="row">
 
     <h3 class="page-title">Búsqueda</h3>
@@ -10,16 +10,7 @@
 
       <?php echo form_open() ?>
 
-      <div class="col-md-8">
-        <div class="form-group">
-          <input type="text" class="form-control"
-                 name="text"
-                 placeholder="Patatas con..."
-                 value="<?php echo set_value("text") ?>">
-        </div>
-      </div>
-
-      <div class="col-md-2">
+      <div class="col-md-3 col-md-offset-6">
         <div class="form-group">
           <select class="form-control wz-multiple" name="ingredients[]" multiple="multiple" placeholder="Ingredientes...">
             <?php foreach($all_ingredients as $ingredient): ?>
@@ -34,9 +25,9 @@
         </div>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-md-3">
         <div class="form-group">
-          <button type="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
+          <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Buscar</button>
         </div>
       </div>
 

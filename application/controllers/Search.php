@@ -24,16 +24,15 @@ class Search extends MY_Controller {
     //If we have looked for some parameters
     if($this->input->post()) {
 
-      $search_text = $this->input->post("text");
       $search_ingredients = $this->input->post("ingredients");
 
 
-      if(strlen($search_text) == 0 && count($search_ingredients) == 0) {
+      if(count($search_ingredients) == 0) {
         $viewData["has_search"] = false;
       }
       else {
         $viewData["has_search"] = true;
-        $viewData["recipes"] = $this->recipes_model->search($search_text, $search_ingredients);
+        $viewData["recipes"] = $this->recipes_model->search($search_ingredients);
       }
 
     }

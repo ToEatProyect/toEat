@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-<div class="container">
+<div class="container min-size-view-container">
   <div class="row">
     <div class="col-md-12">
 

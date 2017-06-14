@@ -61,8 +61,8 @@ class Recipes_model extends MY_Model {
   }
 
   //Peerforms a search
-  public function search($searchText, $searchIngredientIds) {
-    return [];
+  public function search($searchIngredientIds) {
+    return $searchIngredientIds;
   }
 
 }

@@ -174,7 +174,7 @@ class Recipe extends MY_Controller {
       'ingredients' => $requestIngredients,
       'steps' => $requestSteps,
       'avg_score' => intval($requestAvg->score),
-      'can_edit' => $this->verify_min_level(6) //Moderators and above can edit
+      'can_edit' => $this->verify_min_level(3) //Collaborators and above can edit
     ];
 
     // If someone is logged in, we get his username

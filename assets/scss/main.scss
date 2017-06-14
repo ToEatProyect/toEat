@@ -51,6 +51,11 @@ footer {
 
 }
 
+//Min height main body container
+.min-size-view-container {
+  min-height: 535px;
+}
+
 /* ---------------------------------- Select-Multiple ------------------------------------ */
 .wz-multiple {
   &.ms-parent {
