@@ -50,6 +50,7 @@
           <li class="dropdown">
 
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+              <i class="toEat-login-user fa fa-user fa-2x" aria-hidden="true"></i>
               <?php echo $userData->username ?>
               <span class="caret"></span>
             </a>
