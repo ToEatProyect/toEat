@@ -334,7 +334,7 @@ class Recipe extends MY_Controller {
     }
 
     $this->db->where('slug', $recipe);
-    $this->db->update('recipes', array('published' => 1));
+    $this->db->update('recipes', array('published' => 1, 'lastModDate' => date("Y-m-d H:i:s")));
 
     // Set flash data
     $this->session->set_flashdata("notify", "Receta publicada con éxito.");

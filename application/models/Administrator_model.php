@@ -136,12 +136,10 @@ class Administrator_model extends MY_Model {
   // Get all recipes from a category
   public function getRecipes_fromCategory($category) {
 
-    // TODO: Add WHERE published = 1
-
     $query = $this->db->query("SELECT recipes.id, recipes.title ,recipes.slug, recipes.lastModDate, recipes.image FROM recipes
       INNER JOIN rec_cat ON recipes.id = rec_cat.recipe
       INNER JOIN categorization ON rec_cat.category = categorization.id
-      WHERE categorization.slug = '" . $category . "'
+      WHERE categorization.slug = '" . $category . "' AND recipes.published = 1
       ORDER BY recipes.lastModDate DESC");
 
     return $result = $query->result();

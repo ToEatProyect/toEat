@@ -102,7 +102,6 @@
 
               <div class="pull-right">
                 <?php if($can_edit): ?>
-                  <a href="" class="btn btn-success"></a>
                   <a href="/recipes/show/<?php echo $recipe->slug ?>/delete" class="btn btn-success"><i class="fa fa-trash" aria-hidden="true"></i> Borrar receta</a>
                 <?php endif; ?>
               </div>
@@ -247,7 +246,6 @@
         <div class="pull-right">
           <?php if($can_manage): ?>
             <a href="/recipes/management/<?php echo $recipe->slug ?>/published" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Publicar</a>
-            <a href="/recipes/show/<?php echo $recipe->slug ?>/delete" class="btn btn-success"><i class="fa fa-times-circle" aria-hidden="true"></i> Borrar</a>
           <?php endif; ?>
         </div>
 
