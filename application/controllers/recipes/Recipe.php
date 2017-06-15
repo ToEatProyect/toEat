@@ -293,6 +293,8 @@ class Recipe extends MY_Controller {
       return redirect( site_url( '/' ) );
     }
 
+    $this->template->setTitle('Gestión de recetas');
+
     $this->load->helper(["recipes"]);
 
     // Get not published recipes

@@ -13,13 +13,19 @@ class Home extends MY_Controller {
   // Home page
   public function index() {
 
+    $this->load->helper(["recipes"]);
+
     $this->template->setTitle('Home');
 
     $this->load->model(['recipes_model', 'comments_model']);
 
+    $recipesData = $this->recipes_model->get_lastThree();
 
+    $viewData = [
+      'recipes' => $recipesData
+    ];
 
-    $this->template->printView('home/index');
+    $this->template->printView('home/index', $viewData);
   }
 
   // Login page and process

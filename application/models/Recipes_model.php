@@ -31,6 +31,14 @@ class Recipes_model extends MY_Model {
     return $result = $query->row();
   }
 
+  // Get last three recipes
+  public function get_lastThree() {
+
+    $query = $this->db->query('SELECT * FROM recipes WHERE recipes.published ORDER BY recipes.lastModDate DESC LIMIT 3');
+
+    return $result = $query->result();
+  }
+
   // Get recipe owner
   public function get_recipeOwner($recipe) {
 
@@ -72,6 +80,8 @@ class Recipes_model extends MY_Model {
 
     return $result = $query->result();
   }
+
+
 
   // Peerforms a search
   public function search($searchIngredientIds) {
