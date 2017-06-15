@@ -113,7 +113,7 @@
       </div>
 
       <?php // User (no owner) is logged in and he don't have comment in this recipe?>
-      <?php if(isset($user_loggin) && $user_loggin != $owner && $user_haveComment == false): ?>
+      <?php if(isset($user_loggin) && $user_loggin != $owner && $user_haveComment == false && $recipe->published != 0): ?>
 
         <?php echo form_open('') ?>
 
@@ -238,6 +238,18 @@
       <?php endif; ?>
 
     </div><!-- /Recipe container -->
+
+    <!-- Published button -->
+    <div class="row">
+      <div class="col-md-12">
+
+        <?php if($can_manage): ?>
+          <a href="/recipes/management/<?php echo $recipe->slug ?>/published" class="btn btn-success"><i class="fa fa-check-circle" aria-hidden="true"></i> Publicar</a>
+          <a href="" class="btn btn-success"><i class="fa fa-times-circle" aria-hidden="true"></i> Borrar</a>
+        <?php endif; ?>
+
+      </div>
+    </div>
 
     <div class="col-md-4">
 

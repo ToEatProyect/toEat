@@ -151,6 +151,9 @@ class Recipe extends MY_Controller {
 
     $this->load->helper(["recipes"]);
 
+    //Load auth-data
+    $this->verify_min_level(1);
+
     // no recipe? show 404 error
     if($data == null) {
       return show_404();
@@ -182,7 +185,8 @@ class Recipe extends MY_Controller {
       'ingredients' => $requestIngredients,
       'steps' => $requestSteps,
       'avg_score' => intval($requestAvg->score),
-      'can_edit' => $this->verify_role('collaborator') //Only collaborators can edit
+      'can_edit' => $this->verify_role("collaborator"), //Only collaborators can edit
+      'can_manage' => $this->verify_role("moderator") && $requestData->published == 0 ? TRUE : FALSE
     ];
 
     // If someone is logged in, we get his username
@@ -273,6 +277,69 @@ class Recipe extends MY_Controller {
 
     redirect( site_url( '/recipes/my-recipes' ) );
 
+  }
+
+  // Management recipes no published
+  public function management_recipes() {
+
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_role('moderator')) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
+    $this->load->helper(["recipes"]);
+
+    // Get not published recipes
+    $requestData = $this->recipes_model->get_noPublishedRecipes();
+
+    $viewData = [
+      'all_recipes' => $requestData
+    ];
+
+    // Print view
+    $this->template->printView('recipes/Recipe/management_recipes', $viewData);
+  }
+
+  // Post recipe
+  public function post_recipe($recipe = null) {
+
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
+    // no recipe? show 404 error
+    if($recipe == null) {
+      return show_404();
+    }
+
+    // Get recipe data
+    $requestData = $this->recipes_model->getRecipe($recipe);
+
+    // recipe doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    $this->db->where('slug', $recipe);
+    $this->db->update('recipes', array('published' => 1));
+
+    // Set flash data
+    $this->session->set_flashdata("notify", "Receta publicada con éxito.");
+
+    redirect( site_url( '/recipes/management' ) );
   }
 
   // ---------------------------------------------- Private methods ------------------------------------------------- //

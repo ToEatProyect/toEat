@@ -53,14 +53,27 @@ class Recipes_model extends MY_Model {
     return $result = $query->result();
   }
 
-  //Sets an image to an especific recipe
+  // Sets an image to an especific recipe
   public function setImage($recipeId, $image) {
+
     $this->db->set("image", $image)
       ->where("id", $recipeId)
       ->update("recipes");
   }
 
-  //Peerforms a search
+  // Get no published recipes
+  public function get_noPublishedRecipes() {
+
+    $query = $this->db
+      ->from('recipes')
+      ->where('published', 0)
+      ->order_by('created_at', 'DESC')
+      ->get();
+
+    return $result = $query->result();
+  }
+
+  // Peerforms a search
   public function search($searchIngredientIds) {
     return $searchIngredientIds;
   }

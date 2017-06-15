@@ -29,14 +29,14 @@
                     <?php echo print_recipe_image($recipe, "img img-responsive") ?>
                   </a>
                   <div class="caption">
+
                     <h5 class="recipe-title"><?php echo $recipe->title ?></h5>
                     <p><i class="fa fa-clock-o" aria-hidden="true"></i> <?php echo $recipe->cooking_time ?> minutos</p>
                     <p><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo $date->format('d-m-Y'); ?></p>
-                    <?php if($recipe->published == 0): ?>
-                      <p class="text-danger">No publicada</p>
-                    <?php else: ?>
-                      <p class="text-success">Publicada</p>
-                    <?php endif; ?>
+                    <?php echo $recipe->published == 0
+                      ? '<p class="text-danger">No publicada</p>'
+                      : '<p class="text-success">Publicada</p>' ?>
+
                   </div>
                 </div>
               </div>

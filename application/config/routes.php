@@ -38,6 +38,10 @@ $route['users/collaborators-request/(:any)'] = 'administration/show_collaborator
 $route['users/collaborators-request/(:any)/accept'] = 'administration/acceptCollaborator/$1';
 $route['users/collaborators-request/(:any)/deny'] = 'administration/denyCollaborator/$1';
 
+// Administration - recipes
+$route['recipes/management'] = 'recipes/Recipe/management_recipes';
+$route['recipes/management/(:any)/published'] = 'recipes/Recipe/post_recipe/$1';
+
 // Administration - category
 $route['category/new'] = 'administration/newCategory';
 $route['category/modify/(:any)'] = 'administration/modCategory/$1';

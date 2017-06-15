@@ -354,11 +354,12 @@ class MY_Controller extends CI_Controller {
 	 */
 	protected function verify_min_level( $level )
 	{
-		// Has user already been authenticated?
-		if( ! is_null( $this->auth_level ) && $this->auth_level >= $level )
-		{
-			return TRUE;
-		}
+
+    // Has user already been authenticated?
+	  if(!is_null($this->auth_level)) {
+	    return $this->auth_level >= $level;
+    }
+
 
 		$this->auth_data = $this->authentication->check_login( $level );
 
@@ -392,10 +393,9 @@ class MY_Controller extends CI_Controller {
 		$role_array = array_map( 'trim', $role_array );
 
 		// Has user already been authenticated?
-		if( ! is_null( $this->auth_role ) && in_array( $this->auth_role, $role_array ) )
-		{
-			return TRUE;
-		}
+    if(!is_null($this->auth_role)) {
+      return in_array($this->auth_role, $role_array);
+    }
 
 		$this->auth_data = $this->authentication->check_login( $role_array );
 

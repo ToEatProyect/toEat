@@ -71,6 +71,9 @@
                 ? '<li><a href="/users/collaborators-request">Solicitudes de colaborador</a></li>' : NULL ?>
 
               <!-- Users - Only admin -->
+              <?php echo $userData->auth_level == 6 ? '<li><a href="/recipes/management">Gestión de recetas</a></li>' : NULL ?>
+
+              <!-- Users - Only admin -->
               <?php echo $userData->auth_level == 9 ? '<li><a href="/users">Usuarios</a></li>' : NULL ?>
 
               <!-- Categories - Only admin -->
