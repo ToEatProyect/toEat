@@ -203,7 +203,7 @@ CREATE TABLE IF NOT EXISTS recipes(
   cooking_time INT(3) NOT NULL,
   created_at DATETIME NOT NULL,
   lastModDate DATETIME NOT NULL,
-  image VARCHAR(90),
+  image VARCHAR(90) DEFAULT NULL,
   published INT(1) NOT NULL DEFAULT 0,
   CONSTRAINT fk_recipes_users FOREIGN KEY (id_owner) REFERENCES users(user_id) ON DELETE CASCADE
 );
@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS comments(
   text VARCHAR(200) NOT NULL,
   created_at DATETIME NOT NULL,
   lastModDate DATETIME NULL,
-  score INT(1),
+  score INT(1) NOT NULL,
   PRIMARY KEY (id_user, id_recipe),
   CONSTRAINT fk_comments_users FOREIGN KEY (id_user) REFERENCES users(user_id) ON DELETE CASCADE,
   CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
@@ -240,7 +240,7 @@ CREATE TABLE IF NOT EXISTS ingredients(
 -- TABLE 6 - Rec_ingr --
 CREATE TABLE IF NOT EXISTS rec_ingr(
   recipe INT(10) UNSIGNED NOT NULL,
-  ingredient INT(4) UNSIGNED NOT NULL,
+  ingredient INT(5) UNSIGNED NOT NULL,
   quantity VARCHAR(40) NOT NULL,
   PRIMARY KEY (recipe, ingredient),
   CONSTRAINT fk_rec_ingr_recipe FOREIGN KEY (recipe) REFERENCES recipes(id) ON DELETE CASCADE,

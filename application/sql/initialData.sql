@@ -1,5 +1,18 @@
 USE toeat_db;
 
+-- phpMyAdmin SQL Dump
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 14-06-2017 a las 20:21:36
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -87,6 +100,18 @@ INSERT INTO `ingredients` (`id`, `name`, `slug`) VALUES
   (48, 'Remolacha', 'remolacha'),
   (49, 'Pimiento', 'pimiento'),
   (50, 'Puerro', 'puerro');
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`user_id`, `username`, `email`, `name`, `auth_level`, `banned`, `passwd`, `passwd_recovery_code`, `passwd_recovery_date`, `passwd_modified_at`, `last_login`, `created_at`, `modified_at`) VALUES
+  (73542321, 'register1', 'register1@gmail.com', 'register1', 1, '0', '$2y$11$seyfC0t8U5yErmbqdJsURuXkl5fCUe6TojyFiGSTXEU/wdyPWqwwu', NULL, NULL, NULL, NULL, '2017-06-14 20:12:35', '2017-06-14 18:12:35'),
+  (716165383, 'collaborator2', 'collaborator2@gmail.com', 'collaborator2', 6, '0', '$2y$11$FG27wgCir0Gt6LVyU2xSxOa3sNQhvna7FY4DzHWlKKC1wERja1Ouq', NULL, NULL, NULL, NULL, '2017-06-14 20:12:05', '2017-06-14 18:13:39'),
+  (885827396, 'moderator2', 'moderator2@gmail.com', 'moderator', 3, '0', '$2y$11$JFkoeLX7KuIvpvUSZiX/te2Pw7ktL8WWtwYzAjmtjVEVafU8o1Jh6', NULL, NULL, NULL, NULL, '2017-06-14 20:11:13', '2017-06-14 18:13:45'),
+  (1702716028, 'register2', 'register2@gmail.com', 'register2', 1, '0', '$2y$11$N0AntQfz4rkzq1g3PR9q9ONrzVxTwkjftqMEwekG0Ay8cSAr2Yi0y', NULL, NULL, NULL, NULL, '2017-06-14 20:12:52', '2017-06-14 18:12:52'),
+  (2009485070, 'collaborator1', 'collaborator1@gmail.com', 'collaborator1', 3, '0', '$2y$11$JgTvDYVCoxSEDYvNPlQEe.WDXlb0DEB.lhdb8bqxBP9qs4.ccLsHW', NULL, NULL, NULL, NULL, '2017-06-14 20:11:47', '2017-06-14 18:14:05'),
+  (2147484848, 'moderator1', 'moderator1@gmail.com', 'moderador', 6, '0', '$2y$11$0Ra6vQfI61lZsm/Yw1OPVuspOPeENiAW1MQr0FBHLbvNh6iaZ5AjG', NULL, NULL, NULL, NULL, '2017-06-14 20:10:42', '2017-06-14 18:14:02');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
