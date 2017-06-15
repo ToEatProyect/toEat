@@ -20,6 +20,7 @@ $route['recipes/new-recipe'] = 'recipes/Recipe/newRecipe';
 $route['recipes/my-recipes'] = 'recipes/Recipe';
 $route['recipes/show/(:any)'] = 'recipes/Recipe/show/$1';
 $route['recipes/category/(:any)'] = 'administration/recipeList_fromCategory/$1';
+$route['recipes/show/(:any)/delete'] = 'recipes/Recipe/deleteRecipe/$1';
 
 // Ingredient
 $route['ingredients'] = 'recipes/Ingredients';

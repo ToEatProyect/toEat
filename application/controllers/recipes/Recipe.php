@@ -16,9 +16,10 @@ class Recipe extends MY_Controller {
 
     $this->load->helper(["recipes"]);
 
-    // Redirect user if it doesn't belong to the selected level
-    if( ! $this->verify_min_level(3)) {
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_role('collaborator')) {
 
+      // Notifies the user that he does not have permissions
       $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
         Por motivos de seguridad hemos cerrado tu sesión.<br/>
         Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
@@ -44,8 +45,15 @@ class Recipe extends MY_Controller {
   // "Create a new recipe" process
   public function newRecipe() {
 
-    // Redirect user if it doesn't belong to the selected level
-    if( ! $this->verify_min_level(3)) {return redirect( site_url( '/' ) );
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_role('collaborator')) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
     }
 
     $this->template->setTitle('Nueva receta');
@@ -174,7 +182,7 @@ class Recipe extends MY_Controller {
       'ingredients' => $requestIngredients,
       'steps' => $requestSteps,
       'avg_score' => intval($requestAvg->score),
-      'can_edit' => $this->verify_min_level(3) //Collaborators and above can edit
+      'can_edit' => $this->verify_role('collaborator') //Only collaborators can edit
     ];
 
     // If someone is logged in, we get his username
@@ -226,6 +234,47 @@ class Recipe extends MY_Controller {
 
   }
 
+  // Delete recipe
+  public function deleteRecipe($recipe = null) {
+
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_role('collaborator')) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
+    $this->load->helper(["recipes"]);
+
+    // no recipe? show 404 error
+    if($recipe == null) {
+      return show_404();
+    }
+
+    // Get recipe data
+    $requestData = $this->recipes_model->getRecipe($recipe);
+
+    // recipe doesn't exist?
+    if($requestData == null) {
+      return show_404();
+    }
+
+    if($requestData->id_owner != $this->auth_data->user_id)
+      return redirect( site_url( '/' ) );
+
+    $this->db->delete('recipes', array('slug' => $recipe));
+
+    // Set flash data
+    $this->session->set_flashdata("notify", "Receta borrada con éxito.");
+
+    redirect( site_url( '/recipes/my-recipes' ) );
+
+  }
+
   // ---------------------------------------------- Private methods ------------------------------------------------- //
 
   // Retrieve data to build menu
@@ -237,9 +286,7 @@ class Recipe extends MY_Controller {
 
     foreach ($menu_items as $item) {
 
-      if($item->parent != null){
-        continue;
-      }
+      if($item->parent != null){ continue; }
 
       $menu_elements = [];
       $menu_elements['title'] = $item->c_name;
@@ -249,9 +296,7 @@ class Recipe extends MY_Controller {
 
       foreach ($menu_items as $child_item){
 
-        if($child_item->parent != $item->c_name) {
-          continue;
-        }
+        if($child_item->parent != $item->c_name) { continue; }
 
         $menu_elements['children']['item-' . $x] = array();
         $menu_elements['children']['item-' . $x]['id'] = $child_item->id;

@@ -96,6 +96,19 @@
             </div>
           </div><!-- /Steps -->
 
+          <!-- Buttons -->
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="pull-right">
+                <?php if($can_edit): ?>
+                  <a href="/recipes/show/<?php echo $recipe->slug ?>/delete" class="btn btn-success"><i class="fa fa-trash" aria-hidden="true"></i> Borrar receta</a>
+                <?php endif; ?>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 

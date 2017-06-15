@@ -19,6 +19,8 @@ class Administration extends MY_Controller {
 
     // TODO: Add permission restriction
 
+
+
     $this->template->setTitle('Solicitudes de nuevos colaboradores');
 
     // Get all collaborator request
