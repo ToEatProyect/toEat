@@ -11,10 +11,10 @@
 </footer>
 
 <!-- jQuery -->
-<script src="/assets/js/jquery.js"></script>
+<script src="/assets/bower/jquery/dist/jquery.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/bower/bootstrap-sass/assets/javascripts/bootstrap.min.js"></script>
 <script src="/assets/bower/plupload/js/plupload.min.js"></script>
 <script src="/assets/bower/multiple-select/multiple-select.js"></script>
 

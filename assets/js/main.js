@@ -3,18 +3,20 @@
 // To create steps on "Create recipe"
 $(document).ready(function () {
 
-  var nSteps = 1;
-  var steps_container = document.getElementById('steps-container');
+  /* CREATE RECIPE ADD STEPS
+   * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - */
+  var _nSteps = 1;
+  var _steps_container = document.getElementById('steps-container');
 
   $('#addStep').click(function () {
 
-    if(nSteps <= 20) {
+    if(_nSteps <= 20) {
 
-      nSteps++;
+      _nSteps++;
 
-      $(steps_container).append('<div class="form-group" id="s-container-' + nSteps + '">'+
-        '<label for="step-' + nSteps + '">Paso ' + nSteps +'<span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span></label>'+
-        '<textarea id="step-' + nSteps + '" name="step[]" class="form-control" rows="12" required></textarea>'+
+      $(_steps_container).append('<div class="form-group" id="s-container-' + _nSteps + '">'+
+        '<label for="step-' + _nSteps + '">Paso ' + _nSteps +'<span class="text-danger" data-toggle="tooltip" data-placement="top" title="Obligatorio">*</span></label>'+
+        '<textarea id="step-' + _nSteps + '" name="step[]" class="form-control" rows="12" required></textarea>'+
         '</div>'
 
       );
@@ -24,10 +26,10 @@ $(document).ready(function () {
 
   $('#deleteStep').click(function () {
 
-    if(nSteps > 1) {
+    if(_nSteps > 1) {
 
-      $('#s-container-' + nSteps).remove();
-      nSteps--;
+      $('#s-container-' + _nSteps).remove();
+      _nSteps--;
     }
 
   })
@@ -107,6 +109,8 @@ $(function() {
   /* Multiple selects
    * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - * - */
   $('.wz-multiple').multipleSelect({
+    'minimumCountSelected': 1,
+    'countSelected': '# de % seleccionados',
     'placeholder': 'Ingredientes...'
   });
 });

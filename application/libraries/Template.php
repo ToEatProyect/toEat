@@ -40,13 +40,13 @@ class Template {
   // Build title to send to head
   private function _setTitleViewData() {
 
-    $_siteName = 'ToEat!';
+    $_SITE_NAME = 'ToEat!';
 
     if($this->_title != null) {
-      return $title = $this->_title . ' | ' . $_siteName;
+      return $title = $this->_title . ' | ' . $_SITE_NAME;
     }
     else {
-      return $title = $this->_title;
+      return $title = $_SITE_NAME;
     }
   }
 
