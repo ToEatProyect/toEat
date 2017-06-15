@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS comments(
   score INT(1) NOT NULL,
   PRIMARY KEY (id_user, id_recipe),
   CONSTRAINT fk_comments_users FOREIGN KEY (id_user) REFERENCES users(user_id) ON DELETE CASCADE,
-  CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id)
+  CONSTRAINT fk_comments_recipes FOREIGN KEY (id_recipe) REFERENCES recipes(id) ON DELETE CASCADE
 );
 
 -- TABLE 5 - Ingredients --

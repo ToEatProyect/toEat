@@ -17,9 +17,16 @@ class Administration extends MY_Controller {
   // Displays the list of collaborator requests
   public function collaboratorListRequest() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
 
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
 
+      return redirect( site_url( '/' ) );
+    }
 
     $this->template->setTitle('Solicitudes de nuevos colaboradores');
 
@@ -38,7 +45,16 @@ class Administration extends MY_Controller {
   // User list
   public function userList() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     $this->template->setTitle('Usuarios');
 
@@ -70,7 +86,16 @@ class Administration extends MY_Controller {
   // Create a new user
   public function newUser() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     $this->template->setTitle('Crear nuevo usuario');
 
@@ -144,7 +169,16 @@ class Administration extends MY_Controller {
   // Update data from a user
   public function modUser($user = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     // no user? show 404 error
     if($user == null) {
@@ -259,7 +293,16 @@ class Administration extends MY_Controller {
   // Delete user
   public function delete_user($user = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     // no user? show 404 error
     if($user == null) {
@@ -318,7 +361,16 @@ class Administration extends MY_Controller {
   // Accept a collaborator request
   public function acceptCollaborator($value = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     // no user? show 404 error
     if($value == null) {
@@ -368,7 +420,16 @@ class Administration extends MY_Controller {
   // Deny a collaborator request
   public function denyCollaborator($value = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     // no user? show 404 error
     if($value == null) {
@@ -398,7 +459,16 @@ class Administration extends MY_Controller {
   // Displays the list of categories
   public function categoriesList() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     $this->template->setTitle('Listado de categorías');
 
@@ -417,7 +487,16 @@ class Administration extends MY_Controller {
   // Create a new category
   public function newCategory() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     $this->template->setTitle('Nueva categoría');
 
@@ -472,7 +551,16 @@ class Administration extends MY_Controller {
   // Modify an existing category
   public function modCategory($category = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     // no user? show 404 error
     if($category == null) {
@@ -545,7 +633,16 @@ class Administration extends MY_Controller {
   // Delete category
   public function deleteCategory($category = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(9)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
 
     // no user? show 404 error
     if($category == null) {

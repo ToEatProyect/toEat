@@ -17,7 +17,17 @@ class Ingredients extends MY_Controller {
   // View ingredients list
   public function index() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
 
     $this->template->setTitle('Listado de ingredientes');
 
@@ -33,7 +43,17 @@ class Ingredients extends MY_Controller {
   // Create a new ingredient
   public function newIngredient() {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
 
     $this->template->setTitle('Nuevo ingrediente');
 
@@ -70,7 +90,17 @@ class Ingredients extends MY_Controller {
   // Modify an existing category
   public function modIngredient($ingredient = null) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
 
     // no user? show 404 error
     if($ingredient == null) {
@@ -124,7 +154,17 @@ class Ingredients extends MY_Controller {
   // Delete ingredient
   public function deleteIngredient($ingredient) {
 
-    // TODO: Add permission restriction
+    // Redirect user if it doesn't belong to the selected role
+    if( ! $this->verify_min_level(6)) {
+
+      // Notifies the user that he does not have permissions
+      $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>
+        Por motivos de seguridad hemos cerrado tu sesión.<br/>
+        Para acceder de nuevo a la aplicación, vuelve a iniciar sesión");
+
+      return redirect( site_url( '/' ) );
+    }
+
 
     // no user? show 404 error
     if($ingredient == null) {

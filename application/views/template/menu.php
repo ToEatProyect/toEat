@@ -80,7 +80,8 @@
               <?php echo $userData->auth_level == 9 ? '<li><a href="/category/list">Categorías</a></li>' : NULL ?>
 
               <!-- Ingredients - Only admin -->
-              <?php echo $userData->auth_level == 9 ? '<li><a href="/ingredients">Ingredientes</a></li>' : NULL ?>
+              <?php echo $userData->auth_level == 9 || $userData->auth_level == 6
+                ? '<li><a href="/ingredients">Ingredientes</a></li>' : NULL ?>
 
               <li><a href="/logout">Desconectar</a></li>
             </ul>

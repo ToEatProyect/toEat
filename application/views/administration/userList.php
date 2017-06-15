@@ -6,7 +6,7 @@
       <div class="jumbotron">
         <h1>Listado de usuarios</h1>
         <p>Administración de usuarios de la aplicación</p>
-        <p><a href="/users/new" class="btn btn-success btn-lg">Crear usuario</a></p>
+        <p><a href="/users/new" class="btn btn-success btn-lg"><i class="fa fa-user-plus" aria-hidden="true"></i> Crear usuario</a></p>
       </div>
 
     </div>

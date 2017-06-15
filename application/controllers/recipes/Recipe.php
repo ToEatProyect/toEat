@@ -242,7 +242,7 @@ class Recipe extends MY_Controller {
   public function deleteRecipe($recipe = null) {
 
     // Redirect user if it doesn't belong to the selected role
-    if( ! $this->verify_role('collaborator')) {
+    if( ! $this->verify_min_level(3)) {
 
       // Notifies the user that he does not have permissions
       $this->session->set_flashdata("alert", "<strong>No tienes permisos para acceder a esta página</strong><br/><br/>

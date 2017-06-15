@@ -9,7 +9,7 @@
         <h1>Listado de ingredientes</h1>
         <p>Si es necesario, crea nuevos ingredientes para que nuestros chefs puedan elaborar sus recetas.</p>
         <p>Puedes hacerlo pulsando el siguiente botón.</p>
-        <p><a href="/ingredients/new" class="btn btn-success btn-lg">Crear ingrediente</a></p>
+        <p><a href="/ingredients/new" class="btn btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> Crear ingrediente</a></p>
       </div>
 
     </div>

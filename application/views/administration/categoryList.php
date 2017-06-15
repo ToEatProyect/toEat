@@ -8,7 +8,7 @@
       <div class="jumbotron">
         <h1>Listado de categorías</h1>
         <p>Si es necesario, se pueden crear nuevas categorías en el siguiente botón.</p>
-        <p><a href="/category/new" class="btn btn-success btn-lg">Crear categoría</a></p>
+        <p><a href="/category/new" class="btn btn-success btn-lg"><i class="fa fa-plus" aria-hidden="true"></i> Crear categoría</a></p>
       </div>
 
     </div>

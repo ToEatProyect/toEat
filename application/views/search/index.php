@@ -37,7 +37,7 @@
 
 
     <?php if(!$has_search): ?>
-      <h3>Amo a buscar por aca....</h3>
+      <h3>¿Qué necesitas?</h3>
     <?php else: ?>
       <pre><?php print_r($recipes) ?></pre>
     <?php endif; ?>
