@@ -40,8 +40,8 @@
         <?php endfor; ?>
 
         <?php if(isset($userData)): ?>
-          <li><a href="/recipes/my-recipes">Mis recetas</a></li>
-          <li><a href="/my-comments">Mis comentarios</a></li>
+          <?php echo $userData->auth_level == 3 ? '<li><a href="/recipes/my-recipes">Mis recetas</a></li>' : NULL ?>
+          <?php echo $userData->auth_level != 9 ? '<li><a href="/my-comments">Mis comentarios</a></li>' : NULL ?>
         <?php endif; ?>
       </ul>
 
@@ -55,15 +55,29 @@
             </a>
 
             <ul class="dropdown-menu">
-              <li><a href="/recipes/new-recipe">Nueva receta</a></li>
-              <li><a href="/users/collaborators-request">Solicitudes de colaborador</a></li>
-              <li><a href="/category/new">Nueva categoría</a></li>
-              <li><a href="/category/list">Listado categorías</a></li>
-              <li><a href="/users/new">Nuevo usuario (admin)</a></li>
-              <li><a href="/users">Lista usuarios (admin)</a></li>
-              <li><a href="/ingredients">Listado ingredientes</a></li>
-              <li><a href="/ingredients/new">Nuevo ingrediente</a></li>
-              <li><a href="">Cambiar contraseña</a></li>
+
+              <!-- New recipe - Only collaborator -->
+              <?php echo $userData->auth_level == 3 ? '<li><a href="/recipes/new-recipe">Nueva receta</a></li>' : NULL ?>
+
+              <!-- My recipes - Only collaborator -->
+              <?php echo $userData->auth_level == 3 ? '<li><a href="/recipes/my-recipes">Mis recetas</a></li>' : NULL ?>
+
+              <!-- My comments - All less admin -->
+              <?php echo $userData->auth_level != 9 ? '<li><a href="/my-comments">Mis comentarios</a></li>' : NULL ?>
+
+              <!-- Collaborator request - Admin and moderators -->
+              <?php echo $userData->auth_level == 9 || $userData->auth_level == 6
+                ? '<li><a href="/users/collaborators-request">Solicitudes de colaborador</a></li>' : NULL ?>
+
+              <!-- Users - Only admin -->
+              <?php echo $userData->auth_level == 9 ? '<li><a href="/users">Usuarios</a></li>' : NULL ?>
+
+              <!-- Categories - Only admin -->
+              <?php echo $userData->auth_level == 9 ? '<li><a href="/category/list">Categorías</a></li>' : NULL ?>
+
+              <!-- Ingredients - Only admin -->
+              <?php echo $userData->auth_level == 9 ? '<li><a href="/ingredients">Ingredientes</a></li>' : NULL ?>
+
               <li><a href="/logout">Desconectar</a></li>
             </ul>
 
