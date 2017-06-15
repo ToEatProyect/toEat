@@ -51,9 +51,13 @@
       <?php // No comments? ?>
       <?php else: ?>
 
-        <div class="jumbotron">
-          <h1>Sin resultados</h1>
-          <p>Actualmente no has creado un comentario en ninguna receta</p>
+        <div class="row">
+          <div class="col-md-12 comments-recipes-container">
+
+            <div class="text-center"><i class="fa fa-comments fa-5x category-icon" aria-hidden="true"></i></div>
+            <h4 class="text-center">Aún no tienes ningun comentario</h4>
+
+          </div>
         </div>
 
       <?php endif; ?>
