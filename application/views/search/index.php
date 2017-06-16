@@ -39,7 +39,28 @@
     <?php if(!$has_search): ?>
       <h3>¿Qué necesitas?</h3>
     <?php else: ?>
-      <pre><?php print_r($recipes) ?></pre>
+
+      <?php if(count($recipes)): ?>
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="table-responsive">
+              <table class="table table-striped table-hover">
+
+                <?php for($i = 0; $i < sizeof($recipes); $i++): ?>
+                  <tr><td><a href="/recipes/show/<?php echo $recipes[$i] ?>"><?php echo $recipes[$i] ?></a></td></tr>
+                <?php endfor; ?>
+
+              </table>
+            </div>
+
+          </div>
+        </div>
+      <?php else: ?>
+        <h2>No hay coincidencias</h2>
+      <?php endif; ?>
+
     <?php endif; ?>
 
   </div>
